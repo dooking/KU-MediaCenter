@@ -1,9 +1,9 @@
-{% extends 'introbase.html' %} {% block css %} {% load static %}
-<link rel="stylesheet" href="{% static 'home.css' %}" type="text/css" />
+<% include ./base-header %>
+<link rel="stylesheet" href="css/introduce/home.css" type="text/css" />
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 
-{% endblock %} {% block content %}
+<% include ./base-navbar %>
 
 <!-- Slider main container -->
 <div class="swiper-container">
@@ -32,7 +32,7 @@
 
 <div class="button-box">
   <div class="button">
-    <a class="button-text" href="/tab/1"
+    <a class="button-text"
       ><div
         class="button-text"
         style="
@@ -49,7 +49,7 @@
     >
   </div>
   <div class="button">
-    <a class="button-text" href="{% url 'main' %}"
+    <a class="button-text"
       ><div
         class="button-text"
         style="
@@ -84,4 +84,4 @@
   });
 </script>
 
-{% endblock content %}
+<% include ./base-footer %>
