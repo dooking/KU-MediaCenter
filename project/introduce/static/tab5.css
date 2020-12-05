@@ -1,8 +1,0 @@
-@import url(introbase.css);
-@import url(tab4.css);
-
-@media(min-width:768px) {
-    .main-subbox {
-        max-width: 70%;
-    }
-}

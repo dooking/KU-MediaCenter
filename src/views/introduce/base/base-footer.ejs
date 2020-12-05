@@ -1,0 +1,52 @@
+<div class="footer">
+  <div class="footer-left">
+    <img
+      class="footer-left-image"
+      src="https://user-images.githubusercontent.com/46775877/89150419-7a7dd180-d599-11ea-9109-21f47de81fbb.png"
+      alt="My Image"
+      height="60px"
+    />
+  </div>
+  <div class="footer-mid">
+    <h3 class="footer-title">Contact</h3>
+    <div style="color: gray">
+      <p>교육매체실: 02) 3290-1521</p>
+      <p>장비대여실: 02) 3290-1524</p>
+      <p>주소: 고려대학교 미디어관 지하1층 B103호</p>
+    </div>
+  </div>
+  <div class="footer-right">
+    <h3 class="footer-title">Quick Link</h3>
+    <div>
+      <a href="reservation/">장비 대여 페이지</a><br />
+      <a href="/">공간 대여 페이지</a><br />
+      <a href="/">이용 안내 페이지</a>
+    </div>
+  </div>
+</div>
+
+<div id="box">
+  <div id="items"></div>
+</div>
+
+<script>
+  var sidebarBox = document.querySelector("#box");
+  var sidebarBtn = document.querySelector("#btn");
+
+  sidebarBtn.addEventListener("click", function (event) {
+    if (this.classList.contains("active")) {
+      this.classList.remove("active");
+      sidebarBox.classList.remove("active");
+    } else {
+      this.classList.add("active");
+      sidebarBox.classList.add("active");
+    }
+  });
+
+  window.addEventListener("keydown", function (event) {
+    if (sidebarBox.classList.contains("active") && event.keyCode === 27) {
+      sidebarBtn.classList.remove("active");
+      sidebarBox.classList.remove("active");
+    }
+  });
+</script>

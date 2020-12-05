@@ -1,0 +1,27 @@
+    <div class="header">
+      <div class="header_flex">
+        <a id="back" href="javascript:history.back()">
+          <span id="back" class="material-icons"> keyboard_arrow_left </span>
+        </a>
+        <div class="logo_div">
+          <a href="/">
+            <img
+              class="logo_img"
+              src="images/logo.png"
+              alt="로고"
+            />
+          </a>
+        </div>
+        <% if (locals.isAuth > 0) { %>
+            <a id="admin" href="admin/">
+            <span id="admin">
+                관리자
+                <br />
+                페이지
+            </span>
+            </a>
+        <% } else { %>
+            <div><br /></div>
+        <% } %>
+      </div>
+    </div>
