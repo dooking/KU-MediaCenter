@@ -1,0 +1,44 @@
+{% extends 'introbase.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'tab8.css' %}" type='text/css'>
+{% endblock %}
+<!-- SNS -->
+{% block content %}
+<div id="tab-title">SNS</div>
+<div class="sns">
+    <div id="sns-title">
+        <img id="yellow"
+            src="https://user-images.githubusercontent.com/46775877/89154399-c2a0f200-d5a1-11ea-8dc1-0d019d0b5985.png" />
+        <img id="sns-logo"
+            src="https://user-images.githubusercontent.com/46775877/89354976-2b4cb380-d6f5-11ea-9db1-a9fcefbd7223.png" />
+    </div>
+    <div class="youtube">
+        <div id="youtube-box">https://youtube.com/1997KTN </div>
+        <div id="youtube-searchbox"><span id="youtube-search" class="material-icons">
+                search
+            </span></div>
+    </div>
+    <div id="post-title">{{ post_1.title }}</div>
+    <div id="post-content" style="white-space: pre-wrap;">{{ post_1.content }}</div>
+    <a id="tab7-btn" href="https://youtube.com/1997KTN"><div id="tab7-btn">바로가기</div></a>
+</div>
+<div id="line"></div>
+<div class="sns">
+    <div id="sns-title">
+        <img id="yellow"
+            src="https://user-images.githubusercontent.com/46775877/89154399-c2a0f200-d5a1-11ea-8dc1-0d019d0b5985.png" />
+        <img id="sns-logo"
+            src="https://user-images.githubusercontent.com/46775877/89355559-a2367c00-d6f6-11ea-9014-149b1bd7b0f0.png" />
+    </div>
+    <div id="kakao-box">
+        <span id="kakao-search" class="material-icons">
+            search
+        </span>고려대학교 미디어센터
+    </div>
+    <div id="post-title">{{ post_2.title }}</div>
+    <div id="post-content" style="white-space: pre-wrap;">{{ post_2.content }}</div>
+</div>
+
+{% endblock content %}

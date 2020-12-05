@@ -1,0 +1,131 @@
+{% extends 'admin_base.html' %} {% load static %} {% block title %} 관리자
+페이지 {% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'total.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %} {% block content %}
+<div class="equip-head">
+  <a href="{% url 'total' %}">
+    <button class="btn_add" id="gray">장비 예약내역</button>
+  </a>
+  <a href="{% url 'total_studio' %}">
+    <button class="btn_add" id="red">스튜디오 예약내역</button>
+  </a>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">이름</th>
+      <th colspan="2">대여 스튜디오 목록</th>
+      <th colspan="2">기간</th>
+      <th colspan="1">제출 신분증</th>
+      <th colspan="1">이용 목적</th>
+      <th colspan="1">승인 근장</th>
+      <th colspan="1">대여 상태</th>
+      <th colspan="1">비고</th>
+      <th colspan="1">관리하기</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for borrow in borrows %}
+    <tr>
+      <td colspan="2">{{ borrow.username}}</td>
+      <td colspan="2" class="htmllist">
+        <input
+          type="text"
+          hidden
+          value="{{ borrow.studio }}"
+          class="equipmentList"
+        />
+      </td>
+      <td colspan="2">
+        {{ borrow.fromDate }} {{ borrow.fromDateTime }}시 <br />
+        ~{{ borrow.toDate }} {{ borrow.toDateTime }}시
+      </td>
+      <td colspan="1">{{ borrow.auth }}</td>
+      <td colspan="1">{{ borrow.purpose }}</td>
+      <td colspan="1">{{ borrow.alba }}</td>
+      {% if borrow.studioState == -1 %}
+      <td colspan="1">신청 취소(반려)</td>
+      {% elif borrow.studioState == 0 %}
+      <td colspan="1">대여 승인 대기</td>
+      {% elif borrow.studioState == 1 %}
+      <td colspan="1">대여중</td>
+      {% elif borrow.studioState == 2 %}
+      <td colspan="1">연체중</td>
+      {% elif borrow.studioState == 3 %}
+      <td colspan="1">반납완료</td>
+      {% endif %}
+      <td colspan="1">{{ borrow.remark }}</td>
+      <td colspan="1">
+        <a href="{% url 'detailTotalStudio' borrow.pk %}">
+          <button class="btn--edit">수정</button>
+        </a>
+        <a href="{% url 'deleteTotalStudio' borrow.pk %}">
+          <button class="btn--delete">삭제</button>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="search_page">
+  <form action="" method="GET">
+    {% csrf_token %}
+    <input class="qinput" type="text" name="query"/>
+    <button type="submit" class="qsubmit">검색하기</button>
+  </form>
+
+  {% if borrows.has_other_pages %}
+  <ul class="pagination">
+    {% if borrows.has_previous %} {% if query %}
+    <li>
+      <a href="?page={{ borrows.previous_page_number }}&query={{query}}"
+        >&laquo; prev</a
+      >
+    </li>
+    {% else %}
+    <li><a href="?page={{ borrows.previous_page_number }}">&laquo; prev</a></li>
+    {% endif %}
+    <span></span>
+    {% else %}
+    <li class="disabled"><span>&laquo; prev</span></li>
+    {% endif %}
+    <span></span>
+    {% for i in borrows.paginator.page_range %}<span
+    ></span>
+    {% if borrows.number == i %}
+    <li class="active">
+      <span>{{ i }} <span class="sr-only"></span></span>
+    </li>
+    {% else %}<span
+    ></span>
+    {% if query %}
+    <li><a href="?page={{ i }}&query={{query}}">{{ i }}</a></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    <span></span
+    >{% endif %}<span
+    ></span>
+    {% endfor %}
+    <span></span
+    >{% if borrows.has_next %}<span
+    ></span>
+    {% if query %}
+    <li>
+      <a href="?page={{ borrows.next_page_number }}&query={{query}}"
+        >&raquo; next</a
+      >
+    </li>
+    {% else %}
+    <li><a href="?page={{ borrows.next_page_number }}">&raquo; next</a></li>
+    {% endif %} {% else %}
+    <li class="disabled"><span>&raquo; next</span></li>
+    {%endif %}
+  </ul>
+  {%endif%}
+</div>
+{% load static %}
+<script type="text/javascript" src="{% static 'total_studio.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %} 관리자 페이지 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'equipment.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %}
+{% block content %}
+<div class="equip-wrapper">
+  <div class="equip-head">
+    <div>
+      <a class="equip-heading" id = 'gray' href="{% url 'equipment' %}">장비 관리</a>
+      <a class="equip-heading" id = 'black' href="{% url 'studio' %}">스튜디오 관리</a>
+    </div>
+    <a class="equip-table-link" href="{% url 'addStudio' %}">
+      <button class="btn_add">+ 스튜디오 추가</button>
+    </a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">TYPE</span>
+        <th colspan="3">스튜디오 이름</span>
+        <th colspan="2">활성상태</span>
+        <th colspan="2">관리하기</span>
+      </tr>
+    </thead>
+    <tbody>
+      {% for studio in studios %}
+      <tr>
+        <td colspan="2">{{studio.studioType}}</td>
+        <td colspan="3">{{studio.studioName}}</td>
+        {% if studio.studioState == 0 and studio.isExist == True %}
+        <td colspan="2">
+          <p class="equipState0">활성 상태</p>
+        </td>
+        {% else %}
+        <td colspan="2">
+          <p class="equipState1">비활성 상태</p>
+        </td>
+        {% endif %}
+        <td colspan="2">
+          <a href="{% url 'detailStudio' studio.pk %}">
+            <button class="btn--edit">수정</button>
+          </a>
+          <a href="{% url 'deleteStudio' studio.pk %}">
+            <button class="btn--delete">삭제</button>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="search">
+    <form action="" method="GET">
+      {% csrf_token %}
+      <input class="qinput" type="text" name="query" />
+      <button type="submit" class="qsubmit">검색하기</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content%}

@@ -1,0 +1,31 @@
+{% extends 'admin_base.html' %} {% load static %} {% block title %} 관리자
+페이지 {% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'equipment.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %} {% block content %}
+<div></div>
+<input
+  type="text"
+  value="{{currentEquipment.equipmentName}}^{{currentEquipment.serialNumber}}^{{currentEquipment.equipType}}^{{currentEquipment.equipSemiType}}"
+  id="inputValue"
+  hidden
+/>
+<div id="qrDiv"> </div>
+  {% load static %}
+  <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'qrcode.js' %}"></script>
+  <script type="text/javascript">
+  const qrDiv = document.getElementById("qrDiv");
+  const inputValue = document.getElementById("inputValue").value
+    new QRCode(qrDiv, {
+      text: inputValue,
+      width: 100,
+      height: 100,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  </script>
+
+  {% endblock content%}
+</div>

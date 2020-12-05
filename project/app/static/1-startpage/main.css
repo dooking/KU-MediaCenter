@@ -1,0 +1,244 @@
+#wrapper{
+  width: 100%;
+  height: 88vh;
+
+}
+
+.main_div{
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*  프로필 카드  */
+
+.card_box{
+  width: 100%;
+  min-width: 280px;
+  max-width: 400px;
+  height: 68%;
+
+  min-width: padding;
+  margin: 0 10%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*  로그인 됨 */
+.card_elements_login{
+  width: 100%;
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  flex-direction: column;
+}
+.upper_profile_div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: #4f4f4f solid 1px ;
+  padding-bottom: 14px;
+  width: 78%;
+  max-width: 300px;
+}
+.profile_icon{
+  width: 52px;
+}
+
+.profile_name_div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user_name{
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: 0.6px;
+  color: #2a2a2a;
+}
+
+.logout_button{
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+  border-bottom: #4f4f4f solid 1px; 
+
+}
+.profile_major{
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #8d091d;
+}
+
+.profile_info{
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  
+}
+
+.mypage_button{
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4f4f4f;
+  /* border-bottom: #4f4f4f solid 1px;  */
+}
+
+.profile_penalty{
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4f4f4f;
+}
+
+
+/* 로그인 안 됨 */
+.card_elements_logout{
+  width: 100%;
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+}
+.enter_icon{
+  width: 58px;  
+}
+.login_div{
+  margin-left: 7.5%;
+  margin-right: 7px;
+}
+.login_button{
+  width: 10%;
+  min-width: 140px;
+  height: 4%;
+  min-height: 40px;
+  border-radius: 25px;
+  border: none;
+  box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.16);
+  background-image: linear-gradient(to bottom, #aa1a30, #8d091d);
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  /* margin-bottom: 8px; */
+}
+
+p{
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #707070;
+  margin: 0px;
+}
+
+
+
+
+/* 메뉴 탭 */
+
+.menu_boxes{
+  width: 100%;
+  min-width: 320px;
+  height: 48vh;
+}
+.menu_box{
+  width: 100%;
+  height: 16vh;
+  border-top: solid 1px #8d091d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu_elements{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 10%;
+}
+.menu_icon_div{
+  width: 15%;
+
+}
+.menu_icon{
+  width: 100%;
+  max-width: 50px;
+}
+.text_div{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+h1{
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.6px;
+  text-align: left;
+  color: #2a2a2a;
+  margin: 0px;
+}
+.arrow_icon_div{
+  width: 24px;
+}
+.arrow_icon{
+  width: 24px;
+}
+
+/* footer  */
+
+.footer_box{
+  width: 100%;
+  height: 10vh;
+  box-shadow: 0 -2px 0px 0 rgba(37, 37, 37, 0.16);
+  background-color: #e7e7e7;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 8%;
+  padding-top: 1vh;
+}

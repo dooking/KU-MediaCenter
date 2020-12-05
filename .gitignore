@@ -1,0 +1,14 @@
+project/db.sqlite3
+project/dbsettings.py
+project/static
+project/project
+project/app/migrations/
+project/adminpage/migrations/
+project/introduce/migrations
+project/introduce/static/img
+project/introduce/sqlite3
+project/.ebextensions
+project/.elasticbeanstalk
+
+media
+.DS_Store

@@ -1,0 +1,99 @@
+{% extends 'admin_base.html' %} {% load static %} {% block title %} 관리자
+페이지 {% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'qrcheckBorrow.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %} {% block content %}
+<p class="qr_title">반납 확인하기</p>
+<div>
+  <p class="qr_title_2">예약 내역</p>
+  <table>
+    <tr>
+      <th>이름</th>
+      <th>예약 장비 목록</th>
+      <th>기간</th>
+      <th>제출 신분증</th>
+      <th>소속</th>
+      <th>비고</th>
+    </tr>
+    <tr>
+      <td id="newlist_name">{{currentEquipment.username}}</td>
+      <td id="newlist_device">
+        <input
+          hidden
+          value="{{currentEquipment.equipmentList}}"
+          id="equipmentList"
+        />
+      </td>
+      <td id="newlist_period">
+        <input
+          hidden
+          id="list_period_fromDate"
+          value="{{currentEquipment.fromDate}}"
+        />
+        <input
+          hidden
+          id="list_period_fromDateTime"
+          value="{{currentEquipment.fromDateTime}}"
+        />
+        <input
+          hidden
+          id="list_period_toDate"
+          value="{{currentEquipment.toDate}}"
+        />
+        <input
+          hidden
+          id="list_period_toDateTime"
+          value="{{currentEquipment.toDateTime}}"
+        />
+      </td>
+      <td id="newlist_auth">{{currentEquipment.auth}}</td>
+      <td id="newlist_group">{{currentEquipment.group}}</td>
+      <td id="newlist_etc">{{currentEquipment.remark}}</td>
+    </tr>
+  </table>
+</div>
+<div class="qr_box">
+  <div id="frame">
+    <div id="test">
+      <p class="qr_title_2">QR코드 리더</p>
+      <div id="output">
+        <div id="outputMessage">QR코드를 카메라에 노출시켜 주세요</div>
+      </div>
+    </div>
+    <div>
+      <div id="loadingMessage">
+        🎥 카메라에 액세스 할 수 없습니다<br />카메라 활성화 해주세요
+      </div>
+      <div class="qr_camera">
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="qr_card">
+      <p class="qr_title_2" id="title_2">인식 결과</p>
+      <div class="gray_box" id="stretch_way">
+        <div id="row_way">
+          <p class="qr_item" id="equipmentType"></p>
+          <p class="qr_item" id="equipmentSemiType"></p>
+          <p class="qr_item" id="equipmentName"></p>
+          <p class="qr_item" id="equipmentSerialNumber"></p>
+        </div>
+        <button onclick="addEquipmentToForm()" class="ok_button">확인</button>
+      </div>
+    </div>
+    <div class="qr_card">
+      <p class="qr_title_2" id="title_2">담은 내역</p>
+      <div class="gray_box" id="outputLayer"></div>
+    </div>
+  </div>
+</div>
+<form method="POST" id="postFrom">
+  {% csrf_token %}
+  <input type="hidden" name="equipments" id="equipments" />
+  <button type="submit" class="confirm_button">연체 확인</button>
+</form>
+{% load static %}
+<script type="text/javascript" src="{% static 'jsQR.js' %}"></script>
+<script type="text/javascript" src="{% static 'qrcheckReturn.js' %}"></script>
+{% endblock content %}

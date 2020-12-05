@@ -1,0 +1,313 @@
+
+.wrapper{
+    margin: 35px 18px;
+
+
+}
+
+.page_title_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    color: black;
+}
+
+.arrow_icon{
+    transform: rotate(180deg);
+    width: 25px;
+}
+.page_title{
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8d091d;
+    margin-left: 30px;
+}
+.last_reservation_page_title{
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8d091d;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+.page_contents{
+    margin: 0 33px;
+}
+.profile_div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 0 15px;
+
+}
+.profile_img{
+    width: 56px;
+}
+.profile_info{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    margin: 0;
+
+}
+p{
+    margin: 0;
+}
+.user_name{
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222222;
+    margin-bottom: 3px;
+}
+.user_major{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2a2a2a;
+  
+}
+
+.profile_detail_div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: solid #4f4f4f 1px;
+    border-top: solid #4f4f4f 1px;
+
+}
+.go_borrow_list{
+
+
+    width: 50%;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.go_text{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    text-align: left;
+    color: #272727;
+}
+.arrow_icon_2{
+    width: 12px;
+    margin-left: 5px;
+
+}
+.panelty{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    text-align: left;
+    color: #272727;
+
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #4f4f4f;
+
+    padding: 10px 0;
+    
+}
+.panelty_num{
+    margin-left: 5px;
+}
+.modal_open {
+    display: flex;
+}
+
+.modal_close {
+    display: none;
+}
+
+.deleteModal{
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 300px;
+}
+.modal_content{
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 1em;
+    box-shadow: 1px 1px 10px black;
+    width: 80%;
+}
+.modal_content > p {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.choose{
+    display: flex;
+    justify-content: center;
+}
+.cancel{
+    margin-right:20px;
+    cursor: pointer;
+}
+.h3{
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8d091d;
+
+}
+.borrow_now_div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 22px;
+    justify-content: center;
+
+    
+}
+
+
+/* 대여내역없을때 */
+.no_reservation_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px auto;
+    
+
+}
+.no_reservation{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #707070;
+
+
+}
+.go_borrow{
+
+}
+.device_or_studio{
+    font-size: 14px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #222222;
+}
+.borrow_box{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    padding: 14px 20px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    
+}
+.borrow_date_flex{
+    display: flex;
+    flex-direction: column;
+
+}
+.borrow_header_flex{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    border: none;
+}
+.js_equip_btn{
+    border: transparent;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+.js_studio_btn{
+    border: transparent;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+.trash_img{
+    width: 13.5px;
+    height: 17.4px;
+    object-fit: contain;
+    border: transparent;
+}
+.date{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8d091d;
+}
+.borrow_list_detail{
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+
+    letter-spacing: normal;
+    text-align: left;
+    color: #222222;
+    margin-top: 5px;
+}
+

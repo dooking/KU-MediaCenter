@@ -1,1 +1,1 @@
-# ku-media-private
+# KU-MediaCenter

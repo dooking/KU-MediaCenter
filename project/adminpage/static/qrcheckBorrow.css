@@ -1,0 +1,118 @@
+.qr_title {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+}
+.qr_title_2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #4F4F4F;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+#title_2 {
+    margin: 1vw 0;
+}
+.qr_card {
+    margin: 2vw;
+
+}
+#outputMessage {
+    font-size: 15px;
+    font-weight: 400;
+    color: #4F4F4F;
+    margin-left: 0.4vw;
+    margin-bottom: 1vw;
+}
+table {
+    width: 95%;
+}
+th {
+    background-color: #F5F5F5;
+    color: black;
+    font-weight: 400;
+    font-size: 1vw;
+    height: 1.5vw;
+    padding: 0.5vw 1.5vw;
+    text-align: left;
+
+}
+td {
+    font-size: 1vw;
+    padding: 15px;
+    text-align: left;
+}
+.qr_box {
+    display: flex;
+    flex-direction: row;
+}
+#frame {
+    display: flex;
+    flex-direction: column; 
+}
+#canvas {
+    width: 35vw;
+    border-radius: 5px;  
+}
+.qr_camera {
+    width: 37vw;
+    padding: 1vw 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fcfcfc;
+    margin-right: 1vw;
+}
+.gray_box {
+    width: 45vw;
+    padding: 20px 25px;
+    display: flex;
+    border-radius: 7px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fcfcfc;
+    margin: 0 1vw;
+    
+}
+#outputLayer {
+    flex-direction: column;
+}
+#stretch_way {
+    justify-content: space-between;
+}
+#row_way {
+    display: flex;
+    flex-direction: row;
+}
+.qr_item {
+    margin: 0 2px;
+}
+form {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+}
+.confirm_button {
+    width: 180px;
+    height: 60px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.16);
+    background-image: linear-gradient(to bottom, #b1263c, #aa1a30);
+    margin: 50px 0;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+.ok_button {
+    width: 50px;
+    height: 30px;
+    border-radius: 2px;
+    background-image: linear-gradient(to bottom, #b1263c, #aa1a30);
+    border: none;
+    color: white;
+    outline: none;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block css %}
+    <link rel="stylesheet" href="{% static '3-borrow/step1.css' %}" type="text/css"/>
+    {% endblock css %}
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} 장비 대여하기 {% endblock title %}
+
+</head>
+<body>
+    {% block content %}
+    <!-- 스텝 보여주는 부분 -->
+    <div class = "step_box">
+        <div class= "step" id ="step1">STEP 1</div>
+        <div class= "step" id ="step2">STEP 2</div>
+    </div>
+    <!-- 전체 폼 시작 -->
+    <div class = "wrapper">
+    <form method="POST" name="sDate">
+        {% csrf_token %}    
+        <div class ="first_form">
+            <p class = "step-sub">1. 대여 날짜 선택</p>
+            <select id="year"></select>
+            <span>년</span>
+            <select id="month"></select>
+            <span>월</span>
+            <select id="day"></select>
+            <span>일</span>
+            <input type="hidden" name="currentYear" id="currentYear" value="{{year}}">
+            <input type="hidden" name="currentMonth" id="currentMonth" value="{{month}}">
+            <input type="hidden" name="currentDay" id="currentDay" value="{{day}}">
+            <input type="hidden" name="selectDate" id="selectDate" value="">
+        </div>
+    </form>
+    <form method="POST" name = "step1" action="{% url 'borrow_step2' %}" onsubmit="return checkAll();">
+        {% csrf_token %}
+        <div>
+            <p class = 'step-sub first_form'>2. 대여 장비 선택</p>
+
+            {% for otherObject in otherObjects %}
+                <div class = "red_menu_box " onclick = "hide(this)">
+                    <p class = "red_menu_text">{{otherObject.type}}</p>
+                    <p class ="red_menu_text" id="arrow">▼</p>
+                </div>    
+                <div class = "cam_box mystyle">
+                    {% for equipment in otherObject.info %}
+                        <div class = "cam_menu">
+                            <div class = "cam_check">
+                                <input type="hidden" class="equipmentName" value="{{equipment.name}}">
+                                <input type="hidden" class="equipmentCount" value="{{equipment.time1}}">
+                                <input type="hidden" class="equipmentCount2" value="{{equipment.time2}}">
+                                {% if otherObject.type == "카메라" %}
+                                    <input type="radio" name="camera" id="camera" value = "{{equipment.name}}" onchange="radioHandler(this)">
+                                    <p>{{equipment.name}}</p>
+                                {% elif otherObject.type == "기타 부속" %}
+                                    <input type="checkbox" id="etc" data-pk="{{forloop.counter}}" class = "etc{{forloop.counter}}" onchange="etcHandler(this)"/>
+                                    <p>{{equipment.name}}</p>
+                                    <select class="countSelect none select{{forloop.counter}}" data-pk="{{forloop.counter}}" name="countEquipment" id="{{equipment.name}}" onchange="numberHandler(this)" />
+                                        <option value="0">0개</option>
+                                        <option value="1">1개</option>
+                                        <option value="2">2개</option>
+                                    </select>
+                                {% else %}
+                                    <input type="checkbox" id="{{equipment.name}}" class="edit" value="{{equipment.name}}" onchange="checkHandler(this)"/>
+                                    <p>{{equipment.name}}</p>
+                                {% endif %}
+                            </div>
+                            <div class="graph">
+                                <div class = "chart">
+                                    <div class = "standard">
+                                        <p id = "num">수량</p>
+                                        <p id = "time">시간</p>
+                                    </div>
+                                    <div class = 'redbar'></div>
+                                    <div class = 'bar_body'>
+                                        <div class = 'day'>
+                                            <div class ='stack'>
+                                                {% for hour in equipment.time1 %}
+                                                <div class="time-hour">
+                                                    <div class="{{forloop.counter0}}" id={{hour}}>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class = 'hour_num'>
+                                                <p>09 10 11 12 13 14 15 16 17</p>
+                                            </div>
+                                        </div>
+                                        <div class = "day_divide"></div>
+                                        <div class = 'day'>
+                                            <div class = "stack">
+                                                {% for hour in equipment.time2 %}
+                                                <div class="time-hour">
+                                                    <div class="{{forloop.counter|add:"8"}}" id={{hour}}>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class = "hour_num">
+                                                <p>09 10 11 12 13 14 15 16 17</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            <p class = "step-sub first_form">3. 대여 목록</p>
+        </div>
+        <div class="borrow_list">
+        </div>
+        <div class = "set_time">
+            <div class = 'rev_time'>
+                <label>예약 일시</label>
+                <input type="date" id="fromDate" name="fromDate" value="{{calendar}}" readonly/>
+                <select id="startAMPM">
+                    <option value="am">오전</option>
+                    <option value="pm">오후</option>
+                </select>
+                <select id="selectFromTime"></select>
+                <span>시</span>
+            </div>
+            <div class = 'rev_time'>
+                <label>반납 일시</label>
+                <select id="returnDate">
+                </select>
+                <select id="endAMPM">
+                    <option value="am">오전</option>
+                    <option value="pm">오후</option>
+                </select>
+                <select id="selectToTime"></select>
+                <span>시</span>
+            </div>
+        </div>
+        <input type="hidden" id="toDate" name="toDate" value=""/>
+        <input type="hidden" id="fromTime" name="fromTime" value=""/>
+        <input type="hidden" id="toTime" name="toTime" value=""/>
+        <input type="hidden" id="nextDay" name="nextDay" value="{{nextDay}}"/>
+        <input type="hidden" id="resultBorrow" name="resultBorrow" value="">
+        <div class = "button_box">
+            <button type="submit">다음 단계</button>
+        </div>
+    </form>       
+    </div>
+    <script type="text/javascript" src="{% static '3-borrow/step1.js' %}"></script>
+    <script type="text/javascript" src="{% static '3-borrow/stockCheck.js' %}"></script>
+    <script type="text/javascript" src="{% static '3-borrow/selectDate.js' %}"></script>
+    <script type="text/javascript" src="{% static '3-borrow/formValidate.js' %}"></script>
+    {% endblock content %}
+</body>
+</html>

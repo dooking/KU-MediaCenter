@@ -1,0 +1,54 @@
+{% extends 'introbase.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/admin/detailPost.css' %}" type='text/css'>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <h2 class="tabname">{{post.tab.title}}</h2>
+    <div class="line"></div>
+    <div class="postBox">
+        <div class="post">
+            <p class="title"><span id="js-title">title: </span>{{post.title}}</p>
+            <p class="subtitle"><span id="js-subtitle">subtitle: </span>{{post.subtitle}}</p>
+            <p class="content" style="white-space: pre-wrap;"><span>content: </span><br>{{post.content}}</p>
+            {% if post.tab.tabnum == 3 %}
+            <p class="equip"><span>장비유형: </span>{{post.equip_type}}</p>
+            <p class="equip"><span>수량: </span>{{post.count}}</p>
+            {% endif %}
+        </div>
+        <div class="post_images">
+            <p class="imageAttached">첨부된 이미지</p>
+            {% for image in post.images.all %}
+            <img class="thumbnail" src="{{ image.file.url }}" alt="{{post.title}}">
+            {% endfor %}
+        </div>
+        <div class="postBox__link">
+            <a href="{% url 'editPost' post.pk %}">수정</a>
+            <a href="{% url 'deletePost' post.pk %}">삭제</a>
+        </div>
+    </div>
+
+    <nav class="adminNav">
+        <a href="{% url 'adminPost' %}">목록 보기</a>
+        <a href="{% url 'admin_index' %}">관리 홈으로</a>
+    </nav>
+</div>
+
+<script>
+    const tab = "{{post.tab.tabnum}}"
+    const title = document.getElementById('js-title')
+    const subtitle = document.getElementById('js-subtitle')
+
+    const check = () => {
+        if (tab == 3) {
+            title.textContent = "품명: "
+            subtitle.textContent = "규격: "
+        }
+    }
+
+    check()
+</script>
+{% endblock %}

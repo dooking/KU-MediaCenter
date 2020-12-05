@@ -1,0 +1,138 @@
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#tab-title {
+    display: flex;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    margin-top: 79px;
+    margin-bottom: 71px;
+}
+
+
+.org-chart {
+    display: flex;
+    margin-bottom: 50px;
+    width: 40%;
+
+}
+
+.post-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-top-con {
+    width: 50%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+img#phone {
+    width: 3rem;
+    margin-right: 0px;
+    position: relative;
+    right: 10px;
+}
+#post-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+}
+
+#post-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rempx;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.55;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    margin-top: 35px;
+    text-decoration: none;
+    margin-bottom: 43px;
+    line-height: 1.67;
+}
+
+
+@media (max-width: 800px) {
+    #tab-title {
+        font-size: 1.6rem;
+        margin-top: 40px;
+    }
+
+    .org-chart {
+        width: 80%;
+    }
+
+    img {
+        width: 90%;
+    }
+
+    img#phone {
+        width: 2rem;
+        /* margin-right: ; */
+    }
+
+    .post-top-con {
+        height: 50px;
+    }
+
+    #post-title {
+        display: flex;
+        margin-top: 10px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.55;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+        justify-content: center;
+
+    }
+
+    #post-content {
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.55;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 43px;
+    }
+}

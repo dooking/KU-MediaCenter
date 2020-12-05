@@ -1,0 +1,177 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 80vh;
+    margin-top: 68px;
+}
+
+.tabname {
+    font-size: 16px;
+}
+.postBox {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+    min-height: 80vh;
+    
+}
+
+.postBox span {
+    font-size: 15px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    
+    width: 100%;
+    
+}
+.title {
+    font-size: 25px;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 20px;
+    line-height: 1.52;
+}
+
+.subtitle {
+    font-size: 20px;
+    width: 90%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.content {
+    width: 90%;
+    font-size: 17px;
+    line-height: 1.53;
+}
+.equip {
+    font-size: 17px;
+}
+.wrap a {
+    width: 260px;
+    height: 58px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 4px;
+
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: solid 1px #707070;
+    
+}
+
+.wrap a:link {
+    color: black;
+}
+
+.wrap a:visited {
+    color: black;
+}
+
+.post_images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+
+    margin-bottom: 10px;
+}
+
+.line {
+    width: 64px;
+    height: 0px;
+    margin-top: 47px;
+    border-bottom: 2px solid black;
+}
+
+.thumbnail {
+    width: 80%;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.adminNav {
+    font-size: 16px;
+    margin: 40px 0px 20px 0px;
+    padding-top: 20px;
+    width: 100%;
+    border-top: solid 1px #d3d2d2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.adminNav a {
+    width: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 4px;
+
+    text-decoration: none;
+    border-bottom: solid 1px #707070;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.adminNav a:link {
+    color: black;
+}
+.adminNav a:visited {
+    color: black;
+}
+.imageAttached {
+    font-size: 14px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #707070;
+}
+
+@media( min-width: 768px) {
+    .tabname {
+        font-size: 40px;
+    }
+    .message{
+        font-size: 24px;
+    }
+    .wrap a {
+        font-size: 24px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+    .subtitle {
+        font-size: 24px;
+    }
+    .content {
+        font-size: 22px;
+    }
+
+    .post span {
+        font-size: 20px;
+    }
+    .imageAttached {
+        font-size: 24px;
+    }
+}

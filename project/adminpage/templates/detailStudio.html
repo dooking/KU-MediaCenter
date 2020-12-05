@@ -1,0 +1,72 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %} 관리자 페이지 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'detailEquipment.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %}
+{% block content %}
+  <div class="equip-wrapper">
+    <div class="equip-head">
+      <h2 class="equip-heading">스튜디오 수정하기</h2>
+      <a class="equip-table-link" href="{% url 'studio' %}">
+        <button class="btn_add">홈으로</button>
+      </a>
+    </div>
+    <div class="equip-table">
+      <form method="POST" action="{% url 'studio' %}" id="editForm">
+        {% csrf_token %}
+        <div class="equip-list">
+          <span>스튜디오 타입</span>
+          <input type="text" name="studioType" placeholder="{{studio.studioType}}" value="{{studio.studioType}}" required>
+        </div>
+        <div class="equip-list">
+          <span>스튜디오 이름</span>
+          <input type="text" name="studioName" placeholder="{{studio.studioName}}" value="{{studio.studioName}}" required>
+        </div>
+        <div class="equip-list">
+          <span>현재 장비 상태</span>
+          <select name="borrowState">
+            {% if Studio.borrowState == 0 %}
+              <option value="{{studio.borrowState}}" class="disabled" disabled selected>대여 가능</option>
+            {% elif Studiot.borrowState == 1 %}
+              <option value="{{studio.borrowState}}" class="disabled" disabled selected>대여중</option>
+            {% elif Studio.borrowState == 2 %}
+              <option value="{{studio.borrowState}}" class="disabled" disabled selected>연체</option>
+            {% endif %}
+            <option value="0">대여 가능</option>
+            <option value="1">대여중</option>
+            <option value="2">연체</option>
+          </select>
+        </div>
+        <div class="equip-list">
+          <span>고장 여부</span>
+          {% if studio.isExist %}
+            <input type="text" class="isExist" placeholder="정상 대여 가능" readonly>
+          {% else %}
+            <input type="text" class="isExist" placeholder="고장" readonly>
+          {% endif %}
+          {% if studio.isExist == True %}
+          <a class="equip-table-link" href="{% url 'brokenStudio' studio.pk %}">
+            <div class="btn--inactive">비활성화</div>
+          </a>
+          {% else %}
+          <a class="equip-table-link" href="{% url 'repairStudio' studio.pk %}">
+            <div class="btn--active">활성화</div>
+          </a>
+          {% endif %}
+        </div>
+        <div class="equip-list">
+          <span>비고</span>
+          <input type="textarea" name="remark" placeholder="{{studio.remark}}">
+        </div>
+        <div class="center">
+          <input type="hidden" name="equipPK" value="{{studio.pk}}">
+          <div class="btn_edit center">수정하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="{% static 'detailEquipment.js' %}"></script>
+{% endblock content%}

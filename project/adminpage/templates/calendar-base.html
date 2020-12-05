@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'admin_base.css' %}" />
+    {% block css %}{% endblock css %}
+  </head>
+  <body>
+    <header>
+      <p class="logo">장비대여시스템 관리자 페이지</p>
+      <div class="top-nav">
+        <a href="{% url 'main' %}">DAILY</a>
+        <a href="{% url 'main' %}">MONTH</a>
+        <a href="{% url 'total' %}">LIST</a>
+        <a href="{% url 'equipment' %}">DEVICE</a>
+        <a href="{% url 'equipment' %}">STUDIO</a>
+      </div>
+    </header>
+    <div id="wrapper">
+      {% load fullcalendar_tags %} {% fullcalendar_css %}
+      <br />
+      {% fullcalendar_print_css %} {% fullcalendar_jquery %}
+      <br />
+      {% fullcalendar_jquery_ui %}
+      <br />
+      {% fullcalendar_javascript %}
+      <br />
+      {% calendar_init calendar_config_options %}
+      <br />
+      {% block content %} {% endblock %}
+    </div>
+    <!-- 주의 : 이 곳에 jquery script를 작성하면, fullcalendar가 작동되지 않는다. -->
+    {% block extra_script %} {% endblock %}
+</html>

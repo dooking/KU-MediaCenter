@@ -1,0 +1,27 @@
+{% extends 'introbase.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/admin/editTab.css' %}" type='text/css'>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <h2 class="heading">탭 수정</h2>
+    <div class="line"></div>
+    <form class="tabForm" method="post">
+        {% csrf_token %}
+        <span> title </span><input class="title" type="text" name="tabTitle" value="{{tab.title}}" placeholder="제목">
+        <span> subtitle </span><input class="subtitle" type="text" name="tabSubtitle" value="{{tab.subtitle}}"
+            placeholder="부제목">
+
+        <button type="submit">저장</button>
+    </form>
+
+    <nav class="adminNav">
+        <a href="{% url 'adminTab' %}">목록 보기</a>
+        <a href="{% url 'admin_index' %}">관리 홈으로</a>
+    </nav>
+</div>
+
+{% endblock %}

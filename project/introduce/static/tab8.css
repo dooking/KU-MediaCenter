@@ -1,0 +1,268 @@
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tab-title {
+    /* font-family: KoPubWorldDotumPM; */
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    margin-top: 79px;
+    margin-bottom: 71px;
+}
+.sns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sns-logo {
+    margin-left: 12.5px;
+    
+}
+
+#sns-title {
+    width: 100%;
+    margin-bottom: 41.3px;
+    position: relative;
+    left: 20%;
+    z-index: -1;
+}
+
+.youtube {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+#youtube-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+    width: 33%;
+    height: 32px;
+    border: solid 1px #e60012;
+    background-color: #ffffff;
+}
+
+#line {
+    display: flex;
+    width: 86.8%;
+    height: 1px;
+    border: 1px dotted #707070;
+    margin-bottom: 38px;
+    margin-top: 38px;
+}
+
+#youtube-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15.9px;
+    height: 15.9px;
+    color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+
+#youtube-searchbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background-color: #e60012;
+    margin-left: 5px;
+}
+
+a#tab7-btn {
+    text-decoration: none;
+    width: 62px;
+}
+
+#tab7-btn {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    height: 30px;
+    min-height: 40px;
+    border-radius: 25px;
+    border: none;
+    background-color: #e60012;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+}
+
+#kakao-box {
+    display: flex;
+    align-items: center;
+    width: 36%;
+    height: 32px;
+    border-radius: 30px;
+    border: solid 1px #cacbcd;
+    background-color: #f6f6f7;
+    margin-bottom: 16px;
+}
+
+#kakao-search {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#post-title {
+    display: flex;
+    /* font-family: KoPubWorldDotumPM; */
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+div #post-content {
+    display: flex;
+    font-size: 20px;
+    margin-bottom: 80px;
+    width: 50%;
+    line-height: 1.67;
+}
+
+@media (max-width: 800px) {
+    body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+    
+    #tab-title {
+        margin-top: 40px;
+        font-size: 1.6rem;
+    }
+
+    .sns {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+    }
+
+    #sns-title {
+        left: 0;
+    }
+
+
+    .youtube {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 17px;
+    }
+    #youtube-box {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 10px;
+        width: 70%;
+        height: 32px;
+        border: solid 1px #e60012;
+        background-color: #ffffff;
+    
+    }
+    
+    #line {
+        display: flex;
+        width: 86.8%;
+        height: 1px;
+        border: 1px dotted #707070;
+        margin-top: 38px;
+        margin-bottom: 65px;
+    }
+    
+    #youtube-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15.9px;
+        height: 15.9px;
+        color: #ffffff;
+        padding: 0;
+        margin: 0;
+    }
+    
+    #youtube-searchbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        background-color: #e60012;
+        margin-left: 5px;
+    }
+    
+
+    #kakao-box {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        height: 32px;
+        border-radius: 30px;
+        border: solid 1px #cacbcd;
+        background-color: #f6f6f7;
+        margin-bottom: 17px;
+    }
+    
+    #kakao-search {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    #post-title {
+        display: flex;
+        /* font-family: KoPubWorldDotumPM; */
+        font-size: 15px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.67;
+        letter-spacing: normal;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 10px;
+    }
+    
+    div #post-content {
+        display: flex;
+        font-size: 15px;
+        /* font-family: KoPubWorldDotumPL; */
+        margin-bottom: 55px;
+        width: 80%;
+    }
+    
+    
+}

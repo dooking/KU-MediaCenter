@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 마이페이지 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static '5-mypage/mypage.css' %}" />
+
+{% endblock css %} {% block content %}
+
+<div class="wrapper">
+    <div class="page_title_div">
+        <span class="last_reservation_page_title"> 지난 예약 내역</span>
+    </div>
+
+    {% if Equip_last|length == 0 and Studio_last|length == 0 %}
+    <div class="no_reservation_div">
+        <p class="no_reservation">지난 대여 내역이 없습니다.</p>  
+    </div>
+    {% else %}
+    <div class="page_contents">
+        <!-- 예약 현황  -->
+        <div class="borrow_now_div">
+        
+            {% for E in Equip_last %}
+            <span class="device_or_studio">장비 예약 현황</span>
+            <div class="borrow_box">
+                <p class="date">대여일: {{E.fromDateYear}}년 {{E.fromDateMonth}}월 {{E.fromDateDay}}일 {{E.fromDateTime}}시</p>
+                <p class="date">반납일: {{E.toDateYear}}년 {{E.toDateMonth}}월 {{E.toDateDay}}일 {{E.toDateTime}}시</p>
+                {% for equip in E.equips %}
+                <p class="borrow_list_detail">{{equip.name}} (수량: {{equip.count}})</p>
+                {% endfor %}
+            </div>
+            <!-- 변수 예시  -->
+            <!--유저 이름     username=김동현/컴퓨터학과       -->
+            <!--빌린 장비     equipment=['DSLR (Canon EOS-80D) : 1']      -->
+            <!--빌린 날짜     fromDate=20200829      -->
+            <!--빌린 시간     fromDateTime      -->
+            <!--반납 날짜     toDate=20200829      -->
+            <!--반납 시간     toDateTime      -->
+            <!--실제 반납 날짜     realDate=0      -->
+            <!--실제 반납 시간     realDateTime=0      -->
+            <!--소속     group=매체실 산하 방송국      -->
+            <!--목적     purpose=방송국 촬영     -->
+            <!--학생증여부     auth=학생증      -->
+            <!--비고     remark=dd      -->
+            <!--현재상태     borrowState=0      -->
+            {% endfor %}
+
+            
+            {% for S in Studio_last%}
+            <span class="device_or_studio">스튜디오 예약 현황</span>
+            <div class="borrow_box">
+                {% if S.studioState == -1 %}
+                <p class="borrow_list_detail">(신청 취소 된 예약입니다.)</p>
+                {% endif %}
+                <p class="date">대여일: {{S.fromDateYear}}년 {{S.fromDateMonth}}월 {{S.fromDateDay}}일 {{S.fromDateTime}}시</p>
+                <p class="date">반납일: {{S.toDateYear}}년 {{S.toDateMonth}}월 {{S.toDateDay}}일 {{S.toDateTime}}시</p>
+                {% for studio in S.studio %}
+                <p class="borrow_list_detail">{{studio}}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+
+            <!-- 예약 현황  -->
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock content %}

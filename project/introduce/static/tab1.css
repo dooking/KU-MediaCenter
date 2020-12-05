@@ -1,0 +1,90 @@
+@import url(introbase.css);
+
+.outer-box {
+    background-image: url(../static/img/background.png);
+    box-sizing: border-box;
+    padding: 1.25rem;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.main-top {
+    font-size: 1.1rem;
+    height: 30rem;
+    box-sizing: border-box;
+    display:table;
+}
+
+.main-top-sub {
+    display:table-cell;
+    vertical-align: middle;
+}
+
+.top-title {
+    background-color: #FFC50B;
+    color: #990000;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.main-bottom {
+    height: 48rem;
+}
+
+.bottom-icon {
+    width: 21rem; 
+    margin-bottom: 8.1rem;
+    margin-top: 2rem;
+}
+
+.bottom-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #E2D5C6;
+}
+
+.bottom-content {
+    font-size: 1.1rem;
+    color: #E2D5C6;
+}
+
+.bottom-content p {
+    line-height: 1.67;
+}
+
+@media(min-width:768px) {
+    .outer-box {
+        background-image: url(../static/img/background_desktop.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        box-sizing: border-box;
+        padding: 1rem;
+    }
+
+    .main-top {
+        height: 30rem;
+    }
+
+    .main-top-sub {
+        padding: 0 19.5rem 0 19.5rem;
+        min-width: 445px;
+    }
+
+    .main-bottom {
+        padding: 0 18.5rem 0 18.5rem;
+    }
+
+    .bottom-icon {
+        width: 34.15rem;
+    }
+
+    .bottom-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .bottom-content {
+        margin-top: 2.25rem;
+    }
+}

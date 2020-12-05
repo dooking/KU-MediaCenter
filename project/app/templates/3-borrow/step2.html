@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% extends 'base.html' %} {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block css %}
+    <link
+      rel="stylesheet"
+      href="{% static '3-borrow/step2.css' %}"
+      type="text/css"
+    />
+    {% endblock css %} {% block title %} step 2 {% endblock title %}
+  </head>
+  <body>
+    {% block content %}
+    <!-- 스텝 보여주는 부분 -->
+    <div class="step_box">
+      <div class="step" id="step1">STEP 1</div>
+      <div class="step" id="step2">STEP 2</div>
+    </div>
+    <!-- 폼태그 시작 -->
+    <div class="wrapper">
+      <form
+        method="POST"
+        name="step2"
+        action="{% url 'borrow_finish' %}"
+        onsubmit="checkAll();"
+      >
+        {% csrf_token %}
+        <div>
+          <div class="content_box">
+            <p class="step-sub">1. 대여 목록</p>
+            <div>
+              <input type="hidden" name="borrowList" value="{{borrowLists}}" />
+              <input type="hidden" name="fromTime" value="{{fromTime}}" />
+              <input type="hidden" name="toTime" value="{{toTime}}" />
+              <input type="hidden" name="fromDate" value="{{fromDate}}" />
+              <input type="hidden" name="toDate" value="{{toDate}}" />
+              <p>{{fromDate}} {{fromTime}}:00 ~ {{toDate}} {{toTime}}:00</p>
+              {% for borrowList in borrowLists %}
+              <li>{{borrowList}}대</li>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="content_box">
+            <p class="step-sub">2. 소속 선택</p>
+            <div class="choice">
+              <input type="radio" id="edit" name="group" value="미디어학부생" required />
+              <p>미디어학부 '방송 제작 관련 실습 과목' 수강생</p>
+            </div>
+            <div class="choice">
+              <input
+                type="radio"
+                name="group"
+                value="매체실 산하 방송국"
+                required
+                id="edit"
+              />
+              <p>미디어학부 학생</p>
+            </div>
+            <div class="choice">
+              <input
+                type="radio"
+                name="group"
+                id="edit"
+                value="미디어학부 실습과목 수강생"
+                required
+              />
+              <p>교육매체실 산하 방송단체</p>
+            </div>
+            <div class="choice">
+              <input
+                type="radio"
+                name="group"
+                id="edit"
+                value="미디어학부 실습과목 수강생"
+                required
+              />
+              <p>교육매체실 장비(영상제작)교육 이수 학생</p>
+            </div>
+          </div>
+          <div class="content_box">
+            <p class="step-sub">3. 핸드폰 번호 입력</p>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="ex) 01012345678"
+              pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
+              required
+              class="input"
+            />
+          </div>
+          <div class="content_box">
+            <p class="step-sub">4. 사용 목적 입력</p>
+            <input
+              type="text"
+              name="purpose"
+              placeholder="ex) 실습 과목 이름, 작품명 등"
+              required
+              size="35"
+              class="input"
+            />
+          </div>
+          <div class="content_box">
+            <p class="step-sub">5. 제출 신분증 선택</p>
+            <div class="choice">
+              <input id="edit" type="radio" name="auth" value="주민등록증" required />
+              <p>주민등록증</p>
+            </div>
+            <div class="choice">
+              <input id="edit" type="radio" name="auth" value="학생증" required />
+              <p>학생증</p>
+            </div>
+            <div class="choice">
+              <input id="edit" type="radio" name="auth" value="운전면허증" required />
+              <p>운전면허증</p>
+            </div>
+            <div class="choice">
+              <input id="edit" type="radio" name="auth" value="여권" required />
+              <p>여권</p>
+            </div>
+            <div class="choice">
+              <input id="edit" type="radio" name="auth" value="기타" required />
+              <p>기타</p>
+            </div>
+          </div>
+          <div class="content_box">
+            <p class="step-sub">6. 비고 입력</p>
+
+            <input type="text" placeholder="비고" name="remark" 반납시간 및 기타
+            문의 사랑" size = "35" class="input">
+          </div>
+        </div>
+        <div class="button_box">
+          <button type="submit">대여하기</button>
+        </div>
+      </form>
+    </div>
+    <script
+      type="text/javascript"
+      src="{% static '3-borrow/step2.js' %}"
+    ></script>
+    {% endblock content %}
+  </body>
+</html>

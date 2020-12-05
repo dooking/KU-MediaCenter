@@ -1,0 +1,65 @@
+@import url(introbase.css);
+
+.header {
+    margin-top: 3.75rem;
+}
+
+.head-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.main {
+    margin-top: 1.875rem;
+}
+
+.main-titlebox {
+    text-align: center;
+}
+
+.main-subbox {
+    margin: 1.5625rem auto 3.125rem auto;
+    padding: 0 4.0625rem 0 4.0625rem;
+}
+
+.title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.img {
+    margin-bottom: 0.625rem;
+}
+
+@media(min-width:768px) {
+    .header {
+        margin-top: 5rem;
+    }
+
+    .head-title {
+        font-size: 2.5rem;
+    }
+
+    .main {
+        margin-top: 3.5rem;
+    }
+
+    .main-subbox {
+        min-width: 70%;
+    }
+    
+    .title {
+        margin : 0 auto 1.75rem auto;
+        font-size: 2.2rem;
+        font-weight: 600;
+    }
+
+    .content {
+        margin: 0 auto;
+        font-size: 1.5rem;
+        max-width: 600px;
+        width: 60%;
+    }
+}

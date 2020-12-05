@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% load static %} {% block title %} 고려대학교
+미디어센터{% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static '1-startpage/main.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %} {% block content %}
+<div id="wrapper">
+        <div class="main_div">
+            <div class="card_box">
+
+
+    <!-- 로그인 됨 -->
+                    {% if user.is_authenticated %}
+                    <div class="card_elements_login">
+                            <div class="upper_profile_div">
+                                <div class="profile_icon_div">
+                                    <img class="profile_icon" src="{% static 'images/profile_icon.png' %}" alt="프로필 아이콘">
+                                </div>
+                                <div class="profile_div">
+                                    <div class="profile_name_div">
+                                        <span class="user_name"> {{ user.profile.name }} </span>
+
+                                        <a class="logout_button" href="{% url 'logout' %}">
+                                            로그아웃
+                                        </a>
+                                    </div>
+                                    <!-- <div class="profile_major_div"> -->
+                                    <span class="profile_major">{{ user.profile.major }}</p>
+                                    <!-- </div>  -->
+
+                                </div>
+                            </div>
+
+                            <div class="profile_info">
+                                <!-- <span class="profile_penalty"> Penalty {{  user.profile.penalty  }}</span> -->
+                            
+                                <a class="mypage_button" href="{% url 'mypage' %}">
+                                    ✔ 대여내역 확인하기 
+                                </a>
+                        </div>
+                    </div>
+
+
+
+         <!-- 로그인 안 됨  -->
+                    {% else %}
+                    <div class="card_elements_logout">
+                        <div class="enter_icon_div">
+                            <img class="enter_icon" src="{% static 'images/enter_icon.png' %}" alt="enter_icon">
+                        </div>
+                        <div class="login_div">
+                            {%load socialaccount%} {% providers_media_js%}
+                            <a href="{% provider_login_url 'google' %}">
+                                <button class="login_button">학교 메일로 로그인</button>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+            </div>
+        </div>
+  
+
+    <div class="menu_boxes">
+        <a href="{% url 'check_intro_equip' %}">
+            <div class="menu_box">
+                <div class="menu_elements">
+                    <div class="menu_icon_div">
+                        <img class="menu_icon" src="{% static 'images/tool_icon.png' %}" alt="프로필 카드">
+                    </div>
+                    <div class="text_div">
+                        <h1> 장비 대여</h1>
+                        <p> 카메라, 보조장비, 녹음장비, 조명 등 </p>
+                    </div> 
+                    <div class="arrow_icon_div">
+                        <img class="arrow_icon" src="{% static 'images/arrow_icon.png' %}" alt="화살표">    
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'check_intro_studio' %}">
+            <div class="menu_box">
+                <div class="menu_elements">
+                    <div class="menu_icon_div"> 
+                        <img class="menu_icon" src="{% static 'images/studio_icon.png' %}" alt="프로필 카드">
+                    </div>
+                    <div class="text_div">
+                        <h1> 공간 대여</h1>
+                        <p> 편집실 컴퓨터, 스튜디오 등 </p>
+                    </div> 
+                    <div class="arrow_icon_div">
+                        <img class="arrow_icon" src="{% static 'images/arrow_icon.png' %}" alt="화살표">    
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'introduce' %}">
+            <div class="menu_box">
+                <div class="menu_elements">
+                    <div class="menu_icon_div">
+                        <img class="menu_icon" src="{% static 'images/info_icon.png' %}" alt="스튜디오 아이콘">
+                    </div>
+                    <div class="text_div">
+                        <h1> 이용 안내</h1>
+                        <p> 대여 안내사항 및 규칙 </p>
+                    </div> 
+                    <div class="arrow_icon_div">
+                        <img class="arrow_icon" src="{% static 'images/arrow_icon.png' %}" alt="화살표">    
+                    </div>
+                </div>
+            </div>
+        </a>  
+    </div>
+  
+    <div class="footer_box">
+        <p>장비대여실 위치 : 고려대학교 미디어관 지하1층 B103A호 </p>
+        <p>운영시간 : 월-금 9:30 ~ 17:30 / 점심시간 : 12:00 ~ 13:00</p>
+        <p>☎ 02 3290 1524</p>
+    </div>    
+
+</div>
+
+{% endblock content %}

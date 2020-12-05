@@ -1,0 +1,24 @@
+{% extends 'introbase.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'tab6.css' %}" type='text/css'>
+{% endblock %}
+<!-- 각 부서와의 협업 및 영상지원 -->
+{% block content %}
+<div class="header">
+    <div class="head-title">{{tab.title}}</div>
+</div>
+{% for post in posts %}
+<div class="main">
+    <div class="main-titlebox">
+        <img src="../static/img/tab3_bar.jpg" width="61px" />
+        <div class="main-subbox">
+            <div class="title">{{post.title}}</div>
+            <div class="content" style="white-space: pre-wrap;">{{post.content}}</div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %} 관리자 페이지 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'equipment.css' %}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% endblock css %}
+{% block content %}
+<div class="equip-wrapper">
+  <div class="equip-head">
+    <div>
+      <a class="equip-heading" id = 'black' href="{% url 'equipment' %}">장비 관리</a>
+      <a class="equip-heading" id = 'gray' href="{% url 'studio' %}">스튜디오 관리</a>
+    </div>
+    <a class="equip-table-link" href="{% url 'addEquipment' %}">
+      <button class="btn_add">+ 장비 추가</button>
+    </a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">QR 보기</span>
+        <th colspan="2">TYPE</span>
+        <th colspan="3">장비이름</span>
+        <th colspan="1">일련번호</span>
+        <th colspan="2">활성상태</span>
+        <th colspan="2">관리하기</span>
+      </tr>
+    </thead>
+    <tbody>
+      {% for equipment in equipments %}
+      <tr>
+        <td colspan="2">
+          <a href="{% url 'equipment_qr' equipment.pk %}">
+            <button class="btn--qr">QR 보기</button>
+          </a>
+        </td>
+        <td colspan="2">{{equipment.equipType}}</td>
+        <td colspan="3">{{equipment.equipmentName}}</td>
+        <td colspan="1">{{equipment.serialNumber}}</td>
+        {% if equipment.equipmentstate == 0 and equipment.isExist == True %}
+        <td colspan="2">
+          <p class="equipState0">활성 상태</p>
+        </td>
+        {% elif equipment.equipmentstate == 1 %}
+        <td colspan="2">
+          <p class="equipState1">비활성 상태</p>
+        </td>
+        {% else %}
+        <td colspan="2">
+          <p class="equipState1">비활성 상태</p>
+        </td>
+        {% endif %}
+        <td colspan="2">
+          <a href="{% url 'detailEquipment' equipment.pk %}">
+            <button class="btn--edit">수정</button>
+          </a>
+          <a href="{% url 'deleteEquipment' equipment.pk %}">
+            <button class="btn--delete">삭제</button>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="search">
+    <form action="" method="GET">
+      {% csrf_token %}
+      <input class="qinput" type="text" name="query" />
+      <button type="submit" class="qsubmit">검색하기</button>
+    </form>
+  </div>
+  {% if equipments.has_other_pages %}
+  <ul class="pagination">
+    {% if equipments.has_previous %} {% if query %}
+    <li>
+      <a href="?page={{ equipments.previous_page_number }}&query={{query}}"
+        >&laquo; prev</a
+      >
+    </li>
+    {% else %}
+    <li><a href="?page={{ equipments.previous_page_number }}">&laquo; prev</a></li>
+    {% endif %} {% else %}
+    <li class="disabled"><span>&laquo; prev</span></li>
+    {% endif %}
+    <span></span>
+    {% for i in equipments.paginator.page_range %}
+    <span></span>
+    {% if equipments.number == i %}
+    <li class="active">
+      <span>{{ i }} <span class="sr-only"></span></span>
+    </li>
+    {% else %}
+    <span></span>
+    {% if query %}
+    <li><a href="?page={{ i }}&query={{query}}">{{ i }}</a></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    <span></span>
+    {% endif %}
+    <span></span>
+    {% endfor %}
+    <span></span>
+    {% if equipments.has_next %}
+    <span></span>
+    {% if query %}
+    <li>
+      <a href="?page={{ equipments.next_page_number }}&query={{query}}"
+        >&raquo; next</a
+      >
+    </li>
+    {% else %}
+    <li><a href="?page={{ equipments.next_page_number }}">&raquo; next</a></li>
+    {% endif %} {% else %}
+    <li class="disabled"><span>&raquo; next</span></li>
+    {% endif %}
+  </ul>
+  {% endif%}
+
+</div>
+
+{% endblock content%}

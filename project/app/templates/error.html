@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 마이페이지 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'error.css' %}" />
+
+{% endblock css %} {% block content %}
+<div class="flex">
+    <img src="{% static 'images/error_icon.png''%}" alt="error">
+    <h1>Server Error</h1>
+    <p>잘못된 페이지 요청입니다.</p>
+    <!-- <p> 요청하신 페이지 처리 중 오류가 발생했습니다. </p> -->
+    <p> 확인 후 다시 시도해 주시기 바랍니다. </p>
+    <p> 에러 원인 : {{msg}}</p>
+    <a href="{% url 'main' %}">메인으로 돌아가기</a>
+</div>
+
+{% endblock content %}
