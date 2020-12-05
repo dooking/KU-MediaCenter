@@ -7,7 +7,7 @@ var reservationRouter = require("./reservation/index");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("./introduce/home.ejs");
+  res.render("./introduce/main.ejs");
 });
 
 router.use("/admin", adminpageRouter);
