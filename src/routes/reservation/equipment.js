@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const ReservationController = require("../../controller/reservation-controller");
 const { isLogin } = require("../../middleware/auth")
 
-/* GET home page. */
-router.get("/intro", (req, res, next) => {
-    res.render("./reservation/equipment/intro", { user: req.user });
-});
-
-router.get("/step1", (req, res, next) => {
-    res.render("./reservation/equipment/step1", { user: req.user });
-});
+router.get("/intro", ReservationController.equipmentIntro);
+router.get("/step1", ReservationController.equipmentStep1);
 
 module.exports = router;

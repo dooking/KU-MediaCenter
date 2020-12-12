@@ -2,14 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const EquipmentRouter = require("./equipment");
+const ReservationController = require("../../controller/reservation-controller");
 const { isLogin } = require("../../middleware/auth")
 
 /* GET home page. */
-router.get("/", (req, res, next) => {
-  console.log(req.session)
-
-  res.render("./reservation/main", { user: req.session.user, otherObjects: {} });
-});
+router.get("/", ReservationController.mainPage);
 
 router.use("/equipment", EquipmentRouter);
 
