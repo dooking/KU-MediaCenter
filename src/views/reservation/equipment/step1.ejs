@@ -15,7 +15,6 @@
     <!-- 전체 폼 시작 -->
     <div class = "wrapper">
     <form method="POST" name="sDate">
-        {% csrf_token %}    
         <div class ="first_form">
             <p class = "step-sub">1. 대여 날짜 선택</p>
             <select id="year"></select>
@@ -30,38 +29,36 @@
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
-    <form method="POST" name = "step1" action="{% url 'borrow_step2' %}" onsubmit="return checkAll();">
-        {% csrf_token %}
+    <form method="POST" name = "step1" action="/reservation/equipment/step1" onsubmit="return checkAll();">
         <div>
             <p class = 'step-sub first_form'>2. 대여 장비 선택</p>
-
-            {% for otherObject in otherObjects %}
-                <div class = "red_menu_box " onclick = "hide(this)">
-                    <p class = "red_menu_text">{{otherObject.type}}</p>
+            <% for (let otherObject of otherObjects { %>
+                            <div class = "red_menu_box " onclick = "hide(this)">
+                    <p class = "red_menu_text"><%= otherObject.type %></p>
                     <p class ="red_menu_text" id="arrow">▼</p>
                 </div>    
                 <div class = "cam_box mystyle">
-                    {% for equipment in otherObject.info %}
-                        <div class = "cam_menu">
+                    <% for (let equipment of otherObject.info { %>
+                    <div class = "cam_menu">
                             <div class = "cam_check">
                                 <input type="hidden" class="equipmentName" value="{{equipment.name}}">
                                 <input type="hidden" class="equipmentCount" value="{{equipment.time1}}">
                                 <input type="hidden" class="equipmentCount2" value="{{equipment.time2}}">
-                                {% if otherObject.type == "카메라" %}
+                                <% if (otherObject.type) == "카메라" { %>
                                     <input type="radio" name="camera" id="camera" value = "{{equipment.name}}" onchange="radioHandler(this)">
-                                    <p>{{equipment.name}}</p>
-                                {% elif otherObject.type == "기타 부속" %}
+                                    <p><%= equipment.name %></p>
+                                <% } else if (otherObject.type == "기타 부속")  { %>
                                     <input type="checkbox" id="etc" data-pk="{{forloop.counter}}" class = "etc{{forloop.counter}}" onchange="etcHandler(this)"/>
-                                    <p>{{equipment.name}}</p>
+                                    <p><%= equipment.name %></p>
                                     <select class="countSelect none select{{forloop.counter}}" data-pk="{{forloop.counter}}" name="countEquipment" id="{{equipment.name}}" onchange="numberHandler(this)" />
                                         <option value="0">0개</option>
                                         <option value="1">1개</option>
                                         <option value="2">2개</option>
                                     </select>
-                                {% else %}
+                                <% } else { %>
                                     <input type="checkbox" id="{{equipment.name}}" class="edit" value="{{equipment.name}}" onchange="checkHandler(this)"/>
-                                    <p>{{equipment.name}}</p>
-                                {% endif %}
+                                    <p><%= equipment.name %></p>
+                                <% } %>
                             </div>
                             <div class="graph">
                                 <div class = "chart">
@@ -73,12 +70,12 @@
                                     <div class = 'bar_body'>
                                         <div class = 'day'>
                                             <div class ='stack'>
-                                                {% for hour in equipment.time1 %}
-                                                <div class="time-hour">
+                                                <% for (let hour of equipment.time1) { %>
+                                                        <div class="time-hour">
                                                     <div class="{{forloop.counter0}}" id={{hour}}>
                                                     </div>
                                                 </div>
-                                                {% endfor %}
+                                                <% }%>
                                             </div>
                                             <div class = 'hour_num'>
                                                 <p>09 10 11 12 13 14 15 16 17</p>
@@ -87,12 +84,12 @@
                                         <div class = "day_divide"></div>
                                         <div class = 'day'>
                                             <div class = "stack">
-                                                {% for hour in equipment.time2 %}
+                                                <% for (let hour of equipment.time2) { %>
                                                 <div class="time-hour">
                                                     <div class="{{forloop.counter|add:"8"}}" id={{hour}}>
                                                     </div>
                                                 </div>
-                                                {% endfor %}
+                                                <% }%>
                                             </div>
                                             <div class = "hour_num">
                                                 <p>09 10 11 12 13 14 15 16 17</p>
@@ -102,9 +99,9 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                    <% } %>
                 </div>
-            {% endfor %}
+            <% } %>
         </div>
 
         <div>
