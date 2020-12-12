@@ -9,7 +9,6 @@ const indexRouter = require('./routes/index');
 const passport = require('passport');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session)
-const ejsLint = require('ejs-lint');
 const port = process.env.PORT;
 const app = express();
 

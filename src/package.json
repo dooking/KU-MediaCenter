@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon app.js",
-    "lint:ejs": "ejslint src/views/reservation/equipment/step1.ejs"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,5 +20,11 @@
     "passport-google-oauth2": "^0.2.0",
     "sequelize": "^6.3.5",
     "session-file-store": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "prettier": "^2.2.1"
   }
 }

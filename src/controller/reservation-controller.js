@@ -1,3 +1,5 @@
+const EquipmentDB = require('../service/equipment-service')
+
 const mainPage = (req, res) => {
     res.render("./reservation/main", { user: req.session.user });
 }
@@ -8,17 +10,17 @@ const equipmentIntro = (req, res) => {
 
 const equipmentStep1 = (req, res) => {
     // make Camera
+    const kindLists =
 
-
-    //   {
-    //     "otherObjects": otherObject,
-    //     "year": year,
-    //     "month": month,
-    //     "day": day,
-    //     "calendar": year + "-" + month + "-" + day,
-    //     "nextDay": nextDay,
-    // },
-    res.render("./reservation/equipment/step1", { user: req.user });
+        //   {
+        //     "otherObjects": otherObject,
+        //     "year": year,
+        //     "month": month,
+        //     "day": day,
+        //     "calendar": year + "-" + month + "-" + day,
+        //     "nextDay": nextDay,
+        // },
+        res.render("./reservation/equipment/step1", { user: req.user })
 }
 
-module.exports = { mainPage, equipmentIntro, equipmentStep1 };
+module.exports = { mainPage, equipmentIntro, equipmentStep1 }
