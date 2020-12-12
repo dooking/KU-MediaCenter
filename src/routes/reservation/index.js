@@ -7,7 +7,8 @@ const { isLogin } = require("../../middleware/auth")
 /* GET home page. */
 router.get("/", (req, res, next) => {
   console.log(req.session)
-  res.render("./reservation/main", { user: req.session.user });
+
+  res.render("./reservation/main", { user: req.session.user, otherObjects: {} });
 });
 
 router.use("/equipment", EquipmentRouter);

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint:ejs": "ejslint src/views/reservation/equipment/step1.ejs"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
