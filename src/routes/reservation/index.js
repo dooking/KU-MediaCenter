@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const EquipmentRouter = require("./equipment");
-const ReservationController = require("../../controller/reservation-controller");
+const ReservationController = require("./controller");
 const { isLogin } = require("../../middleware/auth")
 
 /* GET home page. */
