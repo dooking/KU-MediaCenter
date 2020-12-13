@@ -8,7 +8,7 @@ const userRouter = require("./user/index");
 const { isLogin } = require("../middleware/auth")
 
 /* GET home page. */
-router.get("/", isLogin, (req, res, next) => {
+router.get("/", (req, res, next) => {
   res.render("./introduce/main.ejs");
 });
 
