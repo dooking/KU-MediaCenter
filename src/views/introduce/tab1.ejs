@@ -1,0 +1,25 @@
+<% include ./base/base-header %>
+
+<link rel="stylesheet" href="css/introduce/tab1.css" type="text/css" />
+
+<% include ./base/base-navbar %>
+
+<div class="outer-box">
+    <div class="main-top flex">
+        <div class="main-top-sub flex">
+            <p style="white-space: pre-wrap; line-height: 1.67;"><span class="top-title">{{post_1.title}}</span>{{post_1.content}}</p>
+        </div>
+    </div>
+    <div class="main-bottom">
+        <div class="flex" style="text-align: center;">
+            <img class="bottom-icon" 
+                src="https://user-images.githubusercontent.com/46775877/89507580-a7cfb700-d807-11ea-9f32-0eae20384ede.png" />
+        </div>
+
+        <span class="bottom-title flex">{{post_2.title}}</span>
+        <div class="bottom-content flex">
+            <p style="white-space: pre-wrap;">{{post_2.content}}</p>
+        </div>
+
+    </div>
+</div>
