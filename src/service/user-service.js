@@ -1,4 +1,4 @@
-const { user } = require('../../models')
+const { user } = require('../models')
 
 const UserDB = class {
     static findUser(sub) {

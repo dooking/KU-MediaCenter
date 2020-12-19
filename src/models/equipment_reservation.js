@@ -52,6 +52,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
+      state: {
+        type: DataTypes.INTEGER(5),
+        allowNull: false,
+      },
     },
     {
       tableName: "equipment_reservation",
