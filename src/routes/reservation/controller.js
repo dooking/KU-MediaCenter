@@ -1,5 +1,12 @@
 const EquipmentDB = require('../../service/equipment-service')
 
+const test = async (req, res) => {
+    const now2 = Date.now();
+    console.log("nowdddddddddddd",now2)
+    const results = await EquipmentDB.test(now2)
+    res.send({results});
+}
+
 const mainPage = (req, res) => {
     res.render("./reservation/main", { user: req.session.user });
 }
@@ -41,4 +48,4 @@ const equipmentStep1 = async (req, res) => {
      })
 }
 
-module.exports = { mainPage, equipmentIntro, equipmentStep1 }
+module.exports = { mainPage, equipmentIntro, equipmentStep1, test }
