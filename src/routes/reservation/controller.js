@@ -1,7 +1,7 @@
 const moment = require('moment');
 const EquipmentDB = require('../../service/equipment-service')
-const { getDate, getHour, getNextDate } = require('../../utils/momment')
-const { fillArray } = require('../../utils/util')
+const { getDate, getNextDate } = require('../../utils/momment')
+const { fillArray, checkStock } = require('../../utils/util')
 
 const test = async (req, res) => {
     const now2 = Date.now();
@@ -24,27 +24,17 @@ const equipmentStep1 = async (req, res) => {
     // make Camera
     const equipmentLists = await EquipmentDB.getEquipmentLists()
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
-        let equipmentInfo = await promise.then();
-        const count = await EquipmentDB.getEquipmentCount()
-        const currentStock = fillArray(24, count)
-        const nextStock = fillArray(24, count)
+        let accumulator = await promise.then();
+        let count = await EquipmentDB.getEquipmentCount()
+        let currentStock = fillArray(24, count)
+        let nextStock = fillArray(24, count)
         const reservations = await EquipmentDB.findEquipmentReservation(selectDate, nextSelectDate)
         reservations.map((reservation)=>{
             const { from_date: fromDate, to_date: toDate } = reservation
-            if(selectDate === (getDate(fromDate) || getDate(toDate))){
-                for (let hour = getHour(fromDate); hour < getHour(toDate)+2; hour++){
-                    currentStock[hour] -= 1
-                }
-            }
-            if(nextSelectDate === (getDate(fromDate) || getDate(toDate))){
-                for (let hour = getHour(fromDate); hour < getHour(toDate)+2; hour++){
-                    nextStock[hour] -= 1
-                }
-            }
+            currentStock = checkStock(currentStock, selectDate, fromDate, toDate)
+            nextStock = checkStock(nextStock, nextSelectDate, fromDate, toDate)
         })
-        console.log("current: ", currentStock)
-        console.log("nextStock: ", nextStock)
-        equipmentInfo[`${equipment.category}`].push(
+        accumulator[`${equipment.category}`].push(
             {
                 category : equipment.category,
                 name : equipment.kind + '(' + equipment.name + ')',
@@ -52,7 +42,7 @@ const equipmentStep1 = async (req, res) => {
                 nextStock
             }
         )
-        return Promise.resolve(equipmentInfo);
+        return Promise.resolve(accumulator);
     },Promise.resolve({
         "카메라" : [],
         "카메라 보조 장치":[],
