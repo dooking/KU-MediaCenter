@@ -1,9 +1,8 @@
-const getTodayDate = () => {
-    const today = new Date();   
-    const year = today.getFullYear(); // 년도
-    const month = today.getMonth() + 1;  // 월
-    const date = today.getDate();  // 날짜
-    return year + '-' + month + '-' + date
-}
+const moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
-module.exports = {getTodayDate}
+const getTodayDate = () => {
+    return moment().format("YYYY-MM-DD");   
+}
+module.exports = {getTodayDate};

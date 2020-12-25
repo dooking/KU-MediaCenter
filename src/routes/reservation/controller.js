@@ -1,3 +1,4 @@
+const moment = require('moment');
 const EquipmentDB = require('../../service/equipment-service')
 const {getTodayDate} = require('../../utils/util')
 
@@ -23,9 +24,10 @@ const equipmentStep1 = async (req, res) => {
     const Equipments = await equipmentLists.reduce (async (promise, equipment, index)=>{
         let equipmentList = await promise.then();
         const equipmentDetail = await EquipmentDB.findEquipmentReservation(getTodayDate())
-        console.log("equip: ", equipmentDetail[0].from_date, typeof equipmentDetail[0].from_date)
-        console.log("equip111: ", equipmentDetail[0].from_date.getDate(), typeof equipmentDetail[0].from_date)
-        console.log("equip222: ", equipmentDetail[0].from_date.getHours(), typeof equipmentDetail[0].from_date)
+        const fromDate = equipmentDetail[0].from_date
+        console.log("equip: ", fromDate)
+        console.log("equip888: ", moment(fromDate).format("YYYY-MM-DD HH:mm"))
+        console.log("equip111: ", moment(fromDate).date(), moment(fromDate).hour(), moment(fromDate).minutes())
         const count = await EquipmentDB.getEquipmentCount()
         const today = new Array(24).fill(count);
         const tomorrow = new Array(24).fill(count);
