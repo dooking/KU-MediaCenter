@@ -55,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       state: {
         type: DataTypes.INTEGER(5),
         allowNull: false,
+        comment: '0: 예약 신청 / 1: 대여 중 / 2: 대여 완료 / 3: 연체 중 / 4: 연장 / 5: 기타', 
       },
     },
     {
