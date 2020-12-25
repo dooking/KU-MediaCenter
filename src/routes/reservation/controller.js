@@ -1,4 +1,5 @@
 const EquipmentDB = require('../../service/equipment-service')
+const {getTodayDate} = require('../../utils/util')
 
 const test = async (req, res) => {
     const now2 = Date.now();
@@ -21,7 +22,10 @@ const equipmentStep1 = async (req, res) => {
     const equipmentLists = await EquipmentDB.getEquipmentLists()
     const Equipments = await equipmentLists.reduce (async (promise, equipment, index)=>{
         let equipmentList = await promise.then();
-        const equipmentDetail = await EquipmentDB.findEquipmentReservation(equipment.id)
+        const equipmentDetail = await EquipmentDB.findEquipmentReservation(getTodayDate())
+        console.log("equip: ", equipmentDetail[0].from_date, typeof equipmentDetail[0].from_date)
+        console.log("equip111: ", equipmentDetail[0].from_date.getDate(), typeof equipmentDetail[0].from_date)
+        console.log("equip222: ", equipmentDetail[0].from_date.getHours(), typeof equipmentDetail[0].from_date)
         const count = await EquipmentDB.getEquipmentCount()
         const today = new Array(24).fill(count);
         const tomorrow = new Array(24).fill(count);

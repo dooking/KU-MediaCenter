@@ -31,36 +31,15 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static findEquipmentReservation(id) {
+  static findEquipmentReservation(selectDate) {
     return equipment_reservation
       .findAll({
-        raw: true,
-        where : {
-          equipment_id : id,
-          state: 0,
-          
-        }
-      })
-      .then((results) => {
-        return results;
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
-  static test(now) {
-    let today = new Date();   
-    let year = today.getFullYear(); // 년도
-    let month = today.getMonth() + 1;  // 월
-    let date = today.getDate();  // 날짜
-    const todayDate = year + '-' + month + '-' + date
-    return equipment_reservation
-      .findAll({
-        raw: true,
+        raw: true, 
+        attributes: ['from_date', 'to_date'],
         where : {
           [sequelize.Op.or] : [
-              sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', todayDate),
-              sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', todayDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', selectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', selectDate),
           ]
           // [sequelize.Op.or] : [
           //   {
