@@ -6,7 +6,6 @@ const EquipmentDB = class {
     return equipment
       .findAll({
         raw: true,
-
       })
       .then((results) => {
         return results;
@@ -31,7 +30,7 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static findEquipmentReservation(selectDate) {
+  static findEquipmentReservation(selectDate, nextSelectDate) {
     return equipment_reservation
       .findAll({
         raw: true, 
@@ -40,6 +39,8 @@ const EquipmentDB = class {
           [sequelize.Op.or] : [
               sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', selectDate),
               sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', selectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', nextSelectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', nextSelectDate),
           ]
           // [sequelize.Op.or] : [
           //   {

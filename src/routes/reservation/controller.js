@@ -1,6 +1,7 @@
 const moment = require('moment');
 const EquipmentDB = require('../../service/equipment-service')
-const {getTodayDate} = require('../../utils/util')
+const { getDate, getHour, getNextDate } = require('../../utils/momment')
+const { fillArray } = require('../../utils/util')
 
 const test = async (req, res) => {
     const now2 = Date.now();
@@ -18,28 +19,40 @@ const equipmentIntro = (req, res) => {
 }
 
 const equipmentStep1 = async (req, res) => {
-    const selectDate = req.query?.selectDate || new Date()
+    const selectDate = req.query?.selectDate || getDate(new Date())
+    const nextSelectDate = getNextDate(selectDate)
     // make Camera
     const equipmentLists = await EquipmentDB.getEquipmentLists()
-    const Equipments = await equipmentLists.reduce (async (promise, equipment, index)=>{
-        let equipmentList = await promise.then();
-        const equipmentDetail = await EquipmentDB.findEquipmentReservation(getTodayDate())
-        const fromDate = equipmentDetail[0].from_date
-        console.log("equip: ", fromDate)
-        console.log("equip888: ", moment(fromDate).format("YYYY-MM-DD HH:mm"))
-        console.log("equip111: ", moment(fromDate).date(), moment(fromDate).hour(), moment(fromDate).minutes())
+    const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
+        let equipmentInfo = await promise.then();
         const count = await EquipmentDB.getEquipmentCount()
-        const today = new Array(24).fill(count);
-        const tomorrow = new Array(24).fill(count);
-        equipmentList[`${equipment.category}`].push(
+        const currentStock = fillArray(24, count)
+        const nextStock = fillArray(24, count)
+        const reservations = await EquipmentDB.findEquipmentReservation(selectDate, nextSelectDate)
+        reservations.map((reservation)=>{
+            const { from_date: fromDate, to_date: toDate } = reservation
+            if(selectDate === (getDate(fromDate) || getDate(toDate))){
+                for (let hour = getHour(fromDate); hour < getHour(toDate)+2; hour++){
+                    currentStock[hour] -= 1
+                }
+            }
+            if(nextSelectDate === (getDate(fromDate) || getDate(toDate))){
+                for (let hour = getHour(fromDate); hour < getHour(toDate)+2; hour++){
+                    nextStock[hour] -= 1
+                }
+            }
+        })
+        console.log("current: ", currentStock)
+        console.log("nextStock: ", nextStock)
+        equipmentInfo[`${equipment.category}`].push(
             {
                 category : equipment.category,
                 name : equipment.kind + '(' + equipment.name + ')',
-                today ,
-                tomorrow
+                currentStock,
+                nextStock
             }
         )
-        return Promise.resolve(equipmentList);
+        return Promise.resolve(equipmentInfo);
     },Promise.resolve({
         "카메라" : [],
         "카메라 보조 장치":[],
@@ -49,7 +62,7 @@ const equipmentStep1 = async (req, res) => {
     }))
     res.render("./reservation/equipment/step1", { 
         user: req.user,
-        Equipments,
+        equipments,
         selectDate
      })
 }
