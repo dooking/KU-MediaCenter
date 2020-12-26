@@ -32,22 +32,19 @@
     <form method="POST" name = "step1" action="/reservation/equipment/step1" onsubmit="return checkAll();">
         <div>
             <p class = 'step-sub first_form'>2. 대여 장비 선택</p>
-            <% for (let [category, equipments] of Object.entries(Equipments)) { %>
+            <% for (let [category, equipmentInfo] of Object.entries(equipments)) { %>
                 <div class = "red_menu_box " onclick = "hide(this)">
                     <p class = "red_menu_text"><%= category %></p>
                     <p class ="red_menu_text" id="arrow">▼</p>
                 </div>    
                 <div class = "cam_box mystyle">
-                    <% for (let equipment of equipments) { %>
+                    <% for (let equipment of equipmentInfo) { %>
                         <div class = "cam_menu">
                             <div class = "cam_check">
-                                <input type="hidden" class="equipmentName" >
-                                <input type="hidden" class="equipmentCount">
-                                <input type="hidden" class="equipmentCount2">
                                 <% if (equipment.category == "카메라") { %>
                                     <input type="radio" name="camera" id="camera" onchange="radioHandler(this)">
                                     <p><%= equipment.name %></p>
-                                <% } else if (equipment.type == "기타 부속") { %>
+                                <% } else if (equipment.category == "기타 부속") { %>
                                     <input type="checkbox" id="etc" class = "etc" onchange="etcHandler(this)"/>
                                     <p><%= equipment.name %></p>
                                     <select class="countSelect none select"" name="countEquipment"  onchange="numberHandler(this)" />
@@ -70,8 +67,9 @@
                                     <div class = 'bar_body'>
                                         <div class = 'day'>
                                             <div class ='stack'>
-                                                <% for (let hour of equipment.today) {%>
+                                                <% for (let hour = 9; hour < 17; hour ++) {%>
                                                     <div class="time-hour">
+                                                        <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
                                                     </div>
                                                 <% } %>
                                             </div>
@@ -82,8 +80,9 @@
                                         <div class = "day_divide"></div>
                                         <div class = 'day'>
                                             <div class = "stack">
-                                                <% for (let hour of equipment.tomorrow) {%>
+                                                <% for (let hour = 9; hour < 17; hour ++) {%>
                                                     <div class="time-hour">
+                                                        <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
                                                     </div>
                                                 <% } %>
                                             </div>

@@ -1,14 +1,6 @@
-const moment = require('moment');
 const EquipmentDB = require('../../service/equipment-service')
 const { getDate, getNextDate } = require('../../utils/momment')
 const { fillArray, checkStock } = require('../../utils/util')
-
-const test = async (req, res) => {
-    const now2 = Date.now();
-    console.log("nowdddddddddddd",now2)
-    const results = await EquipmentDB.test(now2)
-    res.send({results});
-}
 
 const mainPage = (req, res) => {
     res.render("./reservation/main", { user: req.session.user });
@@ -25,7 +17,7 @@ const equipmentStep1 = async (req, res) => {
     const equipmentLists = await EquipmentDB.getEquipmentLists()
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
         let accumulator = await promise.then();
-        let count = await EquipmentDB.getEquipmentCount()
+        let count = await EquipmentDB.getEquipmentCount(equipment.id)
         let currentStock = fillArray(24, count)
         let nextStock = fillArray(24, count)
         const reservations = await EquipmentDB.findEquipmentReservation(selectDate, nextSelectDate)
@@ -36,8 +28,10 @@ const equipmentStep1 = async (req, res) => {
         })
         accumulator[`${equipment.category}`].push(
             {
+                id : equipment.id,
                 category : equipment.category,
-                name : equipment.kind + '(' + equipment.name + ')',
+                kind : equipment.kind,
+                name : equipment.name,
                 currentStock,
                 nextStock
             }
@@ -57,4 +51,4 @@ const equipmentStep1 = async (req, res) => {
      })
 }
 
-module.exports = { mainPage, equipmentIntro, equipmentStep1, test }
+module.exports = { mainPage, equipmentIntro, equipmentStep1 }

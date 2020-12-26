@@ -14,12 +14,12 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmentCount(){
+  static getEquipmentCount(id){
     return equipment_detail
       .count({
         raw: true,
         where : {
-          equipment_id : 1,
+          equipment_id : id,
           state : 0
         }
       })
