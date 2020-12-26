@@ -29,7 +29,7 @@
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
-    <form method="POST" name = "step1" action="/reservation/equipment/step1" onsubmit="return checkAll();">
+    <form method="POST" name = "step2" action="/reservation/equipment/step2" onsubmit="return checkAll();">
         <div>
             <p class = 'step-sub first_form'>2. 대여 장비 선택</p>
             <% for (let [category, equipmentInfo] of Object.entries(equipments)) { %>

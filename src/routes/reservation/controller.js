@@ -51,4 +51,9 @@ const equipmentStep1 = async (req, res) => {
      })
 }
 
-module.exports = { mainPage, equipmentIntro, equipmentStep1 }
+const equipmentStep2 = (req, res) => {
+    
+    res.render("./reservation/equipment/step2", { user: req.user });
+}
+
+module.exports = { mainPage, equipmentIntro, equipmentStep1, equipmentStep2 }
