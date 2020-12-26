@@ -23,9 +23,10 @@
             <span>월</span>
             <select id="day"></select>
             <span>일</span>
-            <input type="hidden" name="currentYear" id="currentYear" value="">
-            <input type="hidden" name="currentMonth" id="currentMonth" value="">
-            <input type="hidden" name="currentDay" id="currentDay" value="">
+           
+            <input type="hidden" name="currentYear" id="currentYear" value=<%= selectDate.year %>>
+            <input type="hidden" name="currentMonth" id="currentMonth" value=<%= selectDate.month %>>
+            <input type="hidden" name="currentDay" id="currentDay" value=<%= selectDate.day %>>
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
@@ -139,5 +140,6 @@
     </div>
     
     <script type="text/javascript" src="/javascript/reservation/equipment/step1.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/selectDate.js"></script>
 </body>
 </html>

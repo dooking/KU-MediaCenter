@@ -1,3 +1,4 @@
+const moment = require('moment');
 const EquipmentDB = require('../../service/equipment-service')
 const { getDate, getNextDate } = require('../../utils/momment')
 const { fillArray, checkStock } = require('../../utils/util')
@@ -11,7 +12,7 @@ const equipmentIntro = (req, res) => {
 }
 
 const equipmentStep1 = async (req, res) => {
-    const selectDate = req.query?.selectDate || getDate(new Date())
+    const selectDate = req.body?.selectDate || getDate(new Date())
     const nextSelectDate = getNextDate(selectDate)
     // make Camera
     const equipmentLists = await EquipmentDB.getEquipmentLists()
@@ -47,7 +48,11 @@ const equipmentStep1 = async (req, res) => {
     res.render("./reservation/equipment/step1", { 
         user: req.user,
         equipments,
-        selectDate
+        selectDate: {
+            year : moment(selectDate).year(),
+            month : moment(selectDate).month() + 1,
+            day : moment(selectDate).date()
+        } 
      })
 }
 
