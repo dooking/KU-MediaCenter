@@ -11,6 +11,7 @@
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "moment": "^2.29.1",
@@ -20,8 +21,7 @@
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
-    "sequelize": "^6.3.5",
-    "session-file-store": "^1.5.0"
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "eslint": "^7.15.0",
