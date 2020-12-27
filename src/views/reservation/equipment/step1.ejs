@@ -17,16 +17,13 @@
     <form method="POST" name="sDate">
         <div class ="first_form">
             <p class = "step-sub">1. 대여 날짜 선택</p>
-            <select id="year"></select>
+            <select id="year" data-current-year=<%= selectDate.year %>></select>
             <span>년</span>
-            <select id="month"></select>
+            <select id="month" data-current-month=<%= selectDate.month %>></select>
             <span>월</span>
-            <select id="day"></select>
+            <select id="day" data-current-day=<%= selectDate.day %>></select>
             <span>일</span>
-           
-            <input type="hidden" name="currentYear" id="currentYear" value=<%= selectDate.year %>>
-            <input type="hidden" name="currentMonth" id="currentMonth" value=<%= selectDate.month %>>
-            <input type="hidden" name="currentDay" id="currentDay" value=<%= selectDate.day %>>
+    
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
