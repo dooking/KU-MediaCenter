@@ -23,7 +23,7 @@
             <span>월</span>
             <select id="day" data-current-day=<%= selectDate.day %>></select>
             <span>일</span>
-    
+
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
@@ -40,20 +40,11 @@
                         <div class = "cam_menu">
                             <div class = "cam_check">
                                 <% if (equipment.category == "카메라") { %>
-                                    <input type="radio" name="camera" id="camera" onchange="radioHandler(this)">
-                                    <p><%= equipment.name %></p>
-                                <% } else if (equipment.category == "기타 부속") { %>
-                                    <input type="checkbox" id="etc" class = "etc" onchange="etcHandler(this)"/>
-                                    <p><%= equipment.name %></p>
-                                    <select class="countSelect none select"" name="countEquipment"  onchange="numberHandler(this)" />
-                                        <option value="0">0개</option>
-                                        <option value="1">1개</option>
-                                        <option value="2">2개</option>
-                                    </select>
+                                    <input type="radio" name="camera" class="checkbox" data-category="<%= equipment.category %>" data-name="<%= equipment.kind %> (<%= equipment.name %>)" onclick="checkHandler(this)">
                                 <% } else { %>
-                                    <input type="checkbox" class="edit" onchange="checkHandler(this)"/>
-                                    <p><%= equipment.name %></p>
+                                    <input type="checkbox" class="checkbox" data-category="<%= equipment.category %>" data-name="<%= equipment.kind %> (<%= equipment.name %>)" onchange="checkHandler(this)">
                                 <% } %>
+                                <p><%= equipment.kind %> (<%= equipment.name %>) </p>
                             </div>
                             <div class="graph">
                                 <div class = "chart">
@@ -100,7 +91,7 @@
         <div>
             <p class = "step-sub first_form">3. 대여 목록</p>
         </div>
-        <div class="borrow_list">
+        <div class="reservation_list">
         </div>
         <div class = "set_time">
             <div class = 'rev_time'>
@@ -138,5 +129,6 @@
     
     <script type="text/javascript" src="/javascript/reservation/equipment/step1.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/selectDate.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/util.js"></script>
 </body>
 </html>

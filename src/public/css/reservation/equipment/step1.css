@@ -226,7 +226,7 @@ form {
   border: 2px black solid;
 }
 
-.borrow_list {
+.reservation_list {
   margin: 0 40px;
   list-style-type: circle;
 }
@@ -283,17 +283,12 @@ button {
   transition: height 0.8s ease-out;
   -webkit-transition: height 0.8s ease-out;
   overflow: hidden;
-
-  /* animation-name: DropDownOff;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards; */
 }
 #arrow {
   font-size: 14px;
 }
 
-
-#camera {
+.checkbox {
   width: 20px;
   height: 20px;
   appearance: none;
@@ -302,64 +297,7 @@ button {
   background-repeat: no-repeat;
   background-size: auto 100%;
 }
-#camera:checked {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/clicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-
-#etc {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/unclicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-#etc:checked {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/clicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-
-#카메라보조장치 {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/unclicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-#etc:checked {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/clicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-
-.edit {
-  width: 20px;
-  height: 20px;
-  appearance: none;
-  background-image: url("../../../images/unclicked.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-}
-.edit:checked {
+.checkbox:checked {
   width: 20px;
   height: 20px;
   appearance: none;
