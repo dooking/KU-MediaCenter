@@ -77,40 +77,40 @@ const $fromDate = document.querySelector("#fromDate")
 const { fromDateYear, fromDateMonth, fromDateDay } = $fromDate.dataset
 $fromDate.value = dateFormat(fromDateYear,fromDateMonth,fromDateDay)
 
-const returnDate = document.querySelector("#returnDate")
+const $returnDate = document.querySelector("#returnDate")
 const option = document.createElement("option")
 const option2 = document.createElement("option")
 option.text = dateFormat(currentYear,currentMonth,currentDay)
-returnDate.add(option)
+$returnDate.add(option)
 
 // 금요일 대여 -> 월요일 반납
 if(currentDate.getDay() === 5){
     currentDate.setDate(currentDate.getDate() + 3)
     option2.text = dateFormat(currentDate.getFullYear(),currentDate.getMonth()+1,currentDate.getDate())
-    returnDate.add(option2)
+    $returnDate.add(option2)
 }
 else{
-    const {nextYear, nextMonth, nextDay } = returnDate.dataset
+    const {nextYear, nextMonth, nextDay } = $returnDate.dataset
     option2.text = dateFormat(nextYear,nextMonth,nextDay)
-    returnDate.add(option2)
+    $returnDate.add(option2)
 }
 
-const selectFromTime = document.querySelector("#selectFromTime")
+const $selectFromTimeEl = document.querySelector("#selectFromTime")
 for (let i=0; i<12; i++){
     const option = document.createElement("option")
     option.text = i+1
-    selectFromTime.add(option)
+    $selectFromTimeEl.add(option)
 }
 
-const selectToTime = document.querySelector("#selectToTime")
+const $selectToTimeEl = document.querySelector("#selectToTime")
 for (let i=0; i<12; i++){
     const option = document.createElement("option")
     option.text = i+1
-    selectToTime.add(option)
+    $selectToTimeEl.add(option)
 }
 
 //default
 startAMPM.options[1].selected = true
 endAMPM.options[1].selected = true
-selectFromTime.options[0].selected = true
-selectToTime.options[4].selected = true
+$selectFromTimeEl.options[0].selected = true
+$selectToTimeEl.options[4].selected = true

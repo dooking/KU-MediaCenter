@@ -37,6 +37,9 @@
                 </div>    
                 <div class = "cam_box mystyle">
                     <% for (let equipment of equipmentInfo) { %>
+                        <input type="hidden" class="equipmentName" value="<%= equipment.kind %> (<%= equipment.name %>)">
+                        <input type="hidden" class="equipmentCount" value="<%= equipment.currentStock %>">
+                        <input type="hidden" class="equipmentCount2" value="<%= equipment.nextStock %>">
                         <div class = "cam_menu">
                             <div class = "cam_check">
                                 <% if (equipment.category == "카메라") { %>
@@ -61,31 +64,27 @@
                                     </div>
                                     <div class = 'redbar'></div>
                                     <div class = 'bar_body'>
-                                        <div class = 'day'>
-                                            <div class ='stack'>
-                                                <% for (let hour = 9; hour < 17; hour ++) {%>
-                                                    <div class="time-hour">
-                                                        <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
-                                                    </div>
-                                                <% } %>
+                                        <% for (let index=0; index<2; index++) { %>
+                                            <div class = 'day'>
+                                                <div class ='stack'>
+                                                    <% for (let hour = 9; hour < 17; hour ++) {%>
+                                                        <div class="time-hour">
+                                                            <% if (index === 0) { %>
+                                                                <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
+                                                            <% } else { %>
+                                                                <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
+                                                            <% } %>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                                <div class = 'hour_num'>
+                                                    <p>09 10 11 12 13 14 15 16 17</p>
+                                                </div>
                                             </div>
-                                            <div class = 'hour_num'>
-                                                <p>09 10 11 12 13 14 15 16 17</p>
-                                            </div>
-                                        </div>
-                                        <div class = "day_divide"></div>
-                                        <div class = 'day'>
-                                            <div class = "stack">
-                                                <% for (let hour = 9; hour < 17; hour ++) {%>
-                                                    <div class="time-hour">
-                                                        <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
-                                                    </div>
-                                                <% } %>
-                                            </div>
-                                            <div class = "hour_num">
-                                                <p>09 10 11 12 13 14 15 16 17</p>
-                                            </div>
-                                        </div>
+                                            <% if (index === 0) { %>
+                                                <div class = "day_divide"></div>
+                                            <% } %>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -133,5 +132,6 @@
     <script type="text/javascript" src="/javascript/reservation/equipment/step1.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/selectDate.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/selectEquipment.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/formValidate.js"></script>
 </body>
 </html>

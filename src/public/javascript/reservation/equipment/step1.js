@@ -20,8 +20,19 @@ $checkBoxes.forEach(checkBox=>{
   }
 })
 
+// Equipmnet Stock
+let equipmentName= document.getElementsByClassName("equipmentName")
+let equipmentCount= document.getElementsByClassName("equipmentCount")
+let equipmentCount2= document.getElementsByClassName("equipmentCount2")
+let equipmentStock = new Map()
 
-//time block
+for(let i=0; i<equipmentName.length; i++){
+    let todayCount = equipmentCount[i].value.replace(/\[|\]/gi,"").split(",")
+    let tomorrowCount = equipmentCount2[i].value.replace(/\[|\]/gi,"").split(",")
+    equipmentStock.set(equipmentName[i].value,todayCount.concat(tomorrowCount))
+}
+
+// time block
 for (let index = 0; index < 18; index++) {
   let blockCount = document.getElementsByClassName(String(index));
   for (let i = 0; i < blockCount.length; i++) {
