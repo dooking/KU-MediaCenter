@@ -10,6 +10,7 @@ const $selectDay = document.querySelector("#day")
 const currentYear = $selectYear.dataset.currentYear
 const currentMonth = $selectMonth.dataset.currentMonth
 const currentDay = $selectDay.dataset.currentDay
+const currentDate = new Date(`${currentYear}`+'-'+`${currentMonth}`+'-'+`${currentDay}`)
 
 // 기본 날짜 설정
 for (let i=0; i<5; i++){
@@ -38,6 +39,7 @@ $selectDay.options[currentDay-1].selected = true
 $selectYear.addEventListener("change",(event)=>{
     $selectMonth.options[0].selected = true
     $selectDay.options[0].selected = true
+    sendForm()
 })
 $selectMonth.addEventListener("change",(event)=>{
     const month = event.target.value
@@ -48,15 +50,10 @@ $selectMonth.addEventListener("change",(event)=>{
         option.text = i+1
         $selectDay.add(option)
     }
+    sendForm()
 })
 $selectDay.addEventListener("change",(event)=>{
-    const $selectDate = document.querySelector("#selectDate")
-    const select = new Date($selectYear.value,$selectMonth.value-1,$selectDay.value,now.getHours(),now.getMinutes(),now.getSeconds(),now.getMilliseconds())
-    $selectDate.value = $selectYear.value +"-"+(parseInt($selectMonth.value) < 10 ? "0"+$selectMonth.value : $selectMonth.value) +"-"+ (parseInt($selectDay.value) < 10 ? "0"+$selectDay.value : $selectDay.value)
-    if(now<=select){
-        return document.sDate.submit()
-    }
-    return alert("오늘 날짜 이후로 선택해주세요")
+    sendForm()
 })
 
 function checkMonth(month){
@@ -76,13 +73,27 @@ function checkMonth(month){
 }
 
 // 반납날짜 선택
+const $fromDate = document.querySelector("#fromDate")
+const { fromDateYear, fromDateMonth, fromDateDay } = $fromDate.dataset
+$fromDate.value = dateFormat(fromDateYear,fromDateMonth,fromDateDay)
+
 const returnDate = document.querySelector("#returnDate")
 const option = document.createElement("option")
 const option2 = document.createElement("option")
-option.text = currentYear +"-"+(parseInt(currentMonth) < 10 ? "0"+currentMonth : currentMonth) +"-"+ (parseInt(currentDay) < 10 ? "0"+currentDay : currentDay)
-option2.text = returnDate.dataset.nextDate
+option.text = dateFormat(currentYear,currentMonth,currentDay)
 returnDate.add(option)
-returnDate.add(option2)
+
+// 금요일 대여 -> 월요일 반납
+if(currentDate.getDay() === 5){
+    currentDate.setDate(currentDate.getDate() + 3)
+    option2.text = dateFormat(currentDate.getFullYear(),currentDate.getMonth()+1,currentDate.getDate())
+    returnDate.add(option2)
+}
+else{
+    const {nextYear, nextMonth, nextDay } = returnDate.dataset
+    option2.text = dateFormat(nextYear,nextMonth,nextDay)
+    returnDate.add(option2)
+}
 
 const selectFromTime = document.querySelector("#selectFromTime")
 for (let i=0; i<12; i++){

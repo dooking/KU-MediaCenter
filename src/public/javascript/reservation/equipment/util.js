@@ -36,10 +36,25 @@ function addList(name, count){
 // remove List
 function removeList(name){
   sessionStorage.removeItem(name)
-
   const listEl = document.getElementsByClassName(`${name}`)[0]
   listEl.remove()
   return;
+}
+
+// YYYY-MM-DD Format
+function dateFormat(year,month,day){
+  return year +"-"+(parseInt(month) < 10 ? "0"+month : month) +"-"+ (parseInt(day) < 10 ? "0"+ day : day)
+}
+
+// Search SelectDate
+function sendForm(){
+  const $selectDate = document.querySelector("#selectDate")
+  const select = new Date(`${$selectYear.value}`+'-'+`${$selectMonth.value}`+'-'+`${$selectDay.value}`)
+  $selectDate.value = dateFormat($selectYear.value,$selectMonth.value,$selectDay.value)
+  if(now<=select){
+    return document.sDate.submit()
+  }
+  return alert("오늘 날짜 이후로 선택해주세요")
 }
 
 // Dropdown

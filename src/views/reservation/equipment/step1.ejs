@@ -103,7 +103,7 @@
         <div class = "set_time">
             <div class = 'rev_time'>
                 <label>예약 일시</label>
-                <input type="date" id="fromDate" name="fromDate" value="<%= selectDate.year %>-<%= selectDate.month %>-<%= selectDate.day %>" readonly/>
+                <input type="date" id="fromDate" name="fromDate" data-from-date-year="<%= selectDate.year %>" data-from-date-month="<%= selectDate.month %>" data-from-date-day="<%= selectDate.day %>" readonly/>
                 <select id="startAMPM">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
@@ -113,7 +113,7 @@
             </div>
             <div class = 'rev_time'>
                 <label>반납 일시</label>
-                <select id="returnDate" data-next-date="<%= nextSelectDate.year %>-<%= nextSelectDate.month %>-<%= nextSelectDate.day %>">
+                <select id="returnDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
                 </select>
                 <select id="endAMPM">
                     <option value="am">오전</option>
