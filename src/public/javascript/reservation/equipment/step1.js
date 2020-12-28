@@ -1,5 +1,10 @@
 const $reservationList = document.querySelector(".reservation_list")
 
+// Set IntroPage initialize 
+if(sessionStorage.getItem('intro_checked')){
+  sessionStorage.removeItem('intro_checked')
+}
+
 // CheckBox Check (Rendering)
 const $checkBoxes = document.querySelectorAll("input[type=checkbox], input[type=radio]")
 $checkBoxes.forEach(checkBox=>{
