@@ -77,11 +77,10 @@ function checkMonth(month){
 
 // 반납날짜 선택
 const returnDate = document.querySelector("#returnDate")
-const nextDay = document.querySelector("#nextDay").value
 const option = document.createElement("option")
 const option2 = document.createElement("option")
 option.text = currentYear +"-"+(parseInt(currentMonth) < 10 ? "0"+currentMonth : currentMonth) +"-"+ (parseInt(currentDay) < 10 ? "0"+currentDay : currentDay)
-option2.text = nextDay
+option2.text = returnDate.dataset.nextDate
 returnDate.add(option)
 returnDate.add(option2)
 

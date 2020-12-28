@@ -103,7 +103,7 @@
         <div class = "set_time">
             <div class = 'rev_time'>
                 <label>예약 일시</label>
-                <input type="date" id="fromDate" name="fromDate" value="" readonly/>
+                <input type="date" id="fromDate" name="fromDate" value="<%= selectDate.year %>-<%= selectDate.month %>-<%= selectDate.day %>" readonly/>
                 <select id="startAMPM">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
@@ -113,7 +113,7 @@
             </div>
             <div class = 'rev_time'>
                 <label>반납 일시</label>
-                <select id="returnDate">
+                <select id="returnDate" data-next-date="<%= nextSelectDate.year %>-<%= nextSelectDate.month %>-<%= nextSelectDate.day %>">
                 </select>
                 <select id="endAMPM">
                     <option value="am">오전</option>
@@ -123,11 +123,6 @@
                 <span>시</span>
             </div>
         </div>
-        <input type="hidden" id="toDate" name="toDate" value=""/>
-        <input type="hidden" id="fromTime" name="fromTime" value=""/>
-        <input type="hidden" id="toTime" name="toTime" value=""/>
-        <input type="hidden" id="nextDay" name="nextDay" value="">
-        <input type="hidden" id="resultBorrow" name="resultBorrow" value="">
         <div class = "button_box">
             <button type="submit">다음 단계</button>
         </div>
@@ -137,5 +132,6 @@
     <script type="text/javascript" src="/javascript/reservation/equipment/util.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/step1.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/selectDate.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/selectEquipment.js"></script>
 </body>
 </html>
