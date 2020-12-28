@@ -57,7 +57,6 @@ const EquipmentDB = class {
         }
       })
       .then((results) => {
-        console.log(results)
         return results;
       })
       .catch((err) => {

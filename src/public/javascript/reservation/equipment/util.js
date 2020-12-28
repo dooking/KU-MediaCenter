@@ -10,6 +10,38 @@ function checkCamera () {
   }
 }
 
+// Etc Event
+function selectEl(event, selector){
+  const $cam_check = event.closest('.cam_check')
+  const $selectCountEl = $cam_check.getElementsByClassName(`${selector}`)[0]
+  return $selectCountEl;
+}
+
+// Add List
+function addList(name, count){
+  sessionStorage.setItem(name, count)
+  const alreadyEl = document.getElementsByClassName(`${name}`)[0]
+  if(alreadyEl){
+    alreadyEl.textContent = name + ' ' + sessionStorage.getItem(name) + '대'
+  }
+  else{
+    const listEl = document.createElement('li')
+    listEl.textContent = name + ' ' + sessionStorage.getItem(name) + '대'
+    listEl.setAttribute("class", `${name}`);
+    $reservationList.appendChild(listEl)
+  }
+  return;
+}
+
+// remove List
+function removeList(name){
+  sessionStorage.removeItem(name)
+
+  const listEl = document.getElementsByClassName(`${name}`)[0]
+  listEl.remove()
+  return;
+}
+
 // Dropdown
 function hide(event) {
   const hide = event.nextElementSibling;
