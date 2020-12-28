@@ -131,6 +131,7 @@ button{
     display: block;
 }
 .borrow{
+    cursor: pointer;
     text-align: center;
     width: 155px;
     height: 50px;

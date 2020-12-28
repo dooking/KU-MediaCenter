@@ -2,14 +2,14 @@
 function checkHandler(event) {
     const { category, name } = event.dataset;
     if(category === '기타 부속'){
-      const $selectCountEl = selectEl(event, 'countSelect')
+      const $selectCountEl = findSelectEl(event, 'countSelect')
       $selectCountEl.classList.toggle('none')
     }
     if(sessionStorage.getItem(name)){
       removeList(name)
       event.checked = false;
       if(category === '기타 부속'){
-        const $selectCountEl = selectEl(event, 'countSelect')
+        const $selectCountEl = findSelectEl(event, 'countSelect')
         $selectCountEl[0].selected = true
       }
       return;
@@ -23,7 +23,7 @@ function checkHandler(event) {
     const { category, name } = event.dataset;
     const selectValue = event.value
     if(selectValue == 0){
-      const $selectCountEl = selectEl(event, 'checkbox')
+      const $selectCountEl = findSelectEl(event, 'checkbox')
       removeList(name)
       event.classList.add('none')
       $selectCountEl.checked = false;

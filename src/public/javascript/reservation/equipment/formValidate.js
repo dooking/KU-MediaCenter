@@ -1,20 +1,19 @@
-// 오후일 때  +12시간
 function checkAll() {
-  const $startAMPM = document.querySelector("#startAMPM").value;
-  const $endAMPM = document.querySelector("#endAMPM").value;
-  let $SelectFromTime = parseInt(document.querySelector("#selectFromTime").value);
-  let $SelectToTime = parseInt(document.querySelector("#selectToTime").value);
-  $SelectFromTime = $startAMPM == "am" ? $SelectFromTime : $SelectFromTime + 12;
-  $SelectToTime = $endAMPM == "am" ? $SelectToTime : $SelectToTime + 12;
+  const startAMPM = document.querySelector("#startAMPM").value;
+  const endAMPM = document.querySelector("#endAMPM").value;
+  let SelectFromTime = parseInt(document.querySelector("#selectFromTime").value);
+  let SelectToTime = parseInt(document.querySelector("#selectToTime").value);
+  SelectFromTime = startAMPM == "am" ? SelectFromTime : SelectFromTime + 12;
+  SelectToTime = endAMPM == "am" ? SelectToTime : SelectToTime + 12;
   try {
     if (!checkList()) {
       throw new Error("대여 장비 목록이 존재하지 않습니다");
     }
-    if (!checkTime($SelectFromTime, $SelectToTime)) {
+    if (!checkTime(SelectFromTime, SelectToTime)) {
       throw new Error("대여 시간이 빌리는 시간보다 빠릅니다");
     }
-    if (!checkStock($SelectFromTime, $SelectToTime).result) {
-      throw new Error(`${checkStock().err} 예약이 이미 존재합니다`);
+    if (!checkStock(SelectFromTime, SelectToTime).result) {
+      throw new Error(`${checkStock().err} 장비를 예약할 수 없습니다`);
     } 
     else {
       return true;
@@ -32,7 +31,7 @@ function checkList() {
 
 // 반납 시간이 대여 시간보다 빠를 때
 function checkTime(fromTime, toTime) {
-  if ($fromDate.value === $returnDate.value && fromTime >= toTime) {
+  if ($fromDateEl.value === $toDateEl.value && fromTime >= toTime) {
     return false;
   }
   return true;
@@ -50,18 +49,18 @@ function checkStock(fromTime, toTime) {
 }
 
 function findStock(equipment, count, fromTime, toTime) {
-  const checkstock = equipmentStock.get(equipment);
+  const stockLists = equipmentStock.get(equipment);
   let check = true;
-  if ($fromDate.value == $returnDate.value) {
-    checkstock.slice(fromTime, toTime).some((v) => {
-      const isMinus = v - count;
+  if ($fromDateEl.value == $toDateEl.value) {
+    stockLists.slice(fromTime, toTime).some((stock) => {
+      const isMinus = stock - count;
       if (isMinus < 0) {
         check = false;
       }
     });
   } else {
-    checkstock.slice(fromTime, toTime + 23).some((v) => {
-      const isMinus = v - count;
+    stockLists.slice(fromTime, toTime + 23).some((stock) => {
+      const isMinus = stock - count;
       if (isMinus < 0) {
         check = false;
       }

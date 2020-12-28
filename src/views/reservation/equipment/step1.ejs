@@ -17,11 +17,11 @@
     <form method="POST" name="sDate">
         <div class ="first_form">
             <p class = "step-sub">1. 대여 날짜 선택</p>
-            <select id="year" data-current-year=<%= selectDate.year %>></select>
+            <select id="year" data-select-year=<%= selectDate.year %>></select>
             <span>년</span>
-            <select id="month" data-current-month=<%= selectDate.month %>></select>
+            <select id="month" data-select-month=<%= selectDate.month %>></select>
             <span>월</span>
-            <select id="day" data-current-day=<%= selectDate.day %>></select>
+            <select id="day" data-select-day=<%= selectDate.day %>></select>
             <span>일</span>
 
             <input type="hidden" name="selectDate" id="selectDate" value="">
@@ -37,9 +37,6 @@
                 </div>    
                 <div class = "cam_box mystyle">
                     <% for (let equipment of equipmentInfo) { %>
-                        <input type="hidden" class="equipmentName" value="<%= equipment.kind %> (<%= equipment.name %>)">
-                        <input type="hidden" class="equipmentCount" value="<%= equipment.currentStock %>">
-                        <input type="hidden" class="equipmentCount2" value="<%= equipment.nextStock %>">
                         <div class = "cam_menu">
                             <div class = "cam_check">
                                 <% if (equipment.category == "카메라") { %>
@@ -89,6 +86,9 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" class="equipmentName" value="<%= equipment.kind %> (<%= equipment.name %>)">
+                        <input type="hidden" class="currentStock" value="<%= equipment.currentStock %>">
+                        <input type="hidden" class="nextStock" value="<%= equipment.nextStock %>">
                     <% } %>
                 </div>
             <% } %>
@@ -112,7 +112,7 @@
             </div>
             <div class = 'rev_time'>
                 <label>반납 일시</label>
-                <select id="returnDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
+                <select id="toDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
                 </select>
                 <select id="endAMPM">
                     <option value="am">오전</option>

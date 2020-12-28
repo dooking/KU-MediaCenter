@@ -6,14 +6,14 @@ if(sessionStorage.getItem('intro_checked')){
 }
 
 // CheckBox Check (Rendering)
-const $checkBoxes = document.querySelectorAll("input[type=checkbox], input[type=radio]")
-$checkBoxes.forEach(checkBox=>{
+const $checkBoxesEl = document.querySelectorAll("input[type=checkbox], input[type=radio]")
+$checkBoxesEl.forEach(checkBox=>{
   const { name } = checkBox.dataset
   if(sessionStorage.getItem(name)){
     checkBox.checked = true
     addList(name, sessionStorage.getItem(name))
     if(checkBox.dataset.category === '기타 부속'){
-      const $selectCountEl = selectEl(checkBox, 'countSelect')
+      const $selectCountEl = findSelectEl(checkBox, 'countSelect')
       $selectCountEl.classList.remove('none')
       $selectCountEl[sessionStorage.getItem(name)].selected = true
     }
@@ -21,15 +21,15 @@ $checkBoxes.forEach(checkBox=>{
 })
 
 // Equipmnet Stock
-let equipmentName= document.getElementsByClassName("equipmentName")
-let equipmentCount= document.getElementsByClassName("equipmentCount")
-let equipmentCount2= document.getElementsByClassName("equipmentCount2")
+let $equipmentNameEl = document.getElementsByClassName("equipmentName")
+let $currentStockEl = document.getElementsByClassName("currentStock")
+let $nextStockEl = document.getElementsByClassName("nextStock")
 let equipmentStock = new Map()
 
-for(let i=0; i<equipmentName.length; i++){
-    let todayCount = equipmentCount[i].value.replace(/\[|\]/gi,"").split(",")
-    let tomorrowCount = equipmentCount2[i].value.replace(/\[|\]/gi,"").split(",")
-    equipmentStock.set(equipmentName[i].value,todayCount.concat(tomorrowCount))
+for(let i=0; i<$equipmentNameEl.length; i++){
+    let todayCount = $currentStockEl[i].value.replace(/\[|\]/gi,"").split(",")
+    let tomorrowCount = $nextStockEl[i].value.replace(/\[|\]/gi,"").split(",")
+    equipmentStock.set($equipmentNameEl[i].value,todayCount.concat(tomorrowCount))
 }
 
 // time block
@@ -37,9 +37,9 @@ for (let index = 0; index < 18; index++) {
   let blockCount = document.getElementsByClassName(String(index));
   for (let i = 0; i < blockCount.length; i++) {
     for (let j = 0; j < blockCount[i].id; j++) {
-      const newDiv = document.createElement("div");
-      newDiv.setAttribute("class", "time-block");
-      blockCount[i].appendChild(newDiv);
+      const newDivEl = document.createElement("div");
+      newDivEl.setAttribute("class", "time-block");
+      blockCount[i].appendChild(newDivEl);
     }
   }
 }
