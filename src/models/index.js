@@ -18,19 +18,9 @@ if (config.use_env_variable) {
     config.password,
     {
       host: config.host,
-      dialect: "mysql",
-      dialectOptions: { charset: "utf8mb4", dateStrings: true, typeCast: true }, // 날짜의 경우 문자열로 타입 변경 처리
-      timezone: "+09:00", // 타임존을 설정
-      pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000,
-      },
-      define: {
-        timestamps: false,
-        supportBigNumbers: true,
-      },
+      dialect: 'mysql',
+      timezone: '+09:00',
+      logging: false
     },
     config
   );

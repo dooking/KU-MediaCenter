@@ -1,11 +1,11 @@
 const { equipment, equipment_detail, equipment_reservation } = require('../models');
+const sequelize = require('sequelize')
 
 const EquipmentDB = class {
   static getEquipmentLists() {
     return equipment
       .findAll({
         raw: true,
-
       })
       .then((results) => {
         return results;
@@ -14,12 +14,12 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmentCount(){
+  static getEquipmentCount(id){
     return equipment_detail
       .count({
         raw: true,
         where : {
-          equipment_id : 1,
+          equipment_id : id,
           state : 0
         }
       })
@@ -30,14 +30,30 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static findEquipmentReservation(id) {
+  static findEquipmentReservation(selectDate, nextSelectDate) {
     return equipment_reservation
       .findAll({
-        raw: true,
+        raw: true, 
+        attributes: ['from_date', 'to_date'],
         where : {
-          equipment_id : id,
-          state: 0,
-          
+          [sequelize.Op.or] : [
+              sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', selectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', selectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', nextSelectDate),
+              sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '=', nextSelectDate),
+          ]
+          // [sequelize.Op.or] : [
+          //   {
+          //   [sequelize.Op.and]:[
+          //     sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '>=', todayDate),
+          //     sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '<=', tomorrowDate),
+          //   ]},
+          //   {
+          //   [sequelize.Op.and]:[
+          //     sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '>=', todayDate),
+          //     sequelize.where(sequelize.fn('date', sequelize.col('to_date')), '<=', tomorrowDate),
+          //   ]}
+          // ]
         }
       })
       .then((results) => {

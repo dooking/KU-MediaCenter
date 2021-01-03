@@ -8,7 +8,7 @@ const { sequelize } = require('./models/index');
 const indexRouter = require('./routes/index');
 const passport = require('passport');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session)
+const MySQLStore = require("express-mysql-session")(session);
 const port = process.env.PORT;
 const app = express();
 
@@ -17,6 +17,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Session setting
+const options = {
+  host: process.env.DB_HOST,
+  port: 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+};
+
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -24,7 +32,7 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60, // 쿠키 유효기간 1시간
   },
-  store: new FileStore()
+  store: new MySQLStore(options)
 }));
 
 // Passport setting
