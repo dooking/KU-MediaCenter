@@ -1,4 +1,3 @@
-
 .wrapper{
     width: 100%;
     display: flex;
@@ -48,10 +47,11 @@ form {
 }
 #step1 {
     background-color: #cbcbcb;
-    
+    cursor: pointer;
 }
 #step2 {
     background-color: #8d091d;
+    cursor: pointer;
 }
 .choice {
     display: flex;

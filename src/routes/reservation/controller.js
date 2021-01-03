@@ -52,7 +52,12 @@ const equipmentStep1 = async (req, res) => {
             year : moment(selectDate).year(),
             month : moment(selectDate).month() + 1,
             day : moment(selectDate).date()
-        } 
+        },
+        nextSelectDate: {
+            year : moment(nextSelectDate).year(),
+            month : moment(nextSelectDate).month() + 1,
+            day : moment(nextSelectDate).date()
+        }
      })
 }
 

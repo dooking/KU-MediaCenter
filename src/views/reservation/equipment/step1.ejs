@@ -17,16 +17,13 @@
     <form method="POST" name="sDate">
         <div class ="first_form">
             <p class = "step-sub">1. 대여 날짜 선택</p>
-            <select id="year"></select>
+            <select id="year" data-select-year=<%= selectDate.year %>></select>
             <span>년</span>
-            <select id="month"></select>
+            <select id="month" data-select-month=<%= selectDate.month %>></select>
             <span>월</span>
-            <select id="day"></select>
+            <select id="day" data-select-day=<%= selectDate.day %>></select>
             <span>일</span>
-           
-            <input type="hidden" name="currentYear" id="currentYear" value=<%= selectDate.year %>>
-            <input type="hidden" name="currentMonth" id="currentMonth" value=<%= selectDate.month %>>
-            <input type="hidden" name="currentDay" id="currentDay" value=<%= selectDate.day %>>
+
             <input type="hidden" name="selectDate" id="selectDate" value="">
         </div>
     </form>
@@ -43,19 +40,17 @@
                         <div class = "cam_menu">
                             <div class = "cam_check">
                                 <% if (equipment.category == "카메라") { %>
-                                    <input type="radio" name="camera" id="camera" onchange="radioHandler(this)">
-                                    <p><%= equipment.name %></p>
-                                <% } else if (equipment.category == "기타 부속") { %>
-                                    <input type="checkbox" id="etc" class = "etc" onchange="etcHandler(this)"/>
-                                    <p><%= equipment.name %></p>
-                                    <select class="countSelect none select"" name="countEquipment"  onchange="numberHandler(this)" />
+                                    <input type="radio" name="camera" class="checkbox" onclick="checkHandler(this)" data-category="<%= equipment.category %>" data-name="<%= equipment.kind %> (<%= equipment.name %>)" >
+                                <% } else { %>
+                                    <input type="checkbox" class="checkbox" onchange="checkHandler(this)" data-category="<%= equipment.category %>" data-name="<%= equipment.kind %> (<%= equipment.name %>)" >
+                                <% } %>
+                                <p><%= equipment.kind %> (<%= equipment.name %>) </p>
+                                <% if (equipment.category == "기타 부속") { %>
+                                    <select class="countSelect none" onchange="etcHandler(this)" data-category="<%= equipment.category %>" data-name="<%= equipment.kind %> (<%= equipment.name %>)"/>
                                         <option value="0">0개</option>
                                         <option value="1">1개</option>
                                         <option value="2">2개</option>
                                     </select>
-                                <% } else { %>
-                                    <input type="checkbox" class="edit" onchange="checkHandler(this)"/>
-                                    <p><%= equipment.name %></p>
                                 <% } %>
                             </div>
                             <div class="graph">
@@ -66,35 +61,34 @@
                                     </div>
                                     <div class = 'redbar'></div>
                                     <div class = 'bar_body'>
-                                        <div class = 'day'>
-                                            <div class ='stack'>
-                                                <% for (let hour = 9; hour < 17; hour ++) {%>
-                                                    <div class="time-hour">
-                                                        <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
-                                                    </div>
-                                                <% } %>
+                                        <% for (let index=0; index<2; index++) { %>
+                                            <div class = 'day'>
+                                                <div class ='stack'>
+                                                    <% for (let hour = 9; hour < 17; hour ++) {%>
+                                                        <div class="time-hour">
+                                                            <% if (index === 0) { %>
+                                                                <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
+                                                            <% } else { %>
+                                                                <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
+                                                            <% } %>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                                <div class = 'hour_num'>
+                                                    <p>09 10 11 12 13 14 15 16 17</p>
+                                                </div>
                                             </div>
-                                            <div class = 'hour_num'>
-                                                <p>09 10 11 12 13 14 15 16 17</p>
-                                            </div>
-                                        </div>
-                                        <div class = "day_divide"></div>
-                                        <div class = 'day'>
-                                            <div class = "stack">
-                                                <% for (let hour = 9; hour < 17; hour ++) {%>
-                                                    <div class="time-hour">
-                                                        <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
-                                                    </div>
-                                                <% } %>
-                                            </div>
-                                            <div class = "hour_num">
-                                                <p>09 10 11 12 13 14 15 16 17</p>
-                                            </div>
-                                        </div>
+                                            <% if (index === 0) { %>
+                                                <div class = "day_divide"></div>
+                                            <% } %>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" class="equipmentName" value="<%= equipment.kind %> (<%= equipment.name %>)">
+                        <input type="hidden" class="currentStock" value="<%= equipment.currentStock %>">
+                        <input type="hidden" class="nextStock" value="<%= equipment.nextStock %>">
                     <% } %>
                 </div>
             <% } %>
@@ -103,12 +97,12 @@
         <div>
             <p class = "step-sub first_form">3. 대여 목록</p>
         </div>
-        <div class="borrow_list">
+        <div class="reservation_list">
         </div>
         <div class = "set_time">
             <div class = 'rev_time'>
                 <label>예약 일시</label>
-                <input type="date" id="fromDate" name="fromDate" value="" readonly/>
+                <input type="date" id="fromDate" name="fromDate" data-from-date-year="<%= selectDate.year %>" data-from-date-month="<%= selectDate.month %>" data-from-date-day="<%= selectDate.day %>" readonly/>
                 <select id="startAMPM">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
@@ -118,7 +112,7 @@
             </div>
             <div class = 'rev_time'>
                 <label>반납 일시</label>
-                <select id="returnDate">
+                <select id="toDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
                 </select>
                 <select id="endAMPM">
                     <option value="am">오전</option>
@@ -128,18 +122,16 @@
                 <span>시</span>
             </div>
         </div>
-        <input type="hidden" id="toDate" name="toDate" value=""/>
-        <input type="hidden" id="fromTime" name="fromTime" value=""/>
-        <input type="hidden" id="toTime" name="toTime" value=""/>
-        <input type="hidden" id="nextDay" name="nextDay" value="">
-        <input type="hidden" id="resultBorrow" name="resultBorrow" value="">
         <div class = "button_box">
             <button type="submit">다음 단계</button>
         </div>
     </form>       
     </div>
-    
+
+    <script type="text/javascript" src="/javascript/reservation/equipment/util.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/step1.js"></script>
     <script type="text/javascript" src="/javascript/reservation/equipment/selectDate.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/selectEquipment.js"></script>
+    <script type="text/javascript" src="/javascript/reservation/equipment/formValidate.js"></script>
 </body>
 </html>
