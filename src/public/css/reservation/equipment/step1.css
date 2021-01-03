@@ -297,7 +297,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/unclicked.png");
+  background-image: url("../../../images/unclicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -306,7 +306,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/clicked.png");
+  background-image: url("../../../images/clicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -316,7 +316,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/unclicked.png");
+  background-image: url("../../../images/unclicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -325,7 +325,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/clicked.png");
+  background-image: url("../../../images/clicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -335,7 +335,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/unclicked.png");
+  background-image: url("../../../images/unclicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -344,7 +344,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/clicked.png");
+  background-image: url("../../../images/clicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -354,7 +354,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/unclicked.png");
+  background-image: url("../../../images/unclicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -363,7 +363,7 @@ button {
   width: 20px;
   height: 20px;
   appearance: none;
-  background-image: url("/static/images/clicked.png");
+  background-image: url("../../../images/clicked.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;

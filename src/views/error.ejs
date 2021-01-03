@@ -1,3 +1,18 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./reservation/base/base-header %>
+    <link rel="stylesheet" type="text/css" href="/css/error.css"/>
+    <title>에러 페이지</title>
+    <% include ./reservation/base/base-navbar %>
+</head>
+<div class="flex">
+    <img src="/images/error_icon.png" alt="error">
+    <h1>Server Error</h1>
+    <p>잘못된 페이지 요청입니다.</p>
+    <!-- <p> 요청하신 페이지 처리 중 오류가 발생했습니다. </p> -->
+    <p> 확인 후 다시 시도해 주시기 바랍니다. </p>
+    <p> 에러 상태 : <%= error.status %></p>
+    <p> 에러 원인 : <%= message %></p>
+    <a href="/">메인으로 돌아가기</a>
+</div>
