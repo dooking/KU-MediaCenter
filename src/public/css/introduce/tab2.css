@@ -1,0 +1,82 @@
+/* 제목 */
+.header {
+    margin-top: 3.75rem;
+}
+
+.head-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.head-content {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+/* POST */
+.main {
+    margin-top: 3.75rem;
+}
+
+.main-titlebox {
+    display: flex;
+    height: 3.3125rem;
+}
+
+.tri {
+    align-self: center;
+    margin-right: 0.625rem;
+}
+
+.main-subbox {
+    align-self: center;
+}
+
+.sub-title {
+    font-size: 1.6rem;
+    color:#990000;
+    font-weight: 900;
+    margin-top: 0.4375rem;
+}
+
+.main-contbox {
+    padding: 1.25rem 1.9375rem 1.5rem 1.9375rem;
+}
+
+.img {
+    margin-bottom: 0.625rem;
+}
+
+@media(min-width:768px) {
+    .header {
+        margin: 4rem 0 6rem 0;
+    }
+
+    .head-title {
+        font-size: 2.5rem;
+    }
+    
+    .head-content {
+        font-size: 1.5rem;
+    }
+
+    .main {
+        margin-top: 5rem;
+        min-width: 445px;
+    }
+
+    .main-titlebox {
+        height: 4rem;
+        padding : 0 10rem 0 10rem;
+    }
+
+    .main-contbox {
+        font-size: 1.25rem;
+        padding: 1.5rem 10rem 1.75rem 11.5rem;
+    }
+
+    .img {
+        margin-bottom: 2rem;
+    }
+}

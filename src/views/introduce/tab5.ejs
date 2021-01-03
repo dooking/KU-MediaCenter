@@ -1,13 +1,12 @@
 <% include ./base/base-header %>
 
-<link rel="stylesheet" href="css/introduce/tab4.css" type='text/css'>
+<link rel="stylesheet" href="css/introduce/tab5.css" type='text/css'>
 
 <% include ./base/base-navbar %>
 
 <div class="header">
     <div class="head-title">{{tab.title}}</div>
 </div>
-
 {% for post in posts %}
 <div class="main">
     <div class="main-titlebox">
@@ -18,7 +17,7 @@
         </div>
     </div>
     {% for image in post.images.all %}
-    <img class="img" src="{{image.file.url}}" width="100%" />
+    <img src="{{image.file.url}}" style="width: 100%;" />
     {% endfor %}
 </div>
 {% endfor %}
