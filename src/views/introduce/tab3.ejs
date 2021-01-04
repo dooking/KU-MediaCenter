@@ -1,0 +1,60 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" href="css/introduce/tab3.css" type='text/css'>
+
+<% include ./base/base-navbar %>
+<div class="equip-container">
+    <div class="header">
+        <div class="head-title">{{tab.title}}</div>
+    </div>
+    <div class="main">
+
+        {% for e_post in posts %}
+        <div class="main-titlebox">
+            <img src="../../public/images/tab3_bar.jpg" width="61px" />
+            <div class="main-subbox">
+                <div class="title">{{e_post.equip_type}}</div>
+                <div class="content" style="white-space: pre-wrap;">{{post.content}}</div>
+            </div>
+        </div>
+        <div class="equip-content">
+            {% for post in e_post.posts %}
+            <div class="equip-table">
+                {% for image in post.images.all %}
+                <div class="equip-table-img">
+                    <img class="equip-img" src="{{image.file.url}}" />
+                </div>
+                {% endfor %}
+                <div class="equip-table-content">
+                    <div class="equip-table-content-tr">
+                        <div class="equip-table-content-td">
+                            &nbsp;&nbsp;&nbsp;&nbsp;품명:
+                        </div>
+                        <div class="equip-table-content-input">
+                            {{post.title}}
+                        </div>
+                    </div>
+                    <div class="equip-table-content-tr">
+                        <div class="equip-table-content-td">
+                            &nbsp;&nbsp;&nbsp;&nbsp;규격:
+                        </div>
+                        <div class="equip-table-content-input">
+                            {{post.subtitle}}
+                        </div>
+                    </div>
+                    <div class="equip-table-content-tr">
+                        <div id="equip-table-content-last" class="equip-table-content-td">
+                            &nbsp;&nbsp;&nbsp;&nbsp;수량:
+                        </div>
+                        <div id="equip-table-content-last" class="equip-table-content-input">
+                            {{post.count}}개
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<% include ./base/base-footer %>
