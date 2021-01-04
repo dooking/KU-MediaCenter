@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const EquipmentRouter = require("./equipment");
+const EquipmentRouter = require("./equipment/equipment");
 const ReservationController = require("./controller");
 const { isLogin } = require("../../middleware/auth")
 

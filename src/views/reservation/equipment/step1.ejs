@@ -67,9 +67,17 @@
                                                     <% for (let hour = 9; hour < 17; hour ++) {%>
                                                         <div class="time-hour">
                                                             <% if (index === 0) { %>
-                                                                <div class=<%= hour %> id=<%= equipment.currentStock[hour]%>></div>
+                                                                <div>
+                                                                    <% for (let count=0; count < equipment.currentStock[hour]; count++ ) {%>
+                                                                        <div class="time-block"></div>
+                                                                    <% } %>
+                                                                </div>
                                                             <% } else { %>
-                                                                <div class=<%= hour %> id=<%= equipment.nextStock[hour]%>></div>
+                                                                <div>
+                                                                    <% for (let count=0; count < equipment.nextStock[hour]; count++ ) {%>
+                                                                        <div class="time-block"></div>
+                                                                    <% } %>
+                                                                </div>
                                                             <% } %>
                                                         </div>
                                                     <% } %>
@@ -103,28 +111,29 @@
             <div class = 'rev_time'>
                 <label>예약 일시</label>
                 <input type="date" id="fromDate" name="fromDate" data-from-date-year="<%= selectDate.year %>" data-from-date-month="<%= selectDate.month %>" data-from-date-day="<%= selectDate.day %>" readonly/>
-                <select id="startAMPM">
+                <select id="startAMPM" name="startAMPM">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
                 </select>
-                <select id="selectFromTime"></select>
+                <select id="selectFromTime" name="fromTime"></select>
                 <span>시</span>
             </div>
             <div class = 'rev_time'>
                 <label>반납 일시</label>
-                <select id="toDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
+                <select id="toDate" name="toDate" data-next-year="<%= nextSelectDate.year %>" data-next-month = "<%= nextSelectDate.month %>" data-next-day="<%= nextSelectDate.day %>">
                 </select>
-                <select id="endAMPM">
+                <select id="endAMPM" name="endAMPM">
                     <option value="am">오전</option>
                     <option value="pm">오후</option>
                 </select>
-                <select id="selectToTime"></select>
+                <select id="selectToTime" name="toTime"></select>
                 <span>시</span>
             </div>
         </div>
         <div class = "button_box">
             <button type="submit">다음 단계</button>
         </div>
+
     </form>       
     </div>
 
