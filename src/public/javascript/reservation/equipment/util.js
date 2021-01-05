@@ -49,8 +49,9 @@ function dateFormat(year,month,day){
 // Search SelectDate
 function sendForm(){
   const $selectDate = document.querySelector("#selectDate")
-  const select = new Date(dateFormat(selectYearEl.value,selectMonthEl.value,selectDayEl.value))
-  $selectDate.value = dateFormat($selectYearEl.value,$selectMonthEl.value,$selectDayEl.value)
+  const selectedDateValue = dateFormat($selectYear.value,$selectMonth.value,$selectDay.value)
+  const select = new Date(selectedDateValue)
+  $selectDate.value = selectedDateValue
   if(now<=select){
     return document.sDate.submit()
   }
@@ -74,7 +75,7 @@ function checkMonth(month) {
   let lastDay
   if(month == 2){
       // 윤년 => 2월 29일
-      const leapYear = ($selectYearEl.value % 4 == 0)
+      const leapYear = ($selectYear.value % 4 == 0)
       lastDay = leapYear ? 29 : 28
   }
   else if(month == 4 || month == 6 || month == 9 || month == 11){
