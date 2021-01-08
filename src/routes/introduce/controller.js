@@ -1,14 +1,12 @@
+const IntroduceService = require('../../service/introduce-service')
 
-const tab = (request, tabnum) => {
-    switch(tabnum) {
-        case 1:
-            
-
-    }
-}
-
-const tab1 = (req, res) => {
-    res.render("./introduce/tab1");
+const tab1 = async(req, res) => { 
+    const tabs = await IntroduceService.getTabs()
+    const post_1 = await IntroduceService.getTabPosts(1)
+    const post_2 = await IntroduceService.getTabPosts(2)
+    res.render("./introduce/tab1", {
+        tabs, post_1, post_2
+    });
 }
 
 const tab2 = (req, res) => {
@@ -23,7 +21,7 @@ const tab4 = (req, res) => {
     res.render("./introduce/tab4");
 }
 
-const tab5 = (req, res) => {
+const tab5 = (req, resㅇ) => {
     res.render("./introduce/tab5");
 }
 

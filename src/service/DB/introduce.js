@@ -2,7 +2,7 @@ const { introduce_tab, introduce_post, introduce_image } = require('../models');
 const sequelize = require('sequelize')
 
 const IntroduceDB = class {
-  static getTabLists() {
+  static getTabItems() {
     return introduce_tab
       .findAll({
         raw: true,

@@ -1,17 +1,22 @@
-const { introduce_tab, introduce_post, introduce_image } = require('../models');
-const sequelize = require('sequelize')
+const IntroduceDB = require('./DB/introduce')
 
-const IntroduceDB = class {
-  static getTabLists() {
-    return introduce_tab
-      .findAll({
-        raw: true,
-      })
-      .then((results) => {
-        return results;
-      })
-      .catch((err) => {
-        return err;
-      });
-  }
+
+exports.getTabs = async () =>{
+    const tabs = await IntroduceDB.getTabItems()
+    return tabs
+}
+
+exports.getTabId = async (tabnum) => {
+    const tabId = await IntroduceDB.getTabId(tabnum)
+    return tabId
+}
+
+exports.getTabPosts = async (tab_id) => {
+    const tabPosts = await IntroduceDB.getTabPosts(tab_id)
+    return tabPosts
+}
+
+exports.getPostImages = async (post_id) => {
+    const postImages = await IntroduceDB.getPostImages(post_id)
+    return postImages
 }
