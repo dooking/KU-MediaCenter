@@ -4,22 +4,22 @@
 
 <% include ./base/base-navbar %>
 
-<div id="tab-title">{{tab.title}}</div>
+<div class="tab-title"> <%= tab.title %></div>
 
 <div class="container">
-    {% for post in posts %}
-    {% for image in post.images.all %}
-    <img class="org-chart" src="{{ image.file.url }}" alt="{{ image.file.image }}">
-    <!-- <div id="line"></div> -->
-    {% endfor %}
+    <% for (let post of posts) { %>
+        <% for (let image of post.images) { %>
+            <img class="org-chart" src="<%= image.file %>">
+    <div id="line"></div>
+    <% } %>
     <div class="post-container">
         <div class="post-top-con">
-            <!-- <img id="phone" src="https://user-images.githubusercontent.com/46775877/95593638-e6daec80-0a84-11eb-91d8-f49f250ce0bc.png"/> -->
-            <div id="post-title">{{post.title}}</div>
+            <img id="phone" src="https://user-images.githubusercontent.com/46775877/95593638-e6daec80-0a84-11eb-91d8-f49f250ce0bc.png"/>
+            <div id="post-title"><%= post.title %></div>
         </div>
-        <div id="post-content" style="white-space: pre-wrap;">{{post.content}}</div>
+        <div id="post-content" style="white-space: pre-wrap;"><%= post.content %></div>
     </div>
-    {% endfor %}
+    <% } %>
 </div>
 
 <% include ./base/base-footer %>
