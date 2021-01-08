@@ -13,16 +13,16 @@ function checkCamera () {
 // Etc Event
 function findSelectEl(event, selector){
   const $cam_check = event.closest('.cam_check')
-  const $selectCountEl = $cam_check.getElementsByClassName(`${selector}`)[0]
-  return $selectCountEl;
+  const $selectCount = $cam_check.getElementsByClassName(`${selector}`)[0]
+  return $selectCount;
 }
 
 // Add List
 function addList(name, count){
   sessionStorage.setItem(name, count)
-  const alreadyEl = document.getElementsByClassName(`${name}`)[0]
-  if(alreadyEl){
-    alreadyEl.textContent = name + ' ' + sessionStorage.getItem(name) + '대'
+  const already = document.getElementsByClassName(`${name}`)[0]
+  if(already){
+    already.textContent = name + ' ' + sessionStorage.getItem(name) + '대'
   }
   else{
     const listEl = document.createElement('li')
@@ -36,8 +36,8 @@ function addList(name, count){
 // remove List
 function removeList(name){
   sessionStorage.removeItem(name)
-  const listEl = document.getElementsByClassName(`${name}`)[0]
-  listEl.remove()
+  const removeItem = document.getElementsByClassName(`${name}`)[0]
+  removeItem.remove()
   return;
 }
 
@@ -49,8 +49,9 @@ function dateFormat(year,month,day){
 // Search SelectDate
 function sendForm(){
   const $selectDate = document.querySelector("#selectDate")
-  const select = new Date(`${$selectYearEl.value}`+'-'+`${$selectMonthEl.value}`+'-'+`${$selectDayEl.value}`)
-  $selectDate.value = dateFormat($selectYearEl.value,$selectMonthEl.value,$selectDayEl.value)
+  const selectedDateValue = dateFormat($selectYear.value,$selectMonth.value,$selectDay.value)
+  const select = new Date(selectedDateValue)
+  $selectDate.value = selectedDateValue
   if(now<=select){
     return document.sDate.submit()
   }
@@ -74,7 +75,7 @@ function checkMonth(month) {
   let lastDay
   if(month == 2){
       // 윤년 => 2월 29일
-      const leapYear = ($selectYearEl.value % 4 == 0)
+      const leapYear = ($selectYear.value % 4 == 0)
       lastDay = leapYear ? 29 : 28
   }
   else if(month == 4 || month == 6 || month == 9 || month == 11){

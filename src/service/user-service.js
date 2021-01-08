@@ -1,33 +1,13 @@
-const { user } = require('../models')
+const db = require('./DB/user')
 
-const UserDB = class {
-    static findUser(sub) {
-        return user.findOne({
-            raw: true,
-            where: {
-                identity: sub,
-            },
-        })
-            .then((results) => {
-                return [null, results]
-            })
-            .catch((err) => {
-                return [err]
-            })
-    }
-    static insertUser({ identity, name, major }) {
-        return user.create({
-            raw: true,
-            identity,
-            name,
-            major
-        })
-            .then((results) => {
-                return [null, results]
-            })
-            .catch((err) => {
-                return [err, null]
-            })
-    }
+// 유저 DB 저장
+exports.insertUser = async (params) => {
+    const user = db.insertUser(params)
+    return user
 }
-module.exports = UserDB
+
+// 유저 DB 조회
+exports.findUser = async (userId) => {
+    const user = await db.findUser(userId);
+    return user;
+};

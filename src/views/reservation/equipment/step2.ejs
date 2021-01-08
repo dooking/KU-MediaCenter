@@ -16,8 +16,13 @@
     <div class="wrapper">
       <form method="POST" name="step2" action="/reservation/equipment/finish" onsubmit="checkAll();">
         <div>
+            <div class="content_box">
+            <p class="step-sub">0. 대여 날짜</p>
+            <p><%= fromDate %> <%= fromDateTime %>:00 ~ <%= toDate %> <%= toDateTime %>:00</p>
+          </div>
           <div class="content_box">
             <p class="step-sub">1. 대여 목록</p>
+            <div class="reservation-list"></div>
           </div>
           <div class="content_box">
             <p class="step-sub">2. 소속 선택</p>
@@ -61,8 +66,8 @@
             <input
               type="tel"
               name="phone"
-              placeholder="ex) 01012345678"
-              pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
+              placeholder="ex) 010-1234-5678"
+              pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
               required
               class="input"
             />
@@ -104,12 +109,18 @@
           <div class="content_box">
             <p class="step-sub">6. 비고 입력</p>
 
-            <input type="text" placeholder="비고" name="remark" 반납시간 및 기타
-            문의 사랑" size = "35" class="input">
+            <input type="text" placeholder="반납시간 및 기타 문의사항 작성" name="remark" size = "35" class="input">
           </div>
         </div>
         <div class="button_box">
           <button type="submit">대여하기</button>
+        </div>
+        <div class="hidden_value">
+          <input type="hidden" name="fromDateValue" value="<%= fromDate %>"/>
+          <input type="hidden" name="fromDateTime" value="<%= fromDateTime %>"/>
+          <input type="hidden" name="toDateValue" value="<%= toDate %>"/>
+          <input type="hidden" name="toDateTime" value="<%= toDateTime %>"/>
+          <input type="hidden" name="equipments" value=" "/>
         </div>
       </form>
     </div>
