@@ -4,18 +4,19 @@
 <% include ./base/base-navbar %>
 
 <div class="header">
-    <div class="head-title">{{tab.title}}</div>
+    <div class="head-title"> <%= tab.title %></div>
 </div>
-{% for post in posts %}
-<div class="main">
+<% for (let post of posts) { %>
+    <div class="main">
     <div class="main-titlebox">
         <img src="../../public/images/tab3_bar.jpg" width="61px" />
         <div class="main-subbox">
-            <div class="title">{{post.title}}</div>
-            <div class="content" style="white-space: pre-wrap;">{{post.content}}</div>
+            <div class="title"> <%= post.title %></div>
+            <div class="content" style="white-space: pre-wrap;"> <%= post.content %></div>
         </div>
     </div>
 </div>
+<% } %>
 
 
 <% include ./base/base-footer %>

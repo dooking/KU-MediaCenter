@@ -5,25 +5,25 @@
 <% include ./base/base-navbar %>
 
 <div class="header">
-    <div class="head-title">{{tab.title}}</div>
-    <div class="head-content">{{tab.subtitle}}</div>
+    <div class="head-title"><%= tab.title %></div>
+    <div class="head-content"><%= tab.subtitle %></div>
 </div>
-{% for post in posts %}
+<% for (let post of posts) { %>
 <div class="main">
     <div class="main-titlebox">
-        <img class="tri" src="../../public/images/tab2_tri.png" height="31px" />
+        <img class="tri" src="/images/tab2_tri.png" height="31px" />
         <div class="main-subbox">
-            <div>{{post.subtitle}}</div>
-            <div class="sub-title">{{post.title}}</div>
+            <div><%= post.subtitle %></div>
+            <div class="sub-title"><%= post.title %></div>
         </div>
     </div>
     <div class="main-contbox">
-        <span style="white-space: pre-wrap;">{{post.content}}</span>
+        <span style="white-space: pre-wrap;"><%= post.content %></span>
     </div>
-    {% for image in post.images.all %}
-    <img class="img" src="{{image.file.url}}" width="100%" />
-    {% endfor %}
+    <% for (let image of post.images) { %>
+    <img class="img" src="<%= image.file %>" width="100%" />
+    <% } %>
 </div>
-{% endfor %}
+<% } %>
 
 <% include ./base/base-footer %>
