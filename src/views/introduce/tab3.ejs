@@ -1,5 +1,5 @@
 <% include ./base/base-header %>
-<link rel="stylesheet" href="css/introduce/tab3.css" type='text/css'>
+<link rel="stylesheet" href="/css/introduce/tab3.css" type='text/css'>
 
 <% include ./base/base-navbar %>
 <div class="equip-container">
@@ -10,7 +10,7 @@
 
         <% for (let post of posts) { %>
         <div class="main-titlebox">
-            <img src="../../public/images/tab3_bar.jpg" width="61px" />
+            <img src="/images/tab3_bar.jpg" width="61px" />
             <div class="main-subbox">
                 <div class="title"><%= post.intro_equip_type %></div>
                 <div class="content" style="white-space: pre-wrap;"><%= post.content %></div>

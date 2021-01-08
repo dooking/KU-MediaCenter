@@ -26,7 +26,13 @@
 </div>
 
 <div id="box">
-  <div id="items"></div>
+  <div id="items">
+    <% for (let item of items) { %>
+      <a class="rent-page-btn-text" href="/introduce/tab1"><div class="tab">
+        <%= item.title %>
+      </div></a>
+      <% } %>
+  </div>
 </div>
 
 <script>
