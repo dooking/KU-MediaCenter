@@ -1,7 +1,8 @@
 const successLogin = async (req, res, next) => {
     try {
-        const { name, major, auth } = req.user
+        const { id, name, major, auth } = req.user
         req.session.user = {
+            userId: id,
             name: name,
             major: major,
             auth: auth

@@ -2,73 +2,74 @@ const now = new Date()
 const nowYear = now.getFullYear()
 
 // 선택 날짜
-const $selectYearEl = document.querySelector("#year")
-const $selectMonthEl = document.querySelector("#month")
-const $selectDayEl = document.querySelector("#day")
+const $selectYear = document.querySelector("#year")
+const $selectMonth = document.querySelector("#month")
+const $selectDay = document.querySelector("#day")
 
 // 현재 페이지의 날짜
-const selectYear = $selectYearEl.dataset.selectYear
-const selectMonth = $selectMonthEl.dataset.selectMonth
-const selectDay = $selectDayEl.dataset.selectDay
-const selectDate = new Date(`${selectYear}`+'-'+`${selectMonth}`+'-'+`${selectDay}`)
+const selectedYear = $selectYear.dataset.selectYear
+const selectedMonth = $selectMonth.dataset.selectMonth
+const selectedDay = $selectDay.dataset.selectDay
+const selectedDate = new Date(`${selectedYear}`+'-'+`${selectedMonth}`+'-'+`${selectedDay}`)
 
 // 기본 날짜 설정
-const lastDay = checkMonth(selectMonth)
-makeTimeOption($selectYearEl, false, 5)
-makeTimeOption($selectMonthEl, true, 12)
-makeTimeOption($selectDayEl, true, lastDay)
+const lastDay = checkMonth(selectedMonth)
+makeTimeOption($selectYear, false, 5)
+makeTimeOption($selectMonth, true, 12)
+makeTimeOption($selectDay, true, lastDay)
 
 // 현재 페이지 날짜 선택 (default)
-$selectYearEl.options[selectYear-nowYear].selected = true
-$selectMonthEl.options[selectMonth-1].selected = true
-$selectDayEl.options[selectDay-1].selected = true
+$selectYear.options[selectedYear-nowYear].selected = true
+$selectMonth.options[selectedMonth-1].selected = true
+$selectDay.options[selectedDay-1].selected = true
 
 // 날짜 선택 시 event처리
-$selectYearEl.addEventListener("change",(event)=>{
-    $selectMonthEl.options[0].selected = true
-    $selectDayEl.options[0].selected = true
+$selectYear.addEventListener("change",(event)=>{
+    $selectMonth.options[0].selected = true
+    $selectDay.options[0].selected = true
     sendForm()
 })
-$selectMonthEl.addEventListener("change",(event)=>{
+$selectMonth.addEventListener("change",(event)=>{
     const month = event.target.value
     const lastDay = checkMonth(month)
-    $selectDayEl.options[0].selected = true
-    makeTimeOption($selectDayEl, true, lastDay)
+    $selectDay.options[0].selected = true
+    makeTimeOption($selectDay, true, lastDay)
     sendForm()
 })
-$selectDayEl.addEventListener("change",(event)=>{
+$selectDay.addEventListener("change",(event)=>{
     sendForm()
 })
 
 // 반납날짜 선택
-const $fromDateEl = document.querySelector("#fromDate")
-const $toDateEl = document.querySelector("#toDate")
-const $selectFromTimeEl = document.querySelector("#selectFromTime")
-const $selectToTimeEl = document.querySelector("#selectToTime")
+const $fromDate = document.querySelector("#fromDate")
+const $toDate = document.querySelector("#toDate")
+const $selectFromTime = document.querySelector("#selectFromTime")
+const $selectToTime = document.querySelector("#selectToTime")
 
-$fromDateEl.value = dateFormat(selectYear,selectMonth,selectDay)
-makeTimeOption($selectFromTimeEl, true, 12)
-makeTimeOption($selectToTimeEl, true, 12)
+$fromDate.value = dateFormat(selectedYear,selectedMonth,selectedDay)
+makeTimeOption($selectFromTime, true, 12)
+makeTimeOption($selectToTime, true, 12)
 
 const option = document.createElement("option")
 const option2 = document.createElement("option")
-option.text = dateFormat(selectYear,selectMonth,selectDay)
-$toDateEl.add(option)
+option.text = dateFormat(selectedYear,selectedMonth,selectedDay)
+$toDate.add(option)
 
 // 금요일 대여 -> 월요일 반납
-if(selectDate.getDay() === 5){
-    selectDate.setDate(selectDate.getDate() + 3)
-    option2.text = dateFormat(selectDate.getFullYear(),selectDate.getMonth()+1,selectDate.getDate())
+if(selectedDate.getDay() === 5){
+    selectedDate.setDate(selectedDate.getDate() + 3)
+    option2.text = dateFormat(selectedDate.getFullYear(),selectedDate.getMonth()+1,selectedDate.getDate())
     $toDateEl.add(option2)
 }
 else{
-    const {nextYear, nextMonth, nextDay } = $toDateEl.dataset
+    const {nextYear, nextMonth, nextDay } = $toDate.dataset
     option2.text = dateFormat(nextYear,nextMonth,nextDay)
-    $toDateEl.add(option2)
+    $toDate.add(option2)
 }
+
 
 //default
 startAMPM.options[1].selected = true
 endAMPM.options[1].selected = true
-$selectFromTimeEl.options[0].selected = true
-$selectToTimeEl.options[4].selected = true
+$selectFromTime.options[0].selected = true
+$selectToTime.options[4].selected = true
