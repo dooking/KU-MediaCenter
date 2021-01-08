@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       file: {
-        type: DataTypes.INTEGER(5),
+        type: DataTypes.STRING(100),
       },
       post_id: {
         type: DataTypes.INTEGER(5),
