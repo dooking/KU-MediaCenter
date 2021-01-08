@@ -3,24 +3,24 @@
 <link rel="stylesheet" href="css/introduce/tab4.css" type='text/css'>
 
 <% include ./base/base-navbar %>
-<!-- 
+
 <div class="header">
-    <div class="head-title">{{tab.title}}</div>
+    <div class="head-title"> <%= tab.title %></div>
 </div>
 
-{% for post in posts %}
+<% for (let post of posts) { %>
 <div class="main">
     <div class="main-titlebox">
         <img src="../../public/images/tab3_bar.jpg" width="61px" />
         <div class="main-subbox">
-            <div class="title">{{post.title}}</div>
-            <div class="content" style="white-space: pre-wrap;">{{post.content}}</div>
+            <div class="title"> <%= post.title %></div>
+            <div class="content" style="white-space: pre-wrap;"> <%= post.content %></div>
         </div>
     </div>
-    {% for image in post.images.all %}
-    <img class="img" src="{{image.file.url}}" width="100%" />
-    {% endfor %}
+    <% for (let image of post.images) { %>
+    <img class="img" src=" <%= image.file %>" width="100%" />
+    <% } %>
 </div>
-{% endfor %} -->
+<% } %>
 
 <% include ./base/base-footer %>

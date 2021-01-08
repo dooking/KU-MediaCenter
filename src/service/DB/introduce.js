@@ -1,4 +1,4 @@
-const { introduce_tab, introduce_post, introduce_image } = require('../models');
+const { introduce_tab, introduce_post, introduce_image } = require('../../models');
 const sequelize = require('sequelize')
 
 const IntroduceDB = class {
@@ -14,7 +14,7 @@ const IntroduceDB = class {
         return err;
       });
   }
-  static getTabId(tabnum) {
+  static getTabInstance(tabnum) {
     return introduce_tab
     .findOne({
       raw: true,

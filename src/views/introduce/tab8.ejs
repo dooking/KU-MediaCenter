@@ -5,7 +5,7 @@
 <% include ./base/base-navbar %>
 
 <!-- SNS -->
-<!-- {% block content %}
+
 <div id="tab-title">SNS</div>
 <div class="sns">
     <div id="sns-title">
@@ -20,8 +20,8 @@
                 search
             </span></div>
     </div>
-    <div id="post-title">{{ post_1.title }}</div>
-    <div id="post-content" style="white-space: pre-wrap;">{{ post_1.content }}</div>
+    <div id="post-title"><%= post_1.title %></div>
+    <div id="post-content" style="white-space: pre-wrap;"><%= post_1.content %></div>
     <a id="tab7-btn" href="https://youtube.com/1997KTN"><div id="tab7-btn">바로가기</div></a>
 </div>
 <div id="line"></div>
@@ -37,8 +37,8 @@
             search
         </span>고려대학교 미디어센터
     </div>
-    <div id="post-title">{{ post_2.title }}</div>
-    <div id="post-content" style="white-space: pre-wrap;">{{ post_2.content }}</div>
-</div> -->
+    <div id="post-title"><%= post_2.title %></div>
+    <div id="post-content" style="white-space: pre-wrap;"><%= post_2.content %></div>
+</div>
 
 <% include ./base/base-footer %>

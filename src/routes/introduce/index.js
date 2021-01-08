@@ -5,8 +5,8 @@ const IntroRouter = require("./introduce");
 const IntroduceController = require("./controller");
 
 /* GET home page. */
-router.get("/", IntroduceController.tab1);
-
 router.use("/introduce", IntroRouter);
+
+router.get("/", IntroduceController.tab8);
 
 module.exports = router;

@@ -1,40 +1,90 @@
 const IntroduceService = require('../../service/introduce-service')
+const { post } = require('./introduce')
 
-const tab1 = async(req, res) => { 
-    const tabs = await IntroduceService.getTabs()
-    const post_1 = await IntroduceService.getTabPosts(1)
-    const post_2 = await IntroduceService.getTabPosts(2)
+exports.tab1 = async(req, res) => { 
+    const posts = await IntroduceService.getTabPosts(1)
+    const post_1 = posts[0]
+    const post_2 = posts[1]
     res.render("./introduce/tab1", {
-        tabs, post_1, post_2
+        post_1, post_2
     });
 }
 
-const tab2 = (req, res) => {
-    res.render("./introduce/tab2");
+exports.tab2 = async (req, res) => {
+    const tab = await IntroduceService.getTab(2)
+    let posts = await IntroduceService.getTabPosts(2)
+    
+    for (let post of posts) {
+        post["images"] = await IntroduceService.getPostImages(post.id)
+    }
+
+    res.render("./introduce/tab2", {
+        tab, posts
+    });
 }
 
-const tab3 = (req, res) => {
-    res.render("./introduce/tab3");
+exports.tab3 = async (req, res) => {
+    const tab = await IntroduceService.getTab(3)
+    const posts = await IntroduceService.getTabPosts(3)
+    for (let post of posts) {
+        post["images"] = await IntroduceService.getPostImages(post.id)
+    }
+    res.render("./introduce/tab3", {
+        tab, posts
+    });
 }
 
-const tab4 = (req, res) => {
-    res.render("./introduce/tab4");
+exports.tab4 = async (req, res) => {
+    const tab = await IntroduceService.getTab(4)
+    const posts = await IntroduceService.getTabPosts(4)
+    for (let post of posts) {
+        post["images"] = await IntroduceService.getPostImages(post.id)
+    }
+    res.render("./introduce/tab4", {
+        tab, posts
+    });
 }
 
-const tab5 = (req, resㅇ) => {
-    res.render("./introduce/tab5");
+exports.tab5 = async (req, res) => {
+    const tab = await IntroduceService.getTab(5)
+    const posts = await IntroduceService.getTabPosts(5)
+    for (let post of posts) {
+        post["images"] = await IntroduceService.getPostImages(post.id)
+    }
+
+    res.render("./introduce/tab5",{
+        tab, posts
+    });
 }
 
-const tab6 = (req, res) => {
-    res.render("./introduce/tab6");
+exports.tab6 = async (req, res) => {
+    const tab = await IntroduceService.getTab(6)
+    const posts = await IntroduceService.getTabPosts(6)
+
+    res.render("./introduce/tab6",{
+        tab, posts
+    });
 }
 
-const tab7 = (req, res) => {
-    res.render("./introduce/tab7");
+exports.tab7 = async (req, res) => {
+    const tab = await IntroduceService.getTab(7)
+    const posts = await IntroduceService.getTabPosts(7)
+    for (let post of posts) {
+        post["images"] = await IntroduceService.getPostImages(post.id)
+    }
+    res.render("./introduce/tab7",{
+        tab, posts
+    });
 }
 
-const tab8 = (req, res) => {
-    res.render("./introduce/tab8");
+exports.tab8 = async (req, res) => {
+    const tab = await IntroduceService.getTab(8)
+    const posts = await IntroduceService.getTabPosts(8)
+
+    const post_1 = posts[0]
+    const post_2 = posts[1]
+    res.render("./introduce/tab8", {
+        post_1, post_2
+    });
 }
 
-module.exports = { tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8}

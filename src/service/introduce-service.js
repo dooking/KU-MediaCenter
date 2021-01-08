@@ -6,6 +6,11 @@ exports.getTabs = async () =>{
     return tabs
 }
 
+exports.getTab = async (tabnum) =>{
+    const tab = await IntroduceDB.getTabInstance(tabnum)
+    return tab
+}
+
 exports.getTabId = async (tabnum) => {
     const tabId = await IntroduceDB.getTabId(tabnum)
     return tabId
