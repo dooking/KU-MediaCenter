@@ -7,13 +7,13 @@
         <div class="head-title"><%= tab.title %></div>
     </div>
     <div class="main">
+        <% for (data of equipPostData) { %>
 
-        <% for (let post of posts) { %>
+        <% for (const [type, posts] of Object.entries(data)) { %>
         <div class="main-titlebox">
             <img src="/images/tab3_bar.jpg" width="61px" />
             <div class="main-subbox">
-                <div class="title"><%= post.intro_equip_type %></div>
-                <div class="content" style="white-space: pre-wrap;"><%= post.content %></div>
+                <div class="title"><%= type %></div>
             </div>
         </div>
         <div class="equip-content">
@@ -55,6 +55,7 @@
 
         <% } %>
     </div>
+        <% } %>
         <% } %>
     </div>
 </div>
