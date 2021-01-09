@@ -1,13 +1,24 @@
 const AdminService = require('../../service/admin-service')
 
-exports.mainPage = async (req, res) => {
+exports.mainPage = async (req, res, next) => {
     try{
         const reservationLists = await AdminService.getReservationLists()
-        console.log(reservationLists)
+
         res.render("./adminpage/main", {reservationLists});
     }
     catch(error){
         next(error);
+    }
+}
+
+exports.manageEquipment = async (req, res, next) => {
+    try{
+        const equipments = await AdminService.getEquipmentLists()
+
+        res.render('./adminpage/manageEquipment')
+    }
+    catch(error){
+        next(error)
     }
 }
 

@@ -1,33 +1,38 @@
 const EquipmentDB = require('./DB/equipment')
+const { getDate, getHour } = require('../utils/momment')
 const { STATUS_BOARD } = require('../utils/constant')
 
 exports.getReservationLists = async () => {
     const reservationLists = []
     
     for (let board of STATUS_BOARD){
-        const reservationList = {}
+        const { state } = board
+        const reservationList = {...board}
         const reservations = []
-        const numbers = []
-        const { title, state } = board
-        reservationList.title = title
-        const tests = await EquipmentDB.getStateReservations({state})
-        for (let test of tests){
-            const { id, name:userName , from_date:fromDate, to_date:toDate, reservation_number:reservationNumber } = test
-            if(!numbers.includes(reservationNumber)){
-                numbers.push(reservationNumber)
+        const setReservationNumbers = []
+        const reservationItems = await EquipmentDB.getStateReservations({state})
+        
+        for (let reservationItem of reservationItems){
+            const { id, name:userName , from_date:fromDate, to_date:toDate, reservation_number:reservationNumber } = reservationItem
+            if(!setReservationNumbers.includes(reservationNumber)){
+                setReservationNumbers.push(reservationNumber)
                 reservations.push({
                     id,
                     reservationNumber,
                     userName,
-                    fromDate,
-                    toDate
+                    fromDate : getDate(fromDate),
+                    fromDateTime : getHour(fromDate),
+                    toDate : getDate(toDate),
+                    toDateTime : getHour(toDate),
                 })
             }
         }
-        reservationList.reservations = reservations
-        console.log(reservations)
-        reservationLists.push(reservationList)
+        reservationLists.push({...reservationList, reservations})
     }
-    console.log(reservationLists)
+
     return reservationLists
+}
+
+exports.getEquipmentLists = async () => {
+    
 }

@@ -6,10 +6,10 @@
 <div id="wrapper">
     <div class="equip-head">
         <a href="/">
-        <button class="btn_add" id="red">장비 관리</button>
+            <button class="btn_add" id="red">장비 관리</button>
         </a>
         <a href="/">
-        <button class="btn_add" id="gray">스튜디오 관리</button>
+            <button class="btn_add" id="gray">스튜디오 관리</button>
         </a>
     </div>
     <div class="main_div">
@@ -20,18 +20,12 @@
                     <div class="current_list_card">
                         <p><%= reservation.userName %></p>
                         <div class="current_list_subbox">
-                        <div>
-                            <p>
-                            <%= reservation.fromDate %>
-                            </p>
-                            ~
-                            <p>
-                            <%= reservation.toDate %>
-                            </p>
-                        </div>
+                            <div>
+                                <p><%= reservation.fromDate %> <%= reservation.fromDateTime%>:00 ~ <%= reservation.toDate %> <%= reservation.toDateTime%>:00</p>
+                            </div>
                         </div>
                         <a href="./">
-                        <button class="check">대여 확인</button>
+                            <button class="check check<%= reservationList.state %>"><%= reservationList.buttonName %></button>
                         </a>
                     </div>
                 <% } %>
