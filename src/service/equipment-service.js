@@ -11,7 +11,7 @@ exports.getStockData = async (selectDate, nextSelectDate)=>{
         let currentStock = fillArray(24, count)
         let nextStock = fillArray(24, count)
 
-        const reservations = await EquipmentDB.findEquipmentReservation({ id, selectDate, nextSelectDate})
+        const reservations = await EquipmentDB.getReservations({ id, selectDate, nextSelectDate})
         reservations.map((reservation)=>{
             const { from_date: fromDate, to_date: toDate } = reservation
             currentStock = checkStock(currentStock, selectDate, fromDate, toDate)

@@ -5,7 +5,6 @@ const EquipmentRouter = require("./equipment/index");
 const ReservationController = require("./controller");
 const { isLogin } = require("../../middleware/auth")
 
-/* GET home page. */
 router.get("/", ReservationController.mainPage);
 
 router.use("/equipment", EquipmentRouter);

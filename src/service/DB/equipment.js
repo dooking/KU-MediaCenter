@@ -1,4 +1,4 @@
-const { equipment, equipment_detail, equipment_reservation } = require('../../models');
+const { user, equipment, equipment_detail, equipment_reservation } = require('../../models');
 const sequelize = require('sequelize')
 
 const EquipmentDB = class {
@@ -45,7 +45,7 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static findEquipmentReservation({ id, selectDate, nextSelectDate}) {
+  static getReservations({ id, selectDate, nextSelectDate}) {
     return equipment_reservation
       .findAll({
         raw: true, 
@@ -91,6 +91,28 @@ const EquipmentDB = class {
     .catch((err) => {
         return [err, null]
     })
-}
+  }
+  static getStateReservations({ state }) {
+    return equipment_reservation
+      .findAll({
+        raw: true, 
+        attributes: ['id', 'user_id', 'reservation_number', 'from_date', 'to_date', 'user.name'],
+        where : {
+          state
+        },
+        include: [
+          { 
+            model: user,
+            attributes: ['name']
+          }
+       ],
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
 module.exports = EquipmentDB;
