@@ -45,9 +45,9 @@
         </thead>
         <tbody>
             <% for (let equipment of equipments) { %>
-                <tr>
+                <tr onclick="location.href='/admin/manage/equipment/<%= equipment.id%>';">
                     <td colspan="1">
-                        <input type="checkbox">
+                        <input type="checkbox" class="check">
                     </td>
                     <td colspan="2"> <%= equipment.category%> </td>
                     <td colspan="2"> <%= equipment.kind%> </td>

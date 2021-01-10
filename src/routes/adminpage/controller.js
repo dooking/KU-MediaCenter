@@ -35,8 +35,10 @@ exports.manageEquipment = async (req, res, next) => {
 
 exports.detailEquipment = async (req, res, next) => {
     try{
-
-        res.render('./adminpage/detailEquipment')
+        const { id } = req.params
+        const equipment = await AdminService.getEquipmentDetail({id})
+        console.log("ZZ",equipment)
+        res.render('./adminpage/detailEquipment',{equipment})
     }
     catch(error){
         next(error)

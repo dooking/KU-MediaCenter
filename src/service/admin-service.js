@@ -56,3 +56,20 @@ exports.getEquipmentsLength = async (params) => {
     const counts = await EquipmentDB.getAllEquipmentsCount(params)
     return counts
 }
+
+exports.getEquipmentDetail = async (params) => {
+    const { id, equipment_id, serial_number, state, remark, equipment } = await EquipmentDB.getEquipmenmtDetail(params)
+    const { category, kind, name } = equipment
+    const result = {
+        id,
+        equipment_id, 
+        serial_number, 
+        state, 
+        remark,
+        category, 
+        kind, 
+        name
+    }
+    console.log(result)
+    return result
+}

@@ -1,11 +1,9 @@
-{% extends 'admin_base.html' %}
-{% load static %}
-{% block title %} 관리자 페이지 {% endblock title %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'detailEquipment.css' %}" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-{% endblock css %}
-{% block content %}
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/detailEquipment.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
   <div class="equip-wrapper">
     <div class="equip-head">
       <h2 class="equip-heading">장비 수정하기</h2>
@@ -14,22 +12,10 @@
       </a>
     </div>
     <div class="equip-table">
-      <form method="POST" action="{% url 'equipment' %}" id="editForm">
-        {% csrf_token %}
+      <form method="POST" action="/" id="editForm">
         <div class="equip-list">
           <span>장비 타입</span>
           <select id="equipType" name="equipType" class="addForm-input">
-            {% if Equipment.equipType == "카메라" %}
-              <option value="{{Equipment.equipType}}" class="disabledType" disabled selected>카메라</option>
-            {% elif Equipment.equipType == "카메라 보조 장치" %}
-              <option value="{{Equipment.equipType}}" class="disabledType" disabled selected>카메라 보조 장치</option>
-            {% elif Equipment.equipType == "녹음 장비" %}
-              <option value="{{Equipment.equipType}}" class="disabledType" disabled selected>녹음 장비</option>
-            {% elif Equipment.equipType == "조명" %}
-              <option value="{{Equipment.equipType}}" class="disabledType" disabled selected>조명</option>
-            {% elif Equipment.equipType == "기타 부속" %}
-              <option value="{{Equipment.equipType}}" class="disabledType" disabled selected>기타 부속</option>
-            {% endif %}
             <option value="카메라">카메라</option>
             <option value="카메라 보조 장치">카메라 보조 장치</option>
             <option value="녹음 장비">녹음 장비</option>
@@ -39,26 +25,26 @@
         </label>
         </div>
         <div class="equip-list">
-          <span>세부 타입</span>
-          <input type="text" name="equipSemiType" placeholder="{{Equipment.equipSemiType}}" value="{{Equipment.equipSemiType}}" required>
+          <span>규격</span>
+          <input type="text" name="equipSemiType" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" required>
         </div>
         <div class="equip-list">
-          <span>장비 이름</span>
-          <input type="text" name="equipmentName" placeholder="{{Equipment.equipmentName}}" value="{{Equipment.equipmentName}}" required>
+          <span>품명</span>
+          <input type="text" name="equipmentName" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" required>
         </div>
         <div class="equip-list">
           <span>장비 시리얼번호</span>
-          <input type="text" name="serialNumber" placeholder="{{Equipment.serialNumber}}" value="{{Equipment.serialNumber}}" required>
+          <input type="text" name="serialNumber" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" required>
         </div>
         <div class="equip-list">
           <span>현재 장비 상태</span>
           <select name="borrowState">
-            {% if Equipment.borrowState == 0 %}
-              <option value="{{Equipment.borrowState}}" class="disabled" disabled selected>대여 가능</option>
-            {% elif Equipment.borrowState == 1 %}
-              <option value="{{Equipment.borrowState}}" class="disabled" disabled selected>대여중</option>
-            {% elif Equipment.borrowState == 2 %}
-              <option value="{{Equipment.borrowState}}" class="disabled" disabled selected>연체</option>
+            {% if Equipment.state == 0 %}
+              <option value="<%= equipment.state%>" class="disabled" disabled selected>대여 가능</option>
+            {% elif Equipment.state == 1 %}
+              <option value="<%= equipment.state%>" class="disabled" disabled selected>대여중</option>
+            {% elif Equipment.state == 2 %}
+              <option value="<%= equipment.state%>" class="disabled" disabled selected>연체</option>
             {% endif %}
             <option value="0">대여 가능</option>
             <option value="1">대여중</option>
@@ -76,47 +62,17 @@
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
-          {% if Equipment.isExist == True %}
-          <a class="active" href="{% url 'brokenEquipment' Equipment.pk %}">
-            <div class="btn--active">활성상태</div>
-          </a>
-          {% else %}
-          <a class="active" href="{% url 'repairEquipment' Equipment.pk %}">
-            <div class="btn--inactive">비활성상태</div>
-          </a>
-          {% endif %}
 
         </div>
         <div class="equip-list">
           <span>비고</span>
-          <input type="textarea" name="remark" placeholder="{{Equipment.remark}}">
+          <input type="textarea" name="remark" placeholder="<%= equipment.remark%>">
         </div>
         <div class="center">
-          <input type="hidden" name="equipPK" value="{{Equipment.pk}}">
+          <input type="hidden" name="equipPK" value="<%= equipment.id%>">
           <div class="btn_edit center">수정하기</button>
         </div>
       </form>
     </div>
   </div>
-  
-<script type="text/javascript" src="{% static 'detailEquipment.js' %}"></script>
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function () {
-  const checkbox = document.querySelector('input[type="checkbox"]');
-  
-  checkbox.addEventListener('change', function () {
-    if (checkbox.checked) {
-      const link = document.querySelector('.active')
-      link.innerHTML = "<div class="btn--active">활성상태</div>";
-      console.log('Checked', link);
-    } else {
-      const link = document.querySelector('.active')
-      // link.click();
-      link.innerHTML = "<div class="btn--inactive">비활성상태</div>"
-      console.log('Not checked');
-    }
-  });
-});
-
-</script>
-{% endblock content%}
+</div>

@@ -76,6 +76,25 @@ const EquipmentDB = class {
         return err;
       });
   }
+  static getEquipmenmtDetail({id}) {
+    return equipment_detail
+    .findOne({
+      include: [
+        { 
+          model: equipment,
+        }
+     ],
+     where : {
+       id
+     }
+    })
+    .then((results) => {
+      return results.dataValues;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
   static getEquipmentId(name) {
     return equipment
       .findOne({
