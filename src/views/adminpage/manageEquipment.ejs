@@ -14,6 +14,12 @@
         <button class="btn_add">+ 장비 추가</button>
         </a>
     </div>
+    <div class="search">
+        <form action="" method="GET">
+        <input class="qinput" type="text" name="query" />
+        <button type="submit" class="qsubmit">검색하기</button>
+        </form>
+    </div>
     <table>
         <thead>
         <tr>
@@ -37,15 +43,15 @@
                     <td colspan="3"> <%= equipment.kind%> (<%= equipment.name%>)</td>
                     <td colspan="1"> <%= equipment.serialNumber %> </td>
                     <td colsapn="2">
-                    <% if (equipment.state) == 0 { %>
+                    <% if (equipment.state == 0) { %>
                         <p class="equipState0">대여 가능</p>
-                    <% } else if (equipment.state) == 1 { %>
+                    <% } else if (equipment.state == 1) { %>
                         <p class="equipState0">대여 중</p>
-                    <% } else if (equipment.state) == 2 { %>
+                    <% } else if (equipment.state == 2) { %>
                         <p class="equipState0">연체 중</p>
-                    <% } else if (equipment.state) == 3 { %>
+                    <% } else if (equipment.state == 3) { %>
                         <p class="equipState0">연장</p>
-                    <% } else if (equipment.state) == 4 { %>
+                    <% } else if (equipment.state == 4) { %>
                         <p class="equipState0">기타</p>
                     <% } %>
                     </td>
@@ -61,12 +67,7 @@
             <% } %>
         </tbody>
     </table>
-    <div class="search">
-        <form action="" method="GET">
-        <input class="qinput" type="text" name="query" />
-        <button type="submit" class="qsubmit">검색하기</button>
-        </form>
-    </div>
+
 
     </div>
 </div>

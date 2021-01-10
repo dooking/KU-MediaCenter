@@ -3,7 +3,8 @@ const { fillArray, checkStock, makeReservationNumber } = require('../utils/util'
 const { getDateWithTime } = require('../utils/momment')
 
 exports.getStockData = async (selectDate, nextSelectDate)=>{
-    const equipmentLists = await EquipmentDB.getEquipmentLists()
+    const equipmentLists = await EquipmentDB.getEquipmentTypeLists()
+    console.log(equipmentLists)
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
         const { id } = equipment
         let accumulator = await promise.then();

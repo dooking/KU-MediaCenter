@@ -2,10 +2,26 @@ const { user, equipment, equipment_detail, equipment_reservation } = require('..
 const sequelize = require('sequelize')
 
 const EquipmentDB = class {
-  static getEquipmentLists() {
+  static getEquipmentTypeLists() {
     return equipment
       .findAll({
         raw: true,
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  static getEquipmentLists() {
+    return equipment_detail
+      .findAll({
+        include: [
+          { 
+            model: equipment
+          }
+       ],
       })
       .then((results) => {
         return results;
