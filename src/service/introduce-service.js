@@ -25,3 +25,4 @@ exports.getPostImages = async (post_id) => {
     const postImages = await IntroduceDB.getPostImages(post_id)
     return postImages
 }
+

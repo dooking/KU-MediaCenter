@@ -1,3 +1,4 @@
+const { getDistinctEquip } = require('../../service/DB/introduce');
 const IntroduceService = require('../../service/introduce-service')
 
 exports.tab = async(req,res) => {
@@ -65,17 +66,33 @@ exports.tab3 = async (req, res) => {
         const items = await IntroduceService.getTabs()
         const tab = await IntroduceService.getTab(3)
         const posts = await IntroduceService.getTabPosts(3)
+        let equipTypeList = []
 
+        // 유니크한 equip_type 뽑아내기
         for (let post of posts) {
-            post["images"] = await IntroduceService.getPostImages(post.id)
+            equipTypeList.push(post.intro_equip_type)
+        }
+        equipTypeList = [... new Set(equipTypeList)]
+        const equipPostData = []
+        // equiptype에 따라 포스트 그룹핑 하기
+        for (let type of equipTypeList) {
+            equipPostDict = {}
+            equipPostDict[type] = []
+            for (let post of posts) {
+                post["images"] = await IntroduceService.getPostImages(post.id)
+                if (post.intro_equip_type === type) {
+                    equipPostDict[type].push(post)
+                }
+            }
+            equipPostData.push(equipPostDict)
         }
 
         res.render("./introduce/tab3", {
-            items, tab, posts
+            items, tab, equipPostData
         });
     }
     catch(error){
-        next(error);
+        console.log(error);
     }
 }
 
