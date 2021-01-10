@@ -16,18 +16,19 @@
     </div>
     <div class="search">
         <form action="" method="GET">
-        <input class="qinput" type="text" name="query" />
+        <input class="qinput" type="text" name="search" placeholder="🔍 장비명을 입력해주세요" />
         <button type="submit" class="qsubmit">검색하기</button>
+        <button class="qsubmit"><a href="/admin/manage/equipment">초기화</a></button>
         </form>
     </div>
     <table>
         <thead>
         <tr>
             <th colspan="2">QR 보기</span>
-            <th colspan="2">TYPE</span>
+            <th colspan="1">TYPE</span>
             <th colspan="3">장비이름</span>
             <th colspan="1">일련번호</span>
-            <th colspan="2">활성상태</span>
+            <th colspan="1">활성상태</span>
             <th colspan="2">관리하기</span>
         </tr>
         </thead>
@@ -35,33 +36,36 @@
             <% for (let equipment of equipments) { %>
                 <tr>
                     <td colspan="2">
-                    <a href="/">
-                        <button class="btn--qr">QR 보기</button>
-                    </a>
+                        <a href="/">
+                            <button class="btn--qr">QR 보기</button>
+                        </a>
                     </td>
-                    <td colspan="2"> <%= equipment.category%> </td>
+                    <td colspan="1"> <%= equipment.category%> </td>
                     <td colspan="3"> <%= equipment.kind%> (<%= equipment.name%>)</td>
                     <td colspan="1"> <%= equipment.serialNumber %> </td>
                     <td colsapn="2">
-                    <% if (equipment.state == 0) { %>
-                        <p class="equipState0">대여 가능</p>
-                    <% } else if (equipment.state == 1) { %>
-                        <p class="equipState0">대여 중</p>
-                    <% } else if (equipment.state == 2) { %>
-                        <p class="equipState0">연체 중</p>
-                    <% } else if (equipment.state == 3) { %>
-                        <p class="equipState0">연장</p>
-                    <% } else if (equipment.state == 4) { %>
-                        <p class="equipState0">기타</p>
-                    <% } %>
+                        <% if (equipment.state == 0) { %>
+                            <p class="equipState0">대여 가능</p>
+                        <% } else if (equipment.state == 1) { %>
+                            <p class="equipState0">대여 중</p>
+                        <% } else if (equipment.state == 2) { %>
+                            <p class="equipState0">연체 중</p>
+                        <% } else if (equipment.state == 3) { %>
+                            <p class="equipState0">연장</p>
+                        <% } else if (equipment.state == 4) { %>
+                            <p class="equipState0">기타</p>
+                        <% } %>
                     </td>
                     <td colspan="2">
-                    <a href="/">
-                        <button class="btn--edit">수정</button>
-                    </a>
-                    <a href="/">
-                        <button class="btn--delete">삭제</button>
-                    </a>
+                        <a href="/">
+                            <button class="btn--edit">수정</button>
+                        </a>
+                        <a href="/">
+                            <button class="btn--delete">삭제</button>
+                        </a>
+                        <a href="/">
+                            <button class="btn--history">내역 보기</button>
+                        </a>
                     </td>
                 </tr>
             <% } %>
@@ -73,19 +77,19 @@
             <% if(pageNum == 1) { %>
                 <span>&laquo; prev</span>
             <% } else { %>
-                <a href="?page=<%= parseInt(pageNum)-1 %>">&laquo; prev</a>
+                <a href="?page=<%= parseInt(pageNum)-1 %>&search=<%= searchWord %>">&laquo; prev</a>
             <% } %>
         </li>
         <% for (let page=1; page<totalPage+1; page++) { %>
             <li>
-                <a href="?page=<%= page%>" class="page <%= pageNum == page ? 'active' : '' %>" > <%= page %> </a>
+                <a href="?page=<%= page%>&search=<%= searchWord %>" class="page <%= pageNum == page ? 'active' : '' %>" > <%= page %> </a>
             </li>
         <% } %>
         <li>
             <% if(pageNum == totalPage) { %>
                 <span>next &raquo;</span>
             <% } else { %>
-                <a href="?page=<%= parseInt(pageNum)+1 %>">next &raquo;</a>
+                <a href="?page=<%= parseInt(pageNum)+1 %>&search=<%= searchWord %>">next &raquo;</a>
             <% } %>
         </li>
     </ul>

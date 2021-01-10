@@ -2,7 +2,7 @@ const RANDOM_LENGTH = 6;
 
 const RANDOM_MAX = 10;
 
-const PER_PAGE = 10;
+const PER_PAGE = 7;
 
 const STATUS_BOARD = [
     {

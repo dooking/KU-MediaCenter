@@ -1,4 +1,5 @@
 const { user, equipment, equipment_detail, equipment_reservation } = require('../../models');
+const { PER_PAGE } = require('../../utils/constant')
 const sequelize = require('sequelize')
 
 const EquipmentDB = class {
@@ -14,16 +15,21 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmentLists({offset}) {
+  static getEquipmentLists({ offset,searchWord }) {
     return equipment_detail
       .findAll({
         include: [
           { 
-            model: equipment
-          }
-       ],
-       offset: offset,
-       limit: 10
+            model: equipment,
+            where : {
+              name: {
+                [sequelize.Op.like]: "%" + searchWord + "%", 
+              },
+            }
+          }             
+        ],
+        offset: offset,
+        limit: PER_PAGE
       })
       .then((results) => {
         return results;
@@ -32,17 +38,27 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getAllEquipmentsCount(){
+  static getAllEquipmentsCount({ searchWord }){
     return equipment_detail
       .count({
-        raw: true
+        raw: true,
+        include: [
+          { 
+            model: equipment,
+            where : {
+              name: {
+                [sequelize.Op.like]: "%" + searchWord + "%", 
+              },
+            }
+          }
+       ],
       })
-      .then((results) => {
-        return results;
-      })
-      .catch((err) => {
-        return err;
-      });
+    .then((results) => {
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
   }
   static getEquipmentCount(id){
     return equipment_detail

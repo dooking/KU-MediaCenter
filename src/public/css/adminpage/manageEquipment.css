@@ -118,7 +118,7 @@
   .btn--delete {
     width: 50px;
     height: 28px;
-    background-color: #bbbbbb;
+    background-color: #008910;
     color: #ffffff;
     outline: none;
     border-radius: 1.5px;
@@ -137,7 +137,17 @@
     text-align: center;
     border-style: none;
   }
-  
+  .btn--history {
+    width: 70px;
+    height: 28px;
+    background-color:#bbbbbb;
+    color: #ffffff;
+    outline: none;
+    border-radius: 1.5px;
+    font-size: 12.5px;
+    text-align: center;
+    border-style: none;
+  }
   .equipState0 {
     width: 70px;
     height: 23px;
@@ -241,5 +251,7 @@
     padding: 6px 8px 6px 8px;
   }
   .search{
-    margin: 10px 0px;
+    margin-left: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
   }
