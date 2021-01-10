@@ -1,6 +1,6 @@
-const { search } = require('.');
 const AdminService = require('../../service/admin-service')
 const { PER_PAGE } = require('../../utils/constant')
+
 exports.mainPage = async (req, res, next) => {
     try{
         const reservationLists = await AdminService.getReservationLists()
@@ -27,6 +27,16 @@ exports.manageEquipment = async (req, res, next) => {
             totalPage : parseInt(equipmentsCount/PER_PAGE)+1,
             searchWord
         })
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.detailEquipment = async (req, res, next) => {
+    try{
+
+        res.render('./adminpage/detailEquipment')
     }
     catch(error){
         next(error)

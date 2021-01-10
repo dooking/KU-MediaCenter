@@ -45,6 +45,7 @@ exports.getEquipmentLists = async (params) => {
             category,
             kind,
             name,
+            remark,
             serialNumber: serial_number
         })
     }
