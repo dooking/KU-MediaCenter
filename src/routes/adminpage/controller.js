@@ -37,8 +37,35 @@ exports.detailEquipment = async (req, res, next) => {
     try{
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
-        console.log("ZZ",equipment)
+
         res.render('./adminpage/detailEquipment',{equipment})
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.updateEquipment = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const equipment = await AdminService.getEquipmentDetail({id})
+
+        res.render('./adminpage/updateEquipment',{equipment})
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.modifyEquipment = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const { category, kind, name, serial_number, remark, state, equipment_id } = req.body
+        console.log(req.body)
+        await AdminService.updateEquipment({equipment_id, category, kind, name})
+        await AdminService.updateEquipmentDetail({ id, serial_number, state, remark})
+
+        res.redirect(`/admin/manage/equipment/detail/${id}`)
     }
     catch(error){
         next(error)

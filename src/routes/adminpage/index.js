@@ -5,6 +5,8 @@ const AdminController = require("./controller");
 
 router.get("/main", AdminController.mainPage);
 router.get("/manage/equipment", AdminController.manageEquipment);
-router.get("/manage/equipment/:id", AdminController.detailEquipment);
+router.get("/manage/equipment/detail/:id", AdminController.detailEquipment);
+router.get("/manage/equipment/update/:id", AdminController.updateEquipment);
+router.post("/manage/equipment/update/:id", AdminController.modifyEquipment);
 
 module.exports = router;

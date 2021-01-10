@@ -70,6 +70,13 @@ exports.getEquipmentDetail = async (params) => {
         kind, 
         name
     }
-    console.log(result)
     return result
+}
+
+exports.updateEquipment = async (params) => {
+    await EquipmentDB.updateEquipment(params)
+}
+
+exports.updateEquipmentDetail = async (params) => {
+    await EquipmentDB.updateEquipmentDetail(params)
 }

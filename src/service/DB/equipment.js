@@ -179,5 +179,47 @@ const EquipmentDB = class {
         return err;
       });
   }
+  static updateEquipment({ equipment_id, category, kind, name }) {
+    return equipment
+      .update(
+        {
+          category, 
+          kind, 
+          name
+        },
+        {
+          where: {
+            id: equipment_id
+          }
+        }
+      )
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  static updateEquipmentDetail({ id, serial_number, state, remark }) {
+    return equipment_detail
+      .update(
+        {
+          serial_number, 
+          remark,
+          state
+        },
+        {
+          where: {
+            id
+          }
+        }
+      )
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
 module.exports = EquipmentDB;

@@ -4,73 +4,43 @@
 <% include ./base/base-navbar %>
 
 <div id="wrapper">
-  <div class="equip-wrapper">
+  <div class="equip-wrapper">    
     <div class="equip-head">
-      <h2 class="equip-heading">장비 수정하기</h2>
-      <a class="equip-table-link" href="{% url 'equipment' %}">
-        <button class="btn_add">홈으로</button>
-      </a>
+        <div>
+            <a class="equip-heading" id = 'black' href="">장비 상세 페이지</a>
+            <a class="equip-heading" id = 'gray' href="/admin/manage/equipment/update/<%= equipment.id%>">장비 수정</a>
+            <a class="equip-heading" id = 'gray' href="/">장비 대여 이력</a>
+        </div>
+        <a class="equip-table-link" href="/admin/manage/equipment">
+            <button class="btn_add">홈으로</button>
+        </a>
     </div>
     <div class="equip-table">
       <form method="POST" action="/" id="editForm">
         <div class="equip-list">
           <span>장비 타입</span>
-          <select id="equipType" name="equipType" class="addForm-input">
-            <option value="카메라">카메라</option>
-            <option value="카메라 보조 장치">카메라 보조 장치</option>
-            <option value="녹음 장비">녹음 장비</option>
-            <option value="조명">조명</option>
-            <option value="기타 부속">기타 부속</option>
-          </select>
+          <input type="text" name="equipSemiType" placeholder="<%= equipment.category%>" value="<%= equipment.category%>" disabled>
         </label>
         </div>
         <div class="equip-list">
           <span>규격</span>
-          <input type="text" name="equipSemiType" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" required>
+          <input type="text" name="equipSemiType" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" disabled>
         </div>
         <div class="equip-list">
           <span>품명</span>
-          <input type="text" name="equipmentName" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" required>
+          <input type="text" name="equipmentName" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" disabled>
         </div>
         <div class="equip-list">
           <span>장비 시리얼번호</span>
-          <input type="text" name="serialNumber" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" required>
+          <input type="text" name="serialNumber" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" disabled>
         </div>
         <div class="equip-list">
           <span>현재 장비 상태</span>
-          <select name="borrowState">
-            {% if Equipment.state == 0 %}
-              <option value="<%= equipment.state%>" class="disabled" disabled selected>대여 가능</option>
-            {% elif Equipment.state == 1 %}
-              <option value="<%= equipment.state%>" class="disabled" disabled selected>대여중</option>
-            {% elif Equipment.state == 2 %}
-              <option value="<%= equipment.state%>" class="disabled" disabled selected>연체</option>
-            {% endif %}
-            <option value="0">대여 가능</option>
-            <option value="1">대여중</option>
-            <option value="2">연체</option>
-          </select>
-        </div>
-        <div class="equip-active">
-          <span>활성/비활성화</span>
-          <!-- {% if Equipment.isExist %}
-            <input type="text" class="isExist" placeholder="활성 상태" readonly>
-          {% else %}
-            <input type="text" class="isExist" placeholder="비활성 상태" readonly>
-          {% endif %} -->
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-
+          <input type="text" name="serialNumber" placeholder="<%= equipment.state%>" value="<%= equipment.state%>" disabled>
         </div>
         <div class="equip-list">
           <span>비고</span>
-          <input type="textarea" name="remark" placeholder="<%= equipment.remark%>">
-        </div>
-        <div class="center">
-          <input type="hidden" name="equipPK" value="<%= equipment.id%>">
-          <div class="btn_edit center">수정하기</button>
+          <input type="textarea" name="remark" placeholder="<%= equipment.remark%>" disabled>
         </div>
       </form>
     </div>
