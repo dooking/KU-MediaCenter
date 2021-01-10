@@ -68,6 +68,27 @@
         </tbody>
     </table>
 
+    <ul class="pagination">
+        <li>
+            <% if(pageNum == 1) { %>
+                <span>&laquo; prev</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)-1 %>">&laquo; prev</a>
+            <% } %>
+        </li>
+        <% for (let page=1; page<totalPage+1; page++) { %>
+            <li>
+                <a href="?page=<%= page%>" class="page <%= pageNum == page ? 'active' : '' %>" > <%= page %> </a>
+            </li>
+        <% } %>
+        <li>
+            <% if(pageNum == totalPage) { %>
+                <span>next &raquo;</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)+1 %>">next &raquo;</a>
+            <% } %>
+        </li>
+    </ul>
 
     </div>
 </div>

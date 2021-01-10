@@ -204,10 +204,6 @@
     background-color: #aa1a30;
     color: white;
   }
-  .active {
-    font-weight: bold;
-    color: purple;
-  }
   ul {
     display: flex;
     justify-content: space-around;
@@ -219,6 +215,13 @@
     margin-right: 10px;
   }
   a {
+    color: black;
+  }
+  .page {
+    color: grey;
+  }
+  .active {
+    font-weight: bold;
     color: black;
   }
   .qinput {

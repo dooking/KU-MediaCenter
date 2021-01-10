@@ -33,9 +33,9 @@ exports.getReservationLists = async () => {
     return reservationLists
 }
 
-exports.getEquipmentLists = async () => {
+exports.getEquipmentLists = async (params) => {
     let equipments = []
-    const equipmentLists = await EquipmentDB.getEquipmentLists()
+    const equipmentLists = await EquipmentDB.getEquipmentLists(params)
     for (equipmentList of equipmentLists){
         const { id, equipment_id, serial_number, state, remark, equipment } = equipmentList.dataValues;
         const { category, kind, name } = equipment.dataValues
@@ -49,4 +49,9 @@ exports.getEquipmentLists = async () => {
         })
     }
     return equipments
+}
+
+exports.getEquipmentsLength = async () => {
+    const counts = await EquipmentDB.getAllEquipmentsCount()
+    return counts
 }

@@ -2,6 +2,8 @@ const RANDOM_LENGTH = 6;
 
 const RANDOM_MAX = 10;
 
+const PER_PAGE = 10;
+
 const STATUS_BOARD = [
     {
         title : '대여 예정',
@@ -45,4 +47,4 @@ const reservationLists = [
     }
 ]
 
-module.exports = { RANDOM_LENGTH, RANDOM_MAX, STATUS_BOARD }
+module.exports = { RANDOM_LENGTH, RANDOM_MAX, STATUS_BOARD, PER_PAGE }

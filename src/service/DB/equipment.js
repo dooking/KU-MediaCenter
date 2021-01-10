@@ -14,7 +14,7 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmentLists() {
+  static getEquipmentLists({offset}) {
     return equipment_detail
       .findAll({
         include: [
@@ -22,6 +22,20 @@ const EquipmentDB = class {
             model: equipment
           }
        ],
+       offset: offset,
+       limit: 10
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  static getAllEquipmentsCount(){
+    return equipment_detail
+      .count({
+        raw: true
       })
       .then((results) => {
         return results;
