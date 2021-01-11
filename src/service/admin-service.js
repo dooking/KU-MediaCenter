@@ -82,6 +82,24 @@ exports.updateEquipmentDetail = async (params) => {
 }
 
 exports.historyEquipment = async (params) => {
+    const results = []
     const reservations = await EquipmentDB.historyEquipment(params)
-    return reservations
+    for (let reservation of reservations){
+        const { id, reservation_number, from_date, to_date, real_date, group, purpose, contact, authentication, remark, state, user } = reservation;
+        const { name } = user
+        results.push({
+            id,
+            name,
+            reservation_number, 
+            from_date : getDate(from_date), 
+            real_date: getDate(real_date),
+            group,
+            purpose, 
+            contact, 
+            authentication, 
+            remark, 
+            state,
+        })
+    }
+    return results
 }

@@ -6,52 +6,69 @@
 <div id="wrapper">
     <div class="equip-wrapper">    
         <div class="equip-head">
-            <div>
-                <a class="equip-heading" id = 'gray' href="/admin/manage/equipment/detail/<%= equipment_id %>">장비 상세 페이지</a>
-                <a class="equip-heading" id = 'gray' href="/admin/manage/equipment/update/<%= equipment_id%>">장비 수정</a>
-                <a class="equip-heading" id = 'black' href="/">장비 대여 이력</a>
-            </div>
+            <a class="equip-heading" id = 'black' href=""><%= equipment.kind %> (<%= equipment.name %>) - <%= equipment.serial_number%></a>
             <a class="equip-table-link" href="/admin/manage/equipment">
                 <button class="btn_add">홈으로</button>
             </a>
         </div>
-        <div class="equip-table">
-            <table>
-                <thead>
-                <tr>
-                    <th colspan="1"><input type="checkbox"></span>
-                    <th colspan="1">유저</span>
-                    <th colspan="1">대여넘버</span>
-                    <th colspan="1">장비</span>
-                    <th colspan="1">대여 날짜</span>
-                    <th colspan="1">반납 날짜</span>
-                    <th colspan="1">소속</span>
-                    <th colspan="1">목적</span>
-                    <th colspan="1">번호</span>
-                    <th colspan="1">신분증</span>
-                    <th colspan="1">비고</span>
-                    <th colspan="1">상태</span>
-                </tr>
-                </thead>
-                <tbody>
-                    <% for (let reservation of reservations) { %>
-                        <tr onclick="location.href='/admin/manage/equipment/detail/<%= reservation.id%>';">
-                            <td colspan="1"><input type="checkbox"></span>
-                            <td colspan="1"> <%= reservation.user_id %> </span>
-                            <td colspan="1"> <%= reservation.reservation_number %> </span>
-                            <td colspan="1"> <%= reservation.equipment_detail_id %> </span>
-                            <td colspan="1"> <%= reservation.from_date %> </span>
-                            <td colspan="1"> <%= reservation.real_date %> </span>
-                            <td colspan="1"> <%= reservation.group %> </span>
-                            <td colspan="1"> <%= reservation.purpose %> </span>
-                            <td colspan="1"> <%= reservation.contact %> </span>
-                            <td colspan="1"> <%= reservation.authentication %> </span>
-                            <td colspan="1"> <%= reservation.remark %> </span>
-                            <td colspan="1"> <%= reservation.state %> </span>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
+        <div class="equip-navbar">
+            <div class="equip-tabs">
+                <div class="equip-tab"><a id = 'gray' href="/admin/manage/equipment/detail/<%= equipment.id %>">장비 상세</a></div>
+                <div class="equip-tab"><a id ='gray' href="/admin/manage/equipment/update/<%= equipment.id%>">장비 수정</a></div>
+                <div class="equip-tab active"><a id ='white' href="">대여 이력</a></div>
+            </div>
+            <div class="equip-history">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="1"><input type="checkbox"></span>
+                        <th colspan="1">대여넘버</span>
+                        <th colspan="1">유저</span>
+                        <th colspan="1">대여 날짜</span>
+                        <th colspan="1">반납 날짜</span>
+                        <th colspan="1">소속</span>
+                        <th colspan="1">목적</span>
+                        <th colspan="1">번호</span>
+                        <th colspan="1">신분증</span>
+                        <th colspan="1">비고</span>
+                        <th colspan="1">상태</span>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let reservation of reservations) { %>
+                            <tr>
+                                <td colspan="1"><input type="checkbox"></td>
+                                <td colspan="1"> <%= reservation.reservation_number %> </td>
+                                <td colspan="1"> <%= reservation.name %> </td>
+                                <td colspan="1"> <%= reservation.from_date %> </td>
+                                <td colspan="1"> <%= reservation.real_date %> </td>
+                                <td colspan="1"> <%= reservation.group %> </td>
+                                <td colspan="1"> <%= reservation.purpose %> </td>
+                                <td colspan="1"> <%= reservation.contact %> </td>
+                                <td colspan="1"> <%= reservation.authentication %> </td>
+                                <td colspan="1"> <%= reservation.remark %> </td>
+                                <td colspan="1"> 
+                                    <% if (reservation.state == 0) { %>
+                                        <span>예약 신청</span> 
+                                    <% } else if (reservation.state == 1) { %>
+                                        <span>대여 중</span> 
+                                    <% } else if (reservation.state == 2) { %>
+                                        <span>연체 중</span> 
+                                    <% } else if (reservation.state == 3) { %>
+                                        <span>대여 완료</span> 
+                                    <% } else if (reservation.state == 4) { %>
+                                        <span>연장</span> 
+                                    <% } else if (reservation.state == 5) { %>
+                                        <span>예약 취소</span> 
+                                    <% } else if (reservation.state == 6) { %>
+                                        <span>기타</span> 
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
   </div>
 </div>

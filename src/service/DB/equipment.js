@@ -25,13 +25,17 @@ const EquipmentDB = class {
               name: {
                 [sequelize.Op.like]: "%" + searchWord + "%", 
               },
-            }
+            },
+            order: [
+              ['name','ASC'],
+            ],
           }             
         ],
         offset: offset,
         limit: PER_PAGE
       })
       .then((results) => {
+        console.log(results)
         return results;
       })
       .catch((err) => {
@@ -224,13 +228,17 @@ const EquipmentDB = class {
   static historyEquipment({ id }) {
     return equipment_reservation
     .findAll({
-      raw: true, 
+      include: [
+        { 
+          model: user,
+          attributes: ['name']
+        }
+     ],
       where : {
         equipment_detail_id : id
       },
     })
     .then((results) => {
-      console.log(results)
       return results;
     })
     .catch((err) => {
