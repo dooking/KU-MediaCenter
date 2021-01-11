@@ -41,7 +41,6 @@ app.use(passport.session());
 app.use((req,res,next)=>{
   if(req.session?.user){
     const { userId, name, major, auth } = req.session.user
-    console.log(req.session.user)
     res.locals.user = {
       userId,
       name,

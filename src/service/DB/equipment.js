@@ -35,7 +35,6 @@ const EquipmentDB = class {
         limit: PER_PAGE
       })
       .then((results) => {
-        console.log(results)
         return results;
       })
       .catch((err) => {

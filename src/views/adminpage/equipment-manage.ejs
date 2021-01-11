@@ -16,7 +16,7 @@
             <form action="" method="GET">
                 <div class="search-bar flex">
                     <span class="qinput-icon">🔍</span>
-                    <input class="qinput" type="text" name="search" placeholder="장비명을 입력해주세요" />
+                    <input class="qinput" type="text" name="search" placeholder="장비명을 입력해주세요" value="<%= searchWord%>"/>
                     <button type="submit" class="qsubmit">검색하기</button>
                     <button class="qsubmit"><a href="/admin/manage/equipment">초기화</a></button>
                 </div>
@@ -34,7 +34,7 @@
     <table>
         <thead>
         <tr>
-            <th colspan="1"><input type="checkbox"></span>
+            <th colspan="1"><input type="checkbox" class="allCheck" onclick="allCheck(this)"></span>
             <th colspan="2">TYPE</span>
             <th colspan="2">품명</span>
             <th colspan="3">규격</span>
@@ -47,7 +47,7 @@
             <% for (let equipment of equipments) { %>
                 <tr onclick="location.href='/admin/manage/equipment/detail/<%= equipment.id%>';">
                     <td colspan="1">
-                        <input type="checkbox" class="check">
+                        <input type="checkbox" class="check" onclick="clickCheck(event)">
                     </td>
                     <td colspan="2"> <%= equipment.category%> </td>
                     <td colspan="2"> <%= equipment.kind%> </td>
@@ -97,6 +97,8 @@
             <% } %>
         </li>
     </ul>
-
     </div>
 </div>
+
+
+<script type="text/javascript" src="/javascript/adminpage/equipment-manage.js"></script>

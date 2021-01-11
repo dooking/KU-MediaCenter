@@ -4,7 +4,6 @@ const { getDateWithTime } = require('../utils/momment')
 
 exports.getStockData = async (selectDate, nextSelectDate)=>{
     const equipmentLists = await EquipmentDB.getEquipmentTypeLists()
-    console.log(equipmentLists)
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
         const { id } = equipment
         let accumulator = await promise.then();
@@ -47,7 +46,6 @@ exports.addReservation = async (userId, { equipments, fromDateValue, fromDateTim
     const toDate = getDateWithTime(toDateValue, toDateTime)
 
     const reservationNumber = makeReservationNumber()
-    console.log(typeof equipments, equipments)
     for (let equipment of equipments){
         if(!equipment.includes('::')) continue;
         const [equipmentCategory,count] = equipment.split('::')
