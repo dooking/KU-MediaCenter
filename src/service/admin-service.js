@@ -80,3 +80,8 @@ exports.updateEquipment = async (params) => {
 exports.updateEquipmentDetail = async (params) => {
     await EquipmentDB.updateEquipmentDetail(params)
 }
+
+exports.historyEquipment = async (params) => {
+    const reservations = await EquipmentDB.historyEquipment(params)
+    return reservations
+}

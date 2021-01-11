@@ -221,5 +221,21 @@ const EquipmentDB = class {
         return err;
       });
   }
+  static historyEquipment({ id }) {
+    return equipment_reservation
+    .findAll({
+      raw: true, 
+      where : {
+        equipment_detail_id : id
+      },
+    })
+    .then((results) => {
+      console.log(results)
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
 };
 module.exports = EquipmentDB;

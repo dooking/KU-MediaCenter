@@ -57,6 +57,21 @@ exports.updateEquipment = async (req, res, next) => {
     }
 }
 
+exports.historyEquipment = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const reservations = await AdminService.historyEquipment({id})
+        console.log(reservations)
+        res.render('./adminpage/equipment-history',{
+            reservations, 
+            equipment_id : id
+        })
+    }
+    catch(error){
+        next(error)
+    }
+}
+
 exports.modifyEquipment = async (req, res, next) => {
     try{
         const { id } = req.params

@@ -1,0 +1,57 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/equipment-detail.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
+    <div class="equip-wrapper">    
+        <div class="equip-head">
+            <div>
+                <a class="equip-heading" id = 'gray' href="/admin/manage/equipment/detail/<%= equipment_id %>">장비 상세 페이지</a>
+                <a class="equip-heading" id = 'gray' href="/admin/manage/equipment/update/<%= equipment_id%>">장비 수정</a>
+                <a class="equip-heading" id = 'black' href="/">장비 대여 이력</a>
+            </div>
+            <a class="equip-table-link" href="/admin/manage/equipment">
+                <button class="btn_add">홈으로</button>
+            </a>
+        </div>
+        <div class="equip-table">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="1"><input type="checkbox"></span>
+                    <th colspan="1">유저</span>
+                    <th colspan="1">대여넘버</span>
+                    <th colspan="1">장비</span>
+                    <th colspan="1">대여 날짜</span>
+                    <th colspan="1">반납 날짜</span>
+                    <th colspan="1">소속</span>
+                    <th colspan="1">목적</span>
+                    <th colspan="1">번호</span>
+                    <th colspan="1">신분증</span>
+                    <th colspan="1">비고</span>
+                    <th colspan="1">상태</span>
+                </tr>
+                </thead>
+                <tbody>
+                    <% for (let reservation of reservations) { %>
+                        <tr onclick="location.href='/admin/manage/equipment/detail/<%= reservation.id%>';">
+                            <td colspan="1"><input type="checkbox"></span>
+                            <td colspan="1"> <%= reservation.user_id %> </span>
+                            <td colspan="1"> <%= reservation.reservation_number %> </span>
+                            <td colspan="1"> <%= reservation.equipment_detail_id %> </span>
+                            <td colspan="1"> <%= reservation.from_date %> </span>
+                            <td colspan="1"> <%= reservation.real_date %> </span>
+                            <td colspan="1"> <%= reservation.group %> </span>
+                            <td colspan="1"> <%= reservation.purpose %> </span>
+                            <td colspan="1"> <%= reservation.contact %> </span>
+                            <td colspan="1"> <%= reservation.authentication %> </span>
+                            <td colspan="1"> <%= reservation.remark %> </span>
+                            <td colspan="1"> <%= reservation.state %> </span>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+  </div>
+</div>
