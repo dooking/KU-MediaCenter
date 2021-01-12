@@ -283,3 +283,17 @@ table {
     background-color: #fcfcfc;
     margin-bottom: 30px;
   }
+  #qrcode{
+    margin-top: 16px;
+  }
+  #qrcode > img {
+    width: 300px;
+  }
+  .equip-qr{
+    height: 100%;
+    margin: 0 auto;
+  }
+  .equip-qr > span {
+    font-size: 30px;
+    font-weight: bold;
+  }

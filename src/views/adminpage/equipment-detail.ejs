@@ -18,34 +18,41 @@
         <div class="equip-tab"><a id ='gray' href="/admin/manage/equipment/history/<%= equipment.id %>">대여 이력</a></div>
       </div>
       <div class="equip-table">
-        <form method="POST" action="/" id="editForm">
+        <div class="equip-form">
           <div class="equip-list">
             <span>장비 타입</span>
-            <input type="text" name="equipSemiType" placeholder="<%= equipment.category%>" value="<%= equipment.category%>" disabled>
-          </label>
+            <input type="text" class="category" placeholder="<%= equipment.category%>" value="<%= equipment.category%>" disabled>
           </div>
           <div class="equip-list">
             <span>규격</span>
-            <input type="text" name="equipSemiType" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" disabled>
+            <input type="text" class="kind" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" disabled>
           </div>
           <div class="equip-list">
             <span>품명</span>
-            <input type="text" name="equipmentName" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" disabled>
+            <input type="text" class="name" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" disabled>
           </div>
           <div class="equip-list">
             <span>장비 시리얼번호</span>
-            <input type="text" name="serialNumber" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" disabled>
+            <input type="text" class="serial_number" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" disabled>
           </div>
           <div class="equip-list">
             <span>현재 장비 상태</span>
-            <input type="text" name="serialNumber" placeholder="<%= equipment.state%>" value="<%= equipment.state%>" disabled>
+            <input type="text" class="state" placeholder="<%= equipment.state%>" value="<%= equipment.state%>" disabled>
           </div>
           <div class="equip-list">
             <span>비고</span>
-            <input type="textarea" name="remark" placeholder="<%= equipment.remark%>" disabled>
+            <input type="textarea" class="remark" placeholder="<%= equipment.remark%>" disabled>
           </div>
-        </form>
+        </div>
+        <div class="equip-qr">
+          <span>QR 코드</span>
+          <div id="qrcode"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="/javascript/adminpage/jquery.min.js"></script>
+<script type="text/javascript" src="/javascript/adminpage/qrcode.js"></script>
+<script type="text/javascript" src="/javascript/adminpage/equipment-detail.js"></script>

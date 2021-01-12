@@ -50,6 +50,21 @@ td {
   padding-top: 1.2%;
   padding-bottom: 1.2%;
 }
+.state0{
+  background-color :#e27802;
+}
+.state1{
+  background-color: #8d091d;
+}
+.state2{
+  background-color: #312c51;
+}
+.state3{
+  background-color: #af0069;
+}
+.state4{
+  background-color: #222831;
+}
 .center {
   display: flex;
   justify-content: center;
@@ -165,20 +180,9 @@ td {
   text-align: center;
   border-style: none;
 }
-.equipState0 {
+.equipState {
   width: 70px;
   height: 23px;
-  background-color: #008910;
-  outline: none;
-  border-radius: 20px;
-  font-size: 12.5px;
-  color: white;
-  margin: auto;
-}
-.equipState1 {
-  width: 74px;
-  height: 23px;
-  background-color: #bbbbbb;
   outline: none;
   border-radius: 20px;
   font-size: 12.5px;

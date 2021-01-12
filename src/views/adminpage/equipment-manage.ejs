@@ -53,15 +53,15 @@
                     <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.serialNumber %> </td>
                     <td colsapn="1" class="pointer" data-id="<%= equipment.id %>">
                         <% if (equipment.state == 0) { %>
-                            <p class="equipState0">대여 가능</p>
+                            <p class="equipState state0">대여 가능</p>
                         <% } else if (equipment.state == 1) { %>
-                            <p class="equipState0">대여 중</p>
+                            <p class="equipState state1">대여 중</p>
                         <% } else if (equipment.state == 2) { %>
-                            <p class="equipState0">연체 중</p>
+                            <p class="equipState state2">연체 중</p>
                         <% } else if (equipment.state == 3) { %>
-                            <p class="equipState0">연장</p>
+                            <p class="equipState state3">연장</p>
                         <% } else if (equipment.state == 4) { %>
-                            <p class="equipState0">기타</p>
+                            <p class="equipState state4">기타</p>
                         <% } %>
                     </td>
                     <td colspan="3" class="pointer" data-id="<%= equipment.id %>">
