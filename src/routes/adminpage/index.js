@@ -11,5 +11,6 @@ router.get("/manage/equipment/update/:id", AdminController.updateEquipment);
 router.get("/manage/equipment/history/:id", AdminController.historyEquipment);
 
 router.post("/manage/equipment/update/:id", AdminController.modifyEquipment);
+router.post("/manage/equipment/delete", AdminController.deleteEquipment);
 
 module.exports = router;

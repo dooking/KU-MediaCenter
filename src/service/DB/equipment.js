@@ -224,6 +224,20 @@ const EquipmentDB = class {
         return err;
       });
   }
+  static deleteEquipmentDetail(deleteList) {
+    return equipment_detail
+      .destroy({
+        where: {
+          id : deleteList
+        }
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
   static historyEquipment({ id }) {
     return equipment_reservation
     .findAll({

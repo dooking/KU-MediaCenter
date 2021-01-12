@@ -27,6 +27,25 @@ function deleteEquipment(){
             deleteList.push(parseInt($checkButton.value))
         }
     }
-
-    return window.location.href=`/admin/manage/equipment/delete/${deleteList}`
+    axios({
+        method: 'post',
+        url: '/admin/manage/equipment/delete',
+        data: {
+            deleteList
+        } 
+      })
+        .then(response=>{
+            const { result } = response?.data
+            if(result){
+                alert('장비가 성공적으로 삭제되었습니다.')
+            }
+            else{
+                alert('장비 삭제 과정에서 문제가 발생하였습니다.')
+            }
+            return window.location.replace("");
+        })
+        .catch(error=>{
+            alert(error)
+            return window.location.replace("");
+        })
 }

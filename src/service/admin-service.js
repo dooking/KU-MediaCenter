@@ -81,6 +81,11 @@ exports.updateEquipmentDetail = async (params) => {
     await EquipmentDB.updateEquipmentDetail(params)
 }
 
+exports.deleteEquipmentDetail = async (params) => {
+    console.log('여기?',params)
+    await EquipmentDB.deleteEquipmentDetail(params)
+}
+
 exports.historyEquipment = async (params) => {
     const results = []
     const reservations = await EquipmentDB.historyEquipment(params)

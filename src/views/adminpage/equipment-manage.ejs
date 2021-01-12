@@ -26,7 +26,7 @@
             <a class="equip-table-link" href="/">
                 <button class="equip-btn">+ 장비 추가</button>
             </a>
-            <button class="equip-btn" onclick="deleteEquipment(this)">- 장비 삭제</button>
+            <button class="equip-btn" onclick="deleteEquipment()">- 장비 삭제</button>
         </div>
     </div>
     <table id="table">
@@ -44,8 +44,8 @@
         <tbody class="tbody">
             <% for (let equipment of equipments) { %>
                 <tr >
-                    <td colspan="1">
-                        <input type="checkbox" class="check" onclick="clickCheck(event)">
+                    <td colspan="1" onclick="clickCheck(event)" >
+                        <input type="checkbox" class="check" value="<%= equipment.id %>">
                     </td>
                     <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.category%> </td>
                     <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.kind%> </td>
