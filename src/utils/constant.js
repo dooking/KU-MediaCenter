@@ -11,13 +11,13 @@ const STATUS_BOARD = [
         buttonName : '대여 확인',
     },
     {
-        title : '반납 예정',
+        title : '현재 대여 상황',
         state : 1,
-        buttonName : '반납 확인',
+        buttonName : '대여 확인',
     },
     {
-        title : '연체 내역',
-        state : 2,
+        title : '연체 상황',
+        state : 3,
         buttonName : '연체 확인',
     },
 ] 

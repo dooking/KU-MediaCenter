@@ -121,7 +121,7 @@ const EquipmentDB = class {
         where : {
           equipment_id : id,
           state : {
-            [sequelize.Op.or]: [0,1,3,4,6]
+            [sequelize.Op.or]: [0,1,3,5]
           },
           [sequelize.Op.or] : [
               sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', selectDate),

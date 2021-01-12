@@ -59,13 +59,13 @@
               <% if (equipment.state == 0) { %>
                 <option value="<%= equipment.state%>" class="disabled" disabled selected>대여 가능</option>
               <% } else if (equipment.state == 1) { %>
-                <option value="<%= equipment.state%>" class="disabled" disabled selected>대여중</option>
+                <option value="<%= equipment.state%>" class="disabled" disabled selected>대여 중</option>
               <% } else if (equipment.state == 2) { %>
-                <option value="<%= equipment.state%>" class="disabled" disabled selected>연체</option>
+                <option value="<%= equipment.state%>" class="disabled" disabled selected>기타</option>
               <% } %>
               <option value="0">대여 가능</option>
-              <option value="1">대여중</option>
-              <option value="2">연체</option>
+              <option value="1">대여 중</option>
+              <option value="2">기타</option>
             </select>
           </div>
           <div class="equip-list">
