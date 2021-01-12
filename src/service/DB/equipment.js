@@ -1,6 +1,6 @@
+const sequelize = require('sequelize')
 const { user, equipment, equipment_detail, equipment_reservation } = require('../../models');
 const { PER_PAGE } = require('../../utils/constant')
-const sequelize = require('sequelize')
 
 const EquipmentDB = class {
   static getEquipmentTypeLists() {

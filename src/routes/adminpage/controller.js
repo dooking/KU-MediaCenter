@@ -128,3 +128,35 @@ exports.createEquipment = async (req, res, next) => {
     }
 }
 
+exports.manageUser = async (req, res, next) => {
+    try{
+        const pageNum = req.query?.page || 1;
+        const searchWord = req.query?.search || '';
+        const offset = pageNum > 1 ? PER_PAGE*(pageNum-1) : 0
+
+        const totalUsers = await AdminService.getUserLength({ searchWord })
+        const users = await AdminService.getUserLists({ offset, searchWord })
+
+        res.render('./adminpage/user-manage',{
+            users,
+            pageNum,
+            totalPage : parseInt(totalUsers/PER_PAGE)+1,
+            searchWord
+        })
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.detailUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const user = await AdminService.getUser({id})
+
+        res.render('./adminpage/user-detail',{user})
+    }
+    catch(error){
+        next(error)
+    }
+}

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       auth: {
         type: DataTypes.INTEGER(5),
         defaultValue: 0,
+        comment: '0: 학생 / 1: 근로 장학생 / 2: 학과사무실 직원 ', 
       },
       penalty: {
         type: DataTypes.INTEGER(5),

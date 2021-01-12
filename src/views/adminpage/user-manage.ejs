@@ -1,0 +1,87 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/user-manage.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
+    <div class="equip-wrapper">
+    <div class="equip-head">
+        <div>
+            <a class="equip-heading" id = 'black' href="/admin/manage/user">유저 관리</a>
+        </div>
+    </div>
+    <div class="search-wrapper">
+        <div class="search">
+            <form action="" method="GET">
+                <div class="search-bar flex">
+                    <span class="qinput-icon">🔍</span>
+                    <input class="qinput" type="text" name="search" placeholder="장비명을 입력해주세요" value="<%= searchWord%>"/>
+                    <button type="submit" class="qsubmit">검색하기</button>
+                    <button class="qsubmit"><a href="/admin/manage/user">초기화</a></button>
+                </div>
+            </form>
+        </div>
+        <div class="equip-link">
+            <button class="equip-btn" onclick="deleteUser()">- 유저 삭제</button>
+        </div>
+    </div>
+    <table id="table">
+        <thead>
+        <tr>
+            <th colspan="1"><input type="checkbox" class="allCheck" onclick="allCheck(this)"></span>
+            <th colspan="2">index</span>
+            <th colspan="2">이름</span>
+            <th colspan="2">전공</span>
+            <th colspan="2">벌점</span>
+            <th colspan="1">권한</span>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+            <% for (let user of users) { %>
+                <tr >
+                    <td colspan="1" onclick="clickCheck(event)" >
+                        <input type="checkbox" class="check" value="<%= user.id %>">
+                    </td>
+                    <td colspan="2" class="pointer" data-id="<%= user.id %>"> <%= user.id%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= user.id %>"> <%= user.name%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= user.id %>"> <%= user.major%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= user.id %>"> <%= user.penalty %> </td>
+                    <td colsapn="1" class="pointer" data-id="<%= user.id %>"> 
+                        <% if (user.auth == 0) { %>
+                            <span>학생</span>
+                        <% } else if (user.auth == 1) { %>
+                            <span>근로 장학생</span>
+                        <% } else if (user.auth == 2) { %>
+                            <span>홈페이지 관리자</span>
+                        <% } %>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li>
+            <% if(pageNum == 1) { %>
+                <span>&laquo; prev</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)-1 %>&search=<%= searchWord %>">&laquo; prev</a>
+            <% } %>
+        </li>
+        <% for (let page=1; page<totalPage+1; page++) { %>
+            <li>
+                <a href="?page=<%= page%>&search=<%= searchWord %>" class="page <%= pageNum == page ? 'active' : '' %>" > <%= page %> </a>
+            </li>
+        <% } %>
+        <li>
+            <% if(pageNum == totalPage) { %>
+                <span>next &raquo;</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)+1 %>&search=<%= searchWord %>">next &raquo;</a>
+            <% } %>
+        </li>
+    </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="/javascript/adminpage/user-manage.js"></script>

@@ -1,4 +1,5 @@
 const EquipmentDB = require('./DB/equipment')
+const UserDB = require('./DB/user')
 const { getDate, getHour } = require('../utils/momment')
 const { STATUS_BOARD } = require('../utils/constant')
 
@@ -124,3 +125,19 @@ exports.historyEquipment = async (params) => {
     }
     return results
 }
+
+exports.getUserLength = async (params) => {
+    const totalUsers= await UserDB.getUserLength(params)
+    return totalUsers
+}
+
+exports.getUserLists = async (params) => {
+    const users= await UserDB.getUserLists(params)
+    return users
+}
+
+exports.getUser = async (params) => {
+    const user= await UserDB.getUser(params)
+    return user
+}
+
