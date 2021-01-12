@@ -26,12 +26,10 @@
             <a class="equip-table-link" href="/">
                 <button class="equip-btn">+ 장비 추가</button>
             </a>
-            <a class="equip-table-link" href="/">
-                <button class="equip-btn">- 장비 삭제</button>
-            </a>
+            <button class="equip-btn" onclick="deleteEquipment(this)">- 장비 삭제</button>
         </div>
     </div>
-    <table>
+    <table id="table">
         <thead>
         <tr>
             <th colspan="1"><input type="checkbox" class="allCheck" onclick="allCheck(this)"></span>
@@ -43,17 +41,17 @@
             <th colspan="3">비고</span>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="tbody">
             <% for (let equipment of equipments) { %>
-                <tr onclick="location.href='/admin/manage/equipment/detail/<%= equipment.id%>';">
+                <tr >
                     <td colspan="1">
                         <input type="checkbox" class="check" onclick="clickCheck(event)">
                     </td>
-                    <td colspan="2"> <%= equipment.category%> </td>
-                    <td colspan="2"> <%= equipment.kind%> </td>
-                    <td colspan="3"> <%= equipment.name%> </td>
-                    <td colspan="2"> <%= equipment.serialNumber %> </td>
-                    <td colsapn="1">
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.category%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.kind%> </td>
+                    <td colspan="3" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.name%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.serialNumber %> </td>
+                    <td colsapn="1" class="pointer" data-id="<%= equipment.id %>">
                         <% if (equipment.state == 0) { %>
                             <p class="equipState0">대여 가능</p>
                         <% } else if (equipment.state == 1) { %>
@@ -66,7 +64,7 @@
                             <p class="equipState0">기타</p>
                         <% } %>
                     </td>
-                    <td colspan="3" >
+                    <td colspan="3" class="pointer" data-id="<%= equipment.id %>">
                         <% if(equipment.remark) { %>
                             <p class="remark"><%= equipment.remark %></p>
                         <% } %>
@@ -99,6 +97,5 @@
     </ul>
     </div>
 </div>
-
 
 <script type="text/javascript" src="/javascript/adminpage/equipment-manage.js"></script>

@@ -20,7 +20,7 @@ exports.manageEquipment = async (req, res, next) => {
         const offset = pageNum > 1 ? PER_PAGE*(pageNum-1) : 0
         const equipmentsCount = await AdminService.getEquipmentsLength({ searchWord })
         const equipments = await AdminService.getEquipmentLists({offset, searchWord})
-
+        console.log(equipments)
         res.render('./adminpage/equipment-manage',{
             equipments,
             pageNum,
