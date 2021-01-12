@@ -258,5 +258,53 @@ const EquipmentDB = class {
       return err;
     });
   }
+  static findAlreadyEquipment({ category, kind, name }) {
+    return equipment
+      .findOne({
+        raw: true,
+        where : {
+          category,
+          kind,
+          name
+        }
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  static insertEquipment({ category, kind, name }) {
+    return equipment
+      .create({
+        raw: true,
+        category, 
+        kind, 
+        name
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+  static insertEquipmentDetail({ id, serial_number }) {
+    return equipment_detail
+      .create({
+        raw: true,
+        equipment_id : id,
+        serial_number,
+        state : 0,
+        remark : ''
+      })
+      .then((results) => {
+        return results;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
 module.exports = EquipmentDB;

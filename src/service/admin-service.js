@@ -81,8 +81,24 @@ exports.updateEquipmentDetail = async (params) => {
     await EquipmentDB.updateEquipmentDetail(params)
 }
 
+exports.createEquipmentDetail = async (params) => {
+    let equipmentDetailId;
+    const equipment = await EquipmentDB.findAlreadyEquipment(params)
+    
+    if(equipment?.id){
+        const newEquipment = await EquipmentDB.insertEquipmentDetail({...params,id : equipment.id}) 
+        equipmentDetailId = newEquipment.id
+    }
+    else{
+        const newEquipment = await EquipmentDB.insertEquipment(params)
+        const newEquipmentDetail = await EquipmentDB.insertEquipmentDetail({...params,id : newEquipment.id}) 
+        equipmentDetailId = newEquipmentDetail.id
+    }
+
+    return equipmentDetailId;
+}
+
 exports.deleteEquipmentDetail = async (params) => {
-    console.log('여기?',params)
     await EquipmentDB.deleteEquipmentDetail(params)
 }
 

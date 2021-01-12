@@ -45,7 +45,7 @@ exports.detailEquipment = async (req, res, next) => {
     }
 }
 
-exports.updateEquipment = async (req, res, next) => {
+exports.modifyEquipment = async (req, res, next) => {
     try{
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
@@ -73,7 +73,7 @@ exports.historyEquipment = async (req, res, next) => {
     }
 }
 
-exports.modifyEquipment = async (req, res, next) => {
+exports.updateEquipment = async (req, res, next) => {
     try{
         const { id } = req.params
         const { category, kind, name, serial_number, remark, state, equipment_id } = req.body
@@ -92,12 +92,38 @@ exports.deleteEquipment = async (req, res, next) => {
         const { deleteList } = req.body
         await AdminService.deleteEquipmentDetail(deleteList)
         res.status(200).send({
-            result : 'SUCCESS'
+            result : true
         })
     }
     catch(error){
         res.state(400).send({
-            result : 'FAIL'
+            result : false
+        })
+    }
+}
+
+exports.addEquipment = async (req, res, next) => {
+    try{
+        res.render('./adminpage/equipment-add')
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.createEquipment = async (req, res, next) => {
+    try{
+        const { formData } = req.body
+        const equipmentDetailId = await AdminService.createEquipmentDetail(formData)
+
+        res.status(200).send({
+            result : true,
+            equipmentDetailId
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            result : false
         })
     }
 }

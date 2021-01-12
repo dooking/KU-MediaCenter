@@ -1,0 +1,64 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/equipment-add.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div class="wrapper">
+    <div class="equip-head">
+        <div>
+        <a class="equip-heading" id = 'black' href="/admin/manage/equipment">장비 관리</a>
+        <a class="equip-heading" id = 'gray' href="/">스튜디오 관리</a>
+        </div>
+    </div>
+    <div class="equip-table">
+        <div>
+            <h2 class="addForm-heading">장비 추가</h2>
+            <div class="label">
+                <p>장비 타입</p>
+                <select id="category" name="category" class="addForm-input">
+                    <option value="카메라">카메라</option>
+                    <option value="카메라 보조 장치">카메라 보조 장치</option>
+                    <option value="녹음 장비">녹음 장비</option>
+                    <option value="조명">조명</option>
+                    <option value="기타 부속">기타 부속</option>
+                </select>
+            </div>
+
+            <div class="label">
+                <p>장비 규격</p>
+                <input type="text"
+                    placeholder="장비 규격을 입력하세요"
+                    id="kind"
+                    name="kind"
+                    class="addForm-input"
+                />
+            </div>
+
+            <div class="label">
+                <p>장비 이름</p>
+                <input
+                    type="text"
+                    placeholder="장비 이름을 입력하세요"
+                    id="name"
+                    name="name"
+                    class="addForm-input"
+                />
+            </div>
+
+            <div class="label">
+                <p>일련 번호</p>
+                <input
+                    type="text"
+                    placeholder="장비 일련 번호를 입력하세요"
+                    id="serial_number"
+                    name="serial_number"
+                    class="addForm-input"
+                />
+            </div>
+            <div class="btn">
+                <button class="addForm-btn" onclick="addEquipment()">장비 등록하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/javascript/adminpage/equipment-add.js"></script>
