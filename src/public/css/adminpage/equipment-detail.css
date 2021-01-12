@@ -29,7 +29,7 @@ a {
 .equip-wrapper span {
     font-size: 18px;
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: bold;
 }
 .equip-heading {
     font-size: 25px;
@@ -291,7 +291,11 @@ table {
   }
   .equip-qr{
     height: 100%;
-    margin: 0 auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   .equip-qr > span {
     font-size: 30px;
