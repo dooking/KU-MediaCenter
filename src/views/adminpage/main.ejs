@@ -1,0 +1,35 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/main.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
+    <div class="equip-head">
+        <a href="/">
+            <button class="btn_add" id="red">장비 관리</button>
+        </a>
+        <a href="/">
+            <button class="btn_add" id="gray">스튜디오 관리</button>
+        </a>
+    </div>
+    <div class="main_div">
+        <% for (let reservationList of reservationLists) { %>
+            <div class="current_list" id="current_list1">
+                <p class="current_list_p"> <%= reservationList.title %> </p>
+                <% for (let reservation of reservationList.reservations) { %>
+                    <div class="current_list_card">
+                        <p><%= reservation.userName %></p>
+                        <div class="current_list_subbox">
+                            <div>
+                                <p><%= reservation.fromDate %> <%= reservation.fromDateTime%>:00 ~ <%= reservation.toDate %> <%= reservation.toDateTime%>:00</p>
+                            </div>
+                        </div>
+                        <a href="./">
+                            <button class="check check<%= reservationList.state %>"><%= reservationList.buttonName %></button>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+</div>

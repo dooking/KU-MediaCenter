@@ -1,0 +1,101 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/equipment-manage.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
+    <div class="equip-wrapper">
+    <div class="equip-head">
+        <div>
+        <a class="equip-heading" id = 'black' href="/admin/manage/equipment">장비 관리</a>
+        <a class="equip-heading" id = 'gray' href="/">스튜디오 관리</a>
+        </div>
+    </div>
+    <div class="search-wrapper">
+        <div class="search">
+            <form action="" method="GET">
+                <div class="search-bar flex">
+                    <span class="qinput-icon">🔍</span>
+                    <input class="qinput" type="text" name="search" placeholder="장비명을 입력해주세요" value="<%= searchWord%>"/>
+                    <button type="submit" class="qsubmit">검색하기</button>
+                    <button class="qsubmit"><a href="/admin/manage/equipment">초기화</a></button>
+                </div>
+            </form>
+        </div>
+        <div class="equip-link">
+            <a class="equip-table-link" href="/admin/manage/equipment/add">
+                <button class="equip-btn">+ 장비 추가</button>
+            </a>
+            <button class="equip-btn" onclick="deleteEquipment()">- 장비 삭제</button>
+        </div>
+    </div>
+    <table id="table">
+        <thead>
+        <tr>
+            <th colspan="1"><input type="checkbox" class="allCheck" onclick="allCheck(this)"></span>
+            <th colspan="2">TYPE</span>
+            <th colspan="2">품명</span>
+            <th colspan="3">규격</span>
+            <th colspan="2">일련번호</span>
+            <th colspan="1">활성상태</span>
+            <th colspan="3">비고</span>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+            <% for (let equipment of equipments) { %>
+                <tr >
+                    <td colspan="1" onclick="clickCheck(event)" >
+                        <input type="checkbox" class="check" value="<%= equipment.id %>">
+                    </td>
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.category%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.kind%> </td>
+                    <td colspan="3" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.name%> </td>
+                    <td colspan="2" class="pointer" data-id="<%= equipment.id %>"> <%= equipment.serialNumber %> </td>
+                    <td colsapn="1" class="pointer" data-id="<%= equipment.id %>">
+                        <% if (equipment.state == 0) { %>
+                            <p class="equipState state0">대여 가능</p>
+                        <% } else if (equipment.state == 1) { %>
+                            <p class="equipState state1">대여 중</p>
+                        <% } else if (equipment.state == 2) { %>
+                            <p class="equipState state2">연체 중</p>
+                        <% } else if (equipment.state == 3) { %>
+                            <p class="equipState state3">연장</p>
+                        <% } else if (equipment.state == 4) { %>
+                            <p class="equipState state4">기타</p>
+                        <% } %>
+                    </td>
+                    <td colspan="3" class="pointer" data-id="<%= equipment.id %>">
+                        <% if(equipment.remark) { %>
+                            <p class="remark"><%= equipment.remark %></p>
+                        <% } %>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li>
+            <% if(pageNum == 1) { %>
+                <span>&laquo; prev</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)-1 %>&search=<%= searchWord %>">&laquo; prev</a>
+            <% } %>
+        </li>
+        <% for (let page=1; page<totalPage+1; page++) { %>
+            <li>
+                <a href="?page=<%= page%>&search=<%= searchWord %>" class="page <%= pageNum == page ? 'active' : '' %>" > <%= page %> </a>
+            </li>
+        <% } %>
+        <li>
+            <% if(pageNum == totalPage) { %>
+                <span>next &raquo;</span>
+            <% } else { %>
+                <a href="?page=<%= parseInt(pageNum)+1 %>&search=<%= searchWord %>">next &raquo;</a>
+            <% } %>
+        </li>
+    </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="/javascript/adminpage/equipment-manage.js"></script>

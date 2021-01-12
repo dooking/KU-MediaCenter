@@ -38,6 +38,21 @@ app.use(session({
 // Passport setting
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req,res,next)=>{
+  if(req.session?.user){
+    const { userId, name, major, auth } = req.session.user
+    res.locals.user = {
+      userId,
+      name,
+      major,
+      auth
+    };
+  }
+  else{
+    res.locals.user = {}
+  }
+  next()
+})
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -1,0 +1,87 @@
+<% include ./base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/equipment-detail.css"/>
+<title>관리자 페이지</title>
+<% include ./base/base-navbar %>
+
+<div id="wrapper">
+  <div class="equip-wrapper">    
+    <div class="equip-head">
+        <a class="equip-heading" id = 'black' href=""><%= equipment.kind %> (<%= equipment.name %>) - <%= equipment.serial_number%></a>
+        <a class="equip-table-link" href="/admin/manage/equipment">
+            <button class="btn_add">홈으로</button>
+        </a>
+    </div>
+    <div class="equip-navbar">
+      <div class="equip-tabs">
+        <div class="equip-tab"><a id = 'gray' href="/admin/manage/equipment/detail/<%= equipment.id%>">장비 상세</a></div>
+        <div class="equip-tab active"><a id ='white' href="">장비 수정</a></div>
+        <div class="equip-tab"><a id ='gray' href="/admin/manage/equipment/history/<%= equipment.id %>">대여 이력</a></div>
+      </div>
+      <div class="equip-table">
+        <form method="POST" action="/admin/manage/equipment/update/<%= equipment.id %>" id="editForm">
+          <div class="equip-list">
+            <span>장비 타입</span>
+            <select id="equipType" name="category" class="addForm-input">
+              <% if (equipment.category == "카메라") { %>
+                <option value="<%= equipment.category%>" class="disabledType" disabled selected>카메라</option>
+              <% }else if (equipment.category == "카메라 보조 장치") { %>
+                <option value="<%= equipment.category%>" class="disabledType" disabled selected>카메라 보조 장치</option>
+              <% } else if (equipment.category == "녹음 장비") { %>
+                <option value="<%= equipment.category%>" class="disabledType" disabled selected>녹음 장비</option>
+              <% } else if (equipment.category == "조명") { %>
+                <option value="<%= equipment.category%>" class="disabledType" disabled selected>조명</option>
+              <% } else if (equipment.category == "기타 부속") { %>
+                <option value="<%= equipment.category%>" class="disabledType" disabled selected>기타 부속</option>
+              <% } %>
+              <option value="카메라">카메라</option>
+              <option value="카메라 보조 장치">카메라 보조 장치</option>
+              <option value="녹음 장비">녹음 장비</option>
+              <option value="조명">조명</option>
+              <option value="기타 부속">기타 부속</option>
+            </select>
+          </label>
+          </div>
+          <div class="equip-list">
+            <span>규격</span>
+            <input type="text" name="kind" placeholder="<%= equipment.kind%>" value="<%= equipment.kind%>" required>
+          </div>
+          <div class="equip-list">
+            <span>품명</span>
+            <input type="text" name="name" placeholder="<%= equipment.name%>" value="<%= equipment.name%>" required>
+          </div>
+          <div class="equip-list">
+            <span>장비 시리얼번호</span>
+            <input type="text" name="serial_number" placeholder="<%= equipment.serial_number%>" value="<%= equipment.serial_number%>" required>
+          </div>
+          <div class="equip-list">
+            <span>현재 장비 상태</span>
+            <select name="state">
+              <% if (equipment.state == 0) { %>
+                <option value="<%= equipment.state%>" class="disabled" disabled selected>대여 가능</option>
+              <% } else if (equipment.state == 1) { %>
+                <option value="<%= equipment.state%>" class="disabled" disabled selected>대여중</option>
+              <% } else if (equipment.state == 2) { %>
+                <option value="<%= equipment.state%>" class="disabled" disabled selected>연체</option>
+              <% } %>
+              <option value="0">대여 가능</option>
+              <option value="1">대여중</option>
+              <option value="2">연체</option>
+            </select>
+          </div>
+          <div class="equip-list">
+            <span>비고</span>
+            <input type="textarea" 
+            ="remark" placeholder="<%= equipment.remark%>">
+          </div>
+          <div class="center">
+            <input type="hidden" name="equipment_id" value="<%= equipment.equipment_id%>">
+            <div class="btn_edit center">수정하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="/javascript/adminpage/equipment-update.js"></script>

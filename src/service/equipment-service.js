@@ -3,7 +3,7 @@ const { fillArray, checkStock, makeReservationNumber } = require('../utils/util'
 const { getDateWithTime } = require('../utils/momment')
 
 exports.getStockData = async (selectDate, nextSelectDate)=>{
-    const equipmentLists = await EquipmentDB.getEquipmentLists()
+    const equipmentLists = await EquipmentDB.getEquipmentTypeLists()
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
         const { id } = equipment
         let accumulator = await promise.then();
@@ -11,7 +11,7 @@ exports.getStockData = async (selectDate, nextSelectDate)=>{
         let currentStock = fillArray(24, count)
         let nextStock = fillArray(24, count)
 
-        const reservations = await EquipmentDB.findEquipmentReservation({ id, selectDate, nextSelectDate})
+        const reservations = await EquipmentDB.getReservations({ id, selectDate, nextSelectDate})
         reservations.map((reservation)=>{
             const { from_date: fromDate, to_date: toDate } = reservation
             currentStock = checkStock(currentStock, selectDate, fromDate, toDate)
@@ -46,7 +46,6 @@ exports.addReservation = async (userId, { equipments, fromDateValue, fromDateTim
     const toDate = getDateWithTime(toDateValue, toDateTime)
 
     const reservationNumber = makeReservationNumber()
-    console.log(typeof equipments, equipments)
     for (let equipment of equipments){
         if(!equipment.includes('::')) continue;
         const [equipmentCategory,count] = equipment.split('::')
