@@ -1,6 +1,6 @@
 const EquipmentDB = require('./DB/equipment')
 const UserDB = require('./DB/user')
-const { getDate, getHour } = require('../utils/momment')
+const { getDate, getHour, getTime } = require('../utils/momment')
 const { STATUS_BOARD } = require('../utils/constant')
 
 exports.getReservationLists = async () => {
@@ -139,5 +139,57 @@ exports.getUserLists = async (params) => {
 exports.getUser = async (params) => {
     const user= await UserDB.getUser(params)
     return user
+}
+
+exports.historyUser = async (params) => {
+    let results = {}
+    let equipments = []
+    const setReservationNumbers = []
+    const reservations = await EquipmentDB.historyUser(params)
+    for (let reservation of reservations){
+        let equipmentInfo = {}
+        const { id, equipment_id, equipment_detail_id, reservation_number, from_date, to_date, real_date, group, purpose, contact, authentication, remark, state, user } = reservation;
+        const { name: userName } = user
+
+        if(equipment_detail_id){
+            const { serial_number, equipment } = await EquipmentDB.getEquipmentDetail({id: equipment_detail_id})
+            const { category, kind, name : equipmentName } = equipment
+            equipmentInfo = {
+                category, kind, equipmentName, serial_number
+            }
+        }
+        else{
+            const { category, kind, name : equipmentName } = await EquipmentDB.getEquipment({id: equipment_id})
+            equipmentInfo = {
+                category, kind, equipmentName
+            }
+        }
+
+        if(!setReservationNumbers.includes(reservation_number)){
+            setReservationNumbers.push(reservation_number)
+            equipments = []
+            results[`${reservation_number}`] = {
+                id,
+                name: userName,
+                reservation_number, 
+                equipments : [...equipments, equipmentInfo],
+                from_date : getDate(from_date), 
+                from_date_time : getTime(from_date),
+                real_date: getDate(real_date),
+                real_date_time: getTime(real_date),
+                group,
+                purpose, 
+                contact, 
+                authentication, 
+                remark, 
+                state,
+            }
+        }
+        else{ 
+            results[`${reservation_number}`].equipments.push(equipmentInfo)
+        }
+    }
+    console.log(results['20210113-360299'])
+    return results
 }
 

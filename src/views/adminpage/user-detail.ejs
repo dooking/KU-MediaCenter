@@ -6,45 +6,45 @@
 <div id="wrapper">
   <div class="user-wrapper">    
     <div class="user-head">
-        <a class="user-heading" id = 'black' href=""><%= user.name %> <%= user.major %></a>
-        <a class="user-table-link" href="/admin/manage/user">
-            <button class="btn_add">홈으로</button>
-        </a>
+      <a class="user-heading" id = 'black' href=""><%= user.name %> <%= user.major %></a>
+      <a class="user-table-link" href="/admin/manage/user">
+          <button class="btn_add">홈으로</button>
+      </a>
     </div>
     <div class="user-navbar">
         <div class="user-tabs">
-            <div class="user-tab active"><a id = 'white' href="">유저 상세</a></div>
-            <div class="user-tab"><a id ='gray' href="/admin/manage/userment/history/<%= user.id %>">대여 이력</a></div>
+          <div class="user-tab active"><a id = 'white' href="">유저 상세</a></div>
+          <div class="user-tab"><a id ='gray' href="/admin/manage/user/history/<%= user.id %>">대여 이력</a></div>
         </div>
-      <div class="user-table">
-        <div class="user-form">
-          <div class="user-list">
-            <span>index</span>
-            <input type="text" class="category" placeholder="<%= user.id%>" value="<%= user.id%>" disabled>
+        <div class="user-table">
+          <div class="user-form">
+            <div class="user-list">
+              <span>index</span>
+              <input type="text" class="category" placeholder="<%= user.id%>" value="<%= user.id%>" disabled>
+            </div>
+            <div class="user-list">
+              <span>이름</span>
+              <input type="text" class="kind" placeholder="<%= user.name%>" value="<%= user.name%>" disabled>
+            </div>
+            <div class="user-list">
+              <span>전공</span>
+              <input type="text" class="name" placeholder="<%= user.major%>" value="<%= user.major%>" disabled>
+            </div>
+            <div class="user-list">
+              <span>벌점</span>
+              <input type="text" class="serial_number" placeholder="<%= user.penalty%>" value="<%= user.penalty%>" disabled>
+            </div>
+            <div class="user-list">
+              <span>권한</span>
+              <% if (user.auth == 0) { %>
+                  <input type="text" class="state" placeholder="<%= user.auth%>" value="학생" disabled>
+              <% } else if (user.auth == 1) { %>
+                  <input type="text" class="state" placeholder="<%= user.auth%>" value="근로 장학생" disabled>
+              <% } else if (user.auth == 2) { %>
+                  <input type="text" class="state" placeholder="<%= user.auth%>" value="홈페이지 관리자" disabled>
+              <% } %>
+            </div>
           </div>
-          <div class="user-list">
-            <span>이름</span>
-            <input type="text" class="kind" placeholder="<%= user.name%>" value="<%= user.name%>" disabled>
-          </div>
-          <div class="user-list">
-            <span>전공</span>
-            <input type="text" class="name" placeholder="<%= user.major%>" value="<%= user.major%>" disabled>
-          </div>
-          <div class="user-list">
-            <span>벌점</span>
-            <input type="text" class="serial_number" placeholder="<%= user.penalty%>" value="<%= user.penalty%>" disabled>
-          </div>
-          <div class="user-list">
-            <span>권한</span>
-            <% if (user.auth == 0) { %>
-                <input type="text" class="state" placeholder="<%= user.auth%>" value="학생" disabled>
-            <% } else if (user.auth == 1) { %>
-                <input type="text" class="state" placeholder="<%= user.auth%>" value="근로 장학생" disabled>
-            <% } else if (user.auth == 2) { %>
-                <input type="text" class="state" placeholder="<%= user.auth%>" value="홈페이지 관리자" disabled>
-            <% } %>
-          </div>
-        </div>
       </div>
     </div>
   </div>

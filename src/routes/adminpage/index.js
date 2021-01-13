@@ -19,5 +19,6 @@ router.post("/manage/equipment/delete", AdminController.deleteEquipment);
 // 유저 관리
 router.get("/manage/user", AdminController.manageUser);
 router.get("/manage/user/detail/:id", AdminController.detailUser);
+router.get("/manage/user/history/:id", AdminController.historyUser);
 
 module.exports = router;

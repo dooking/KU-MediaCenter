@@ -160,3 +160,20 @@ exports.detailUser = async (req, res, next) => {
         next(error)
     }
 }
+
+exports.historyUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const user = await AdminService.getUser({id})
+        const reservations = await AdminService.historyUser({id})
+
+        res.render('./adminpage/user-history',{
+            reservations, 
+            user
+        })
+    }
+    catch(error){
+        console.log(error)
+        next(error)
+    }
+}

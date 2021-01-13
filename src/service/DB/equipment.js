@@ -79,7 +79,22 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmenmtDetail({id}) {
+  static getEquipment({id}) {
+    return equipment
+    .findOne({
+     raw: true,
+     where : {
+       id
+     }
+    })
+    .then((results) => {
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+  static getEquipmentDetail({id}) {
     return equipment_detail
     .findOne({
       include: [
@@ -249,6 +264,26 @@ const EquipmentDB = class {
      ],
       where : {
         equipment_detail_id : id
+      },
+    })
+    .then((results) => {
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+  static historyUser({ id }) {
+    return equipment_reservation
+    .findAll({
+      include: [
+        { 
+          model: user,
+          attributes: ['name']
+        }
+     ],
+      where : {
+        user_id : id
       },
     })
     .then((results) => {
