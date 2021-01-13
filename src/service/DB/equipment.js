@@ -178,8 +178,9 @@ const EquipmentDB = class {
   static getStateReservations({ state }) {
     return equipment_reservation
       .findAll({
-        raw: true, 
-        attributes: ['id', 'user_id', 'reservation_number', 'from_date', 'to_date', 'user.name'],
+        raw: true,  
+        nest: true,
+        attributes: ['id','user_id', 'reservation_number', 'from_date', 'to_date'],
         where : {
           state
         },
@@ -187,8 +188,17 @@ const EquipmentDB = class {
           { 
             model: user,
             attributes: ['name']
-          }
-       ],
+          },
+          { 
+            model: equipment,
+            attributes: ['category','kind','name']
+          },
+          { 
+            model: equipment_detail,
+            attributes: ['serial_number']
+          },
+       ],        
+
       })
       .then((results) => {
         return results;

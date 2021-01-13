@@ -9,28 +9,49 @@ exports.getReservationLists = async () => {
     for (let board of STATUS_BOARD){
         const { state } = board
         const reservationList = {...board}
-        const reservations = []
+        const reservations = {}
         const setReservationNumbers = []
         const reservationItems = await EquipmentDB.getStateReservations({state})
         
         for (let reservationItem of reservationItems){
-            const { id, name:userName , from_date:fromDate, to_date:toDate, reservation_number:reservationNumber } = reservationItem
-            if(!setReservationNumbers.includes(reservationNumber)){
-                setReservationNumbers.push(reservationNumber)
-                reservations.push({
+            let equipmentInfo = {}
+            const { id, reservation_number, from_date, to_date, user, equipment, equipment_detail } = reservationItem
+            const { name: userName } = user
+            const { category, kind, name: equipmentName } = equipment
+
+            if(equipment_detail){
+                const { serial_number } = equipment_detail
+                equipmentInfo = {
+                    category, kind, equipmentName, serial_number
+                }
+            }
+            else{
+                equipmentInfo = {
+                    category, kind, equipmentName
+                }
+            }
+
+            if(!setReservationNumbers.includes(reservation_number)){
+                setReservationNumbers.push(reservation_number)
+                equipments = []
+                reservations[`${reservation_number}`] = {
                     id,
-                    reservationNumber,
                     userName,
-                    fromDate : getDate(fromDate),
-                    fromDateTime : getHour(fromDate),
-                    toDate : getDate(toDate),
-                    toDateTime : getHour(toDate),
-                })
+                    reservation_number, 
+                    equipments : [...equipments, equipmentInfo],
+                    from_date : getDate(from_date), 
+                    from_date_time : getTime(from_date),
+                    to_date: getDate(to_date),
+                    to_date_time: getTime(to_date),
+                    state,
+                }
+            }
+            else{ 
+                reservations[`${reservation_number}`].equipments.push(equipmentInfo)
             }
         }
         reservationLists.push({...reservationList, reservations})
     }
-
     return reservationLists
 }
 
