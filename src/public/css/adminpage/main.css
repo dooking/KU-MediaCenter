@@ -4,8 +4,7 @@
     height: 88vh;
   }
   #gray {
-    color: #AA1A30;
-    background-color: white;
+    color: #aaaaaa;
   }
   #black {
     color: black;
@@ -17,7 +16,22 @@
   a{
     text-decoration: none;
   }
-  
+  .equip-head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .equip-heading {
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 20px;
+    text-decoration: none;
+    color: black;
+    /* width: 200px; */
+  }
   .main_div {
     margin-top: 3vh;
     margin-right: 10vh;
@@ -37,14 +51,20 @@
     font-size: 28px;
     font-weight: 450;
     color: black;
+    margin-bottom: 20px;
+    text-align: center;
   }
-  
+  hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
   .current_list_card {
+    cursor: pointer;
     width: 100%;
     background-color: #fcfcfc;
     border-radius: 7px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.26);
-    margin-top: 20px;
+    margin-bottom: 30px;
     padding: 10px 35px 15px 35px;
     display: flex;
     flex-direction: column;
@@ -52,12 +72,12 @@
   }
   
   .current_list_subbox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+    margin-bottom: 16px;
   }
-  
+  .title{
+    font-size: 20px;
+    font-weight: bold;
+  }
   .check {
     width: 75px;
     height: 30px;
@@ -84,21 +104,6 @@
   
   .check2 {
     background-color: #A2A2A2;
-  }
-  .equip-head{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    /* margin-bottom: 20px; */
-  }
-  .equip-heading {
-    font-size: 30px;
-    font-weight: 600;
-    padding-left: 20px;
-    text-decoration: none;
-    color: black;
-    /* width: 200px; */
   }
   
   .btn_add {

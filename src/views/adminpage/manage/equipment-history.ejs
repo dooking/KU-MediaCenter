@@ -1,7 +1,7 @@
-<% include ./base/base-header %>
-<link rel="stylesheet" type="text/css" href="/css/adminpage/equipment-detail.css"/>
+<% include ../base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/manage/equipment-detail.css"/>
 <title>관리자 페이지</title>
-<% include ./base/base-navbar %>
+<% include ../base/base-navbar %>
 
 <div id="wrapper">
     <div class="equip-wrapper">    
@@ -22,7 +22,7 @@
                     <thead>
                     <tr>
                         <th colspan="1"><input type="checkbox"></span>
-                        <th colspan="1">대여넘버</span>
+                        <th colspan="1">대여 번호</span>
                         <th colspan="1">유저</span>
                         <th colspan="1">대여 날짜</span>
                         <th colspan="1">반납 날짜</span>
@@ -48,19 +48,19 @@
                                 <td colspan="1"> <%= reservation.authentication %> </td>
                                 <td colspan="1"> <%= reservation.remark %> </td>
                                 <td colspan="1"> 
-                                    <% if (reservation.state == 0) { %>
+                                    <% if (reservation.state == -1) { %>
+                                        <span>예약 취소</span> 
+                                    <% } else if (reservation.state == 0) { %>
                                         <span>예약 신청</span> 
                                     <% } else if (reservation.state == 1) { %>
                                         <span>대여 중</span> 
                                     <% } else if (reservation.state == 2) { %>
-                                        <span>연체 중</span> 
+                                        <span>반납 완료</span> 
                                     <% } else if (reservation.state == 3) { %>
-                                        <span>대여 완료</span> 
+                                        <span>연체</span> 
                                     <% } else if (reservation.state == 4) { %>
-                                        <span>연장</span> 
+                                        <span>반납 완료 (연체)</span> 
                                     <% } else if (reservation.state == 5) { %>
-                                        <span>예약 취소</span> 
-                                    <% } else if (reservation.state == 6) { %>
                                         <span>기타</span> 
                                     <% } %>
                                 </td>

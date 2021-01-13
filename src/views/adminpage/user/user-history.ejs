@@ -1,0 +1,88 @@
+<% include ../base/base-header %>
+<link rel="stylesheet" type="text/css" href="/css/adminpage/user/user-detail.css"/>
+<title>관리자 페이지</title>
+<% include ../base/base-navbar %>
+
+<div id="wrapper">
+    <div class="user-wrapper">    
+        <div class="user-head">
+            <a class="user-heading" id = 'black' href=""><%= userInfo.name %> <%= userInfo.major %></a>
+            <a class="user-table-link" href="/admin/manage/user">
+                <button class="btn_add">홈으로</button>
+            </a>
+        </div>
+        <div class="user-navbar">
+            <div class="user-tabs">
+                <div class="user-tab "><a id = 'gray' href="/admin/manage/user/detail/<%= userInfo.id %>">유저 상세</a></div>
+                <div class="user-tab active"><a id ='white' href="">대여 이력</a></div>
+            </div>
+            <div class="user-history">
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="1">대여 번호</span>
+                        <th colspan="1">유저</span>
+                        <th colspan="1">대여 날짜</span>
+                        <th colspan="1">반납 날짜</span>
+                        <th colspan="2">대여 장비</span>
+                        <th colspan="1">소속</span>
+                        <th colspan="1">목적</span>
+                        <th colspan="1">번호</span>
+                        <th colspan="1">신분증</span>
+                        <th colspan="1">비고</span>
+                        <th colspan="1">상태</span>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let [reservation_number, reservation] of Object.entries(reservations)) { %>
+                            <tr>
+                                <td colspan="1"> <%= reservation.reservation_number %> </td>
+                                <td colspan="1"> <%= reservation.name %> </td>
+                                <td colspan="1"> 
+                                    <p><%= reservation.from_date %></p>
+                                    <p><%= reservation.from_date_time %></p>
+                                </td>
+                                <td colspan="1"> 
+                                    <p><%= reservation.real_date %></p>
+                                    <p><%= reservation.real_date_time %></p>
+                                </td>
+                                <td colspan="2"> 
+                                    <% for (let equipment of reservation.equipments) { %>
+                                        <p>
+                                            <%= equipment.equipmentName %> 
+                                            <% if (equipment.serial_number) { %>
+                                               - <%= equipment.serial_number %>
+                                            <% } %>
+                                        </p>
+                                    <% } %>
+                                </td>
+                                <td colspan="1"> <%= reservation.group %> </td>
+                                <td colspan="1"> <%= reservation.purpose %> </td>
+                                <td colspan="1"> <%= reservation.contact %> </td>
+                                <td colspan="1"> <%= reservation.authentication %> </td>
+                                <td colspan="1"> <%= reservation.remark %> </td>
+                                <td colspan="1"> 
+                                    <% if (reservation.state == -1) { %>
+                                        <span>예약 취소</span> 
+                                    <% } else if (reservation.state == 0) { %>
+                                        <span>예약 신청</span> 
+                                    <% } else if (reservation.state == 1) { %>
+                                        <span>대여 중</span> 
+                                    <% } else if (reservation.state == 2) { %>
+                                        <span>반납 완료</span> 
+                                    <% } else if (reservation.state == 3) { %>
+                                        <span>연체</span> 
+                                    <% } else if (reservation.state == 4) { %>
+                                        <span>반납 완료 (연체)</span> 
+                                    <% } else if (reservation.state == 5) { %>
+                                        <span>기타</span> 
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  </div>
+</div>

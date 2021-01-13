@@ -21,7 +21,7 @@ exports.manageEquipment = async (req, res, next) => {
         const equipmentsCount = await AdminService.getEquipmentsLength({ searchWord })
         const equipments = await AdminService.getEquipmentLists({offset, searchWord})
 
-        res.render('./adminpage/equipment-manage',{
+        res.render('./adminpage/manage/equipment-manage',{
             equipments,
             pageNum,
             totalPage : parseInt(equipmentsCount/PER_PAGE)+1,
@@ -38,7 +38,7 @@ exports.detailEquipment = async (req, res, next) => {
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
 
-        res.render('./adminpage/equipment-detail',{equipment})
+        res.render('./adminpage/manage/equipment-detail',{equipment})
     }
     catch(error){
         next(error)
@@ -50,7 +50,7 @@ exports.modifyEquipment = async (req, res, next) => {
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
 
-        res.render('./adminpage/equipment-update',{equipment})
+        res.render('./adminpage/manage/equipment-update',{equipment})
     }
     catch(error){
         next(error)
@@ -63,7 +63,7 @@ exports.historyEquipment = async (req, res, next) => {
         const equipment = await AdminService.getEquipmentDetail({id})
         const reservations = await AdminService.historyEquipment({id})
 
-        res.render('./adminpage/equipment-history',{
+        res.render('./adminpage/manage/equipment-history',{
             reservations, 
             equipment
         })
@@ -104,7 +104,7 @@ exports.deleteEquipment = async (req, res, next) => {
 
 exports.addEquipment = async (req, res, next) => {
     try{
-        res.render('./adminpage/equipment-add')
+        res.render('./adminpage/manage/equipment-add')
     }
     catch(error){
         next(error)
@@ -128,3 +128,85 @@ exports.createEquipment = async (req, res, next) => {
     }
 }
 
+exports.manageUser = async (req, res, next) => {
+    try{
+        const pageNum = req.query?.page || 1;
+        const searchWord = req.query?.search || '';
+        const offset = pageNum > 1 ? PER_PAGE*(pageNum-1) : 0
+
+        const totalUsers = await AdminService.getUserLength({ searchWord })
+        const users = await AdminService.getUserLists({ offset, searchWord })
+
+        res.render('./adminpage/user/user-manage',{
+            users,
+            pageNum,
+            totalPage : parseInt(totalUsers/PER_PAGE)+1,
+            searchWord
+        })
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.detailUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const userInfo = await AdminService.getUser({id})
+
+        res.render('./adminpage/user/user-detail',{userInfo})
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.historyUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const userInfo = await AdminService.getUser({id})
+        const reservations = await AdminService.historyUser({id})
+
+        res.render('./adminpage/user/user-history',{
+            reservations, 
+            userInfo
+        })
+    }
+    catch(error){
+        next(error)
+    }
+}
+
+exports.penaltyUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const { changedPenaltyValue } = req.body
+        await AdminService.updateUserPenalty({id,penalty:changedPenaltyValue})
+
+        res.status(200).send({
+            result : true
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            result : false
+        })
+    }
+}
+
+exports.authUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const { changedAuthValue } = req.body
+        await AdminService.updateUserAuth({id,auth:changedAuthValue})
+
+        res.status(200).send({
+            result : true
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            result : false
+        })
+    }
+}

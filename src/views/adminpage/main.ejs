@@ -5,28 +5,41 @@
 
 <div id="wrapper">
     <div class="equip-head">
-        <a href="/">
-            <button class="btn_add" id="red">장비 관리</button>
-        </a>
-        <a href="/">
-            <button class="btn_add" id="gray">스튜디오 관리</button>
-        </a>
+        <div>
+            <a class="equip-heading" id = 'black' href="/admin/manage/equipment">장비 관리</a>
+            <a class="equip-heading" id = 'gray' href="/">스튜디오 관리</a>
+        </div>
     </div>
     <div class="main_div">
         <% for (let reservationList of reservationLists) { %>
             <div class="current_list" id="current_list1">
                 <p class="current_list_p"> <%= reservationList.title %> </p>
-                <% for (let reservation of reservationList.reservations) { %>
+                <% for (let [reservation_number, reservation] of Object.entries(reservationList.reservations)) { %>
                     <div class="current_list_card">
-                        <p><%= reservation.userName %></p>
                         <div class="current_list_subbox">
-                            <div>
-                                <p><%= reservation.fromDate %> <%= reservation.fromDateTime%>:00 ~ <%= reservation.toDate %> <%= reservation.toDateTime%>:00</p>
-                            </div>
+                            <span class="title"> 이름 </span>
+                            <hr>
+                            <p><%= reservation.userName %></p>
                         </div>
-                        <a href="./">
-                            <button class="check check<%= reservationList.state %>"><%= reservationList.buttonName %></button>
-                        </a>
+                        <div class="current_list_subbox">
+                            <p class="title">기간</p>
+                            <hr>
+                            <p>
+                                <%= reservation.from_date %> <%= reservation.from_date_time%> ~ <%= reservation.to_date %> <%= reservation.to_date_time%>
+                            </p>
+                        </div>
+                        <div class="current_list_subbox">
+                            <p class="title">대여 장비</p>
+                            <hr>
+                            <% for (let equipment of reservation.equipments) { %>
+                                <p>
+                                    ✔ <%= equipment.equipmentName %>
+                                    <% if(equipment.serial_number) { %>
+                                        - <%= equipment.serial_number %>
+                                    <% } %>
+                                </p>
+                            <% } %>
+                        </div>
                     </div>
                 <% } %>
             </div>

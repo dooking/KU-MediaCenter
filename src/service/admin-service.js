@@ -1,5 +1,6 @@
 const EquipmentDB = require('./DB/equipment')
-const { getDate, getHour } = require('../utils/momment')
+const UserDB = require('./DB/user')
+const { getDate, getHour, getTime } = require('../utils/momment')
 const { STATUS_BOARD } = require('../utils/constant')
 
 exports.getReservationLists = async () => {
@@ -8,28 +9,49 @@ exports.getReservationLists = async () => {
     for (let board of STATUS_BOARD){
         const { state } = board
         const reservationList = {...board}
-        const reservations = []
+        const reservations = {}
         const setReservationNumbers = []
         const reservationItems = await EquipmentDB.getStateReservations({state})
         
         for (let reservationItem of reservationItems){
-            const { id, name:userName , from_date:fromDate, to_date:toDate, reservation_number:reservationNumber } = reservationItem
-            if(!setReservationNumbers.includes(reservationNumber)){
-                setReservationNumbers.push(reservationNumber)
-                reservations.push({
+            let equipmentInfo = {}
+            const { id, reservation_number, from_date, to_date, user, equipment, equipment_detail } = reservationItem
+            const { name: userName } = user
+            const { category, kind, name: equipmentName } = equipment
+
+            if(equipment_detail){
+                const { serial_number } = equipment_detail
+                equipmentInfo = {
+                    category, kind, equipmentName, serial_number
+                }
+            }
+            else{
+                equipmentInfo = {
+                    category, kind, equipmentName
+                }
+            }
+
+            if(!setReservationNumbers.includes(reservation_number)){
+                setReservationNumbers.push(reservation_number)
+                equipments = []
+                reservations[`${reservation_number}`] = {
                     id,
-                    reservationNumber,
                     userName,
-                    fromDate : getDate(fromDate),
-                    fromDateTime : getHour(fromDate),
-                    toDate : getDate(toDate),
-                    toDateTime : getHour(toDate),
-                })
+                    reservation_number, 
+                    equipments : [...equipments, equipmentInfo],
+                    from_date : getDate(from_date), 
+                    from_date_time : getTime(from_date),
+                    to_date: getDate(to_date),
+                    to_date_time: getTime(to_date),
+                    state,
+                }
+            }
+            else{ 
+                reservations[`${reservation_number}`].equipments.push(equipmentInfo)
             }
         }
         reservationLists.push({...reservationList, reservations})
     }
-
     return reservationLists
 }
 
@@ -58,7 +80,7 @@ exports.getEquipmentsLength = async (params) => {
 }
 
 exports.getEquipmentDetail = async (params) => {
-    const { id, equipment_id, serial_number, state, remark, equipment } = await EquipmentDB.getEquipmenmtDetail(params)
+    const { id, equipment_id, serial_number, state, remark, equipment } = await EquipmentDB.getEquipmentDetail(params)
     const { category, kind, name } = equipment
     const result = {
         id,
@@ -123,4 +145,78 @@ exports.historyEquipment = async (params) => {
         })
     }
     return results
+}
+
+exports.getUserLength = async (params) => {
+    const totalUsers= await UserDB.getUserLength(params)
+    return totalUsers
+}
+
+exports.getUserLists = async (params) => {
+    const users= await UserDB.getUserLists(params)
+    return users
+}
+
+exports.getUser = async (params) => {
+    const user= await UserDB.getUser(params)
+    return user
+}
+
+exports.historyUser = async (params) => {
+    let results = {}
+    let equipments = []
+    const setReservationNumbers = []
+    const reservations = await EquipmentDB.historyUser(params)
+    for (let reservation of reservations){
+        let equipmentInfo = {}
+        const { id, equipment_id, equipment_detail_id, reservation_number, from_date, to_date, real_date, group, purpose, contact, authentication, remark, state, user } = reservation;
+        const { name: userName } = user
+
+        if(equipment_detail_id){
+            const { serial_number, equipment } = await EquipmentDB.getEquipmentDetail({id: equipment_detail_id})
+            const { category, kind, name : equipmentName } = equipment
+            equipmentInfo = {
+                category, kind, equipmentName, serial_number
+            }
+        }
+        else{
+            const { category, kind, name : equipmentName } = await EquipmentDB.getEquipment({id: equipment_id})
+            equipmentInfo = {
+                category, kind, equipmentName
+            }
+        }
+
+        if(!setReservationNumbers.includes(reservation_number)){
+            setReservationNumbers.push(reservation_number)
+            equipments = []
+            results[`${reservation_number}`] = {
+                id,
+                name: userName,
+                reservation_number, 
+                equipments : [...equipments, equipmentInfo],
+                from_date : getDate(from_date), 
+                from_date_time : getTime(from_date),
+                real_date: getDate(real_date),
+                real_date_time: getTime(real_date),
+                group,
+                purpose, 
+                contact, 
+                authentication, 
+                remark, 
+                state,
+            }
+        }
+        else{ 
+            results[`${reservation_number}`].equipments.push(equipmentInfo)
+        }
+    }
+    return results
+}
+
+exports.updateUserPenalty = async (params) => {
+    await UserDB.updatePenalty(params)
+}
+
+exports.updateUserAuth = async (params) => {
+    await UserDB.updateAuth(params)
 }

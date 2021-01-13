@@ -1,6 +1,6 @@
+const sequelize = require('sequelize')
 const { user, equipment, equipment_detail, equipment_reservation } = require('../../models');
 const { PER_PAGE } = require('../../utils/constant')
-const sequelize = require('sequelize')
 
 const EquipmentDB = class {
   static getEquipmentTypeLists() {
@@ -79,7 +79,22 @@ const EquipmentDB = class {
         return err;
       });
   }
-  static getEquipmenmtDetail({id}) {
+  static getEquipment({id}) {
+    return equipment
+    .findOne({
+     raw: true,
+     where : {
+       id
+     }
+    })
+    .then((results) => {
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+  static getEquipmentDetail({id}) {
     return equipment_detail
     .findOne({
       include: [
@@ -121,7 +136,7 @@ const EquipmentDB = class {
         where : {
           equipment_id : id,
           state : {
-            [sequelize.Op.or]: [0,1,3,4,6]
+            [sequelize.Op.or]: [0,1,3,5]
           },
           [sequelize.Op.or] : [
               sequelize.where(sequelize.fn('date', sequelize.col('from_date')), '=', selectDate),
@@ -163,8 +178,9 @@ const EquipmentDB = class {
   static getStateReservations({ state }) {
     return equipment_reservation
       .findAll({
-        raw: true, 
-        attributes: ['id', 'user_id', 'reservation_number', 'from_date', 'to_date', 'user.name'],
+        raw: true,  
+        nest: true,
+        attributes: ['id','user_id', 'reservation_number', 'from_date', 'to_date'],
         where : {
           state
         },
@@ -172,8 +188,17 @@ const EquipmentDB = class {
           { 
             model: user,
             attributes: ['name']
-          }
-       ],
+          },
+          { 
+            model: equipment,
+            attributes: ['category','kind','name']
+          },
+          { 
+            model: equipment_detail,
+            attributes: ['serial_number']
+          },
+       ],        
+
       })
       .then((results) => {
         return results;
@@ -250,6 +275,34 @@ const EquipmentDB = class {
       where : {
         equipment_detail_id : id
       },
+      order: [
+        ['reservation_number','ASC'],
+        ['from_date','ASC'],
+      ],
+    })
+    .then((results) => {
+      return results;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+  static historyUser({ id }) {
+    return equipment_reservation
+    .findAll({
+      include: [
+        { 
+          model: user,
+          attributes: ['name']
+        }
+     ],
+      where : {
+        user_id : id
+      },
+      order: [
+        ['reservation_number','ASC'],
+        ['from_date','ASC'],
+      ],
     })
     .then((results) => {
       return results;
