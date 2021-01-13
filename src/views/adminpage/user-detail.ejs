@@ -6,7 +6,7 @@
 <div id="wrapper">
   <div class="user-wrapper">    
     <div class="user-head">
-      <a class="user-heading" id = 'black' href=""><%= user.name %> <%= user.major %></a>
+      <a class="user-heading" id = 'black' href=""><%= userInfo.name %> <%= userInfo.major %></a>
       <a class="user-table-link" href="/admin/manage/user">
           <button class="btn_add">홈으로</button>
       </a>
@@ -14,38 +14,51 @@
     <div class="user-navbar">
         <div class="user-tabs">
           <div class="user-tab active"><a id = 'white' href="">유저 상세</a></div>
-          <div class="user-tab"><a id ='gray' href="/admin/manage/user/history/<%= user.id %>">대여 이력</a></div>
+          <div class="user-tab"><a id ='gray' href="/admin/manage/user/history/<%= userInfo.id %>">대여 이력</a></div>
         </div>
         <div class="user-table">
           <div class="user-form">
             <div class="user-list">
               <span>index</span>
-              <input type="text" class="category" placeholder="<%= user.id%>" value="<%= user.id%>" disabled>
+              <input type="text" class="category" placeholder="<%= userInfo.id%>" value="<%= userInfo.id%>" disabled>
             </div>
             <div class="user-list">
               <span>이름</span>
-              <input type="text" class="kind" placeholder="<%= user.name%>" value="<%= user.name%>" disabled>
+              <input type="text" class="kind" placeholder="<%= userInfo.name%>" value="<%= userInfo.name%>" disabled>
             </div>
             <div class="user-list">
               <span>전공</span>
-              <input type="text" class="name" placeholder="<%= user.major%>" value="<%= user.major%>" disabled>
+              <input type="text" class="name" placeholder="<%= userInfo.major%>" value="<%= userInfo.major%>" disabled>
             </div>
             <div class="user-list">
               <span>벌점</span>
-              <input type="text" class="serial_number" placeholder="<%= user.penalty%>" value="<%= user.penalty%>" disabled>
+              <div>
+                <input type="number" class="serial_number" placeholder="<%= userInfo.penalty%>" value="<%= userInfo.penalty%>">
+                <button class="edit" onclick="penaltyClick(this)" data-user-Id="<%= userInfo.id%>">적용</button>
+              </div>
             </div>
             <div class="user-list">
               <span>권한</span>
-              <% if (user.auth == 0) { %>
-                  <input type="text" class="state" placeholder="<%= user.auth%>" value="학생" disabled>
-              <% } else if (user.auth == 1) { %>
-                  <input type="text" class="state" placeholder="<%= user.auth%>" value="근로 장학생" disabled>
-              <% } else if (user.auth == 2) { %>
-                  <input type="text" class="state" placeholder="<%= user.auth%>" value="홈페이지 관리자" disabled>
-              <% } %>
+              <div>
+                <select id="equipType" name="category" class="addForm-input">
+                  <% if (userInfo.auth == 0) { %>
+                    <option value="0" class="disabledType" disabled selected>학생</option>
+                  <% } else if (userInfo.auth == 1) { %>
+                    <option value="1" class="disabledType" disabled selected>근로 장학생</option>
+                  <% } else if (userInfo.auth == 2) { %>
+                    <option value="2" class="disabledType" disabled selected>홈페이지 관리자</option>
+                  <% } %>
+                  <option value="0">학생</option>
+                  <option value="1">근로 장학생</option>
+                  <option value="2">홈페이지 관리자</option>
+                </select>
+                <button class="edit" onclick="authClick(this)" data-user-Id="<%= userInfo.id%>" data-user-Auth="<%= locals.user.auth %>">적용</button>
+              </div>
             </div>
           </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="/javascript/adminpage/user-detail.js"></script>

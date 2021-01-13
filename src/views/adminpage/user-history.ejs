@@ -6,14 +6,14 @@
 <div id="wrapper">
     <div class="user-wrapper">    
         <div class="user-head">
-            <a class="user-heading" id = 'black' href=""><%= user.name %> <%= user.major %></a>
+            <a class="user-heading" id = 'black' href=""><%= userInfo.name %> <%= userInfo.major %></a>
             <a class="user-table-link" href="/admin/manage/user">
                 <button class="btn_add">홈으로</button>
             </a>
         </div>
         <div class="user-navbar">
             <div class="user-tabs">
-                <div class="user-tab "><a id = 'gray' href="/admin/manage/user/detail/<%= user.id %>">유저 상세</a></div>
+                <div class="user-tab "><a id = 'gray' href="/admin/manage/user/detail/<%= userInfo.id %>">유저 상세</a></div>
                 <div class="user-tab active"><a id ='white' href="">대여 이력</a></div>
             </div>
             <div class="user-history">

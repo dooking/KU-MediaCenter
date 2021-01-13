@@ -79,5 +79,41 @@ const UserDB = class {
                 return [err, null]
             })
     }
+    static updatePenalty({ id, penalty }) {
+        return user.update( 
+            {
+                raw: true,
+                penalty
+            },
+            {
+                where: {
+                    id
+                },
+        })
+            .then((results) => {
+                return results
+            })
+            .catch((err) => {
+                return err
+            })
+    }
+    static updateAuth({ id, auth }) {
+        return user.update( 
+            {
+                raw: true,
+                auth
+            },
+            {
+                where: {
+                    id
+                },
+        })
+            .then((results) => {
+                return results
+            })
+            .catch((err) => {
+                return err
+            })
+    }
 }
 module.exports = UserDB

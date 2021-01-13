@@ -71,7 +71,7 @@ a {
     flex-direction: column;
     margin-bottom: 20px;
 }
-select, input[type="text"]{
+select, input[type="text"], input[type="number"]{
     width: 628px;
     height: 45px;
     border-radius: 7px;
@@ -282,4 +282,15 @@ table {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #fcfcfc;
     margin-bottom: 30px;
+  }
+  .edit {
+    width: 70px;
+    height: 35px;
+    outline: none;
+    border-radius: 10px;
+    font-size: 14px;
+    color: white;
+    background: #8d091d;
+    border: none;
+    margin-left: 16px;
   }

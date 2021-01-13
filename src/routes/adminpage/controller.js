@@ -152,9 +152,9 @@ exports.manageUser = async (req, res, next) => {
 exports.detailUser = async (req, res, next) => {
     try{
         const { id } = req.params
-        const user = await AdminService.getUser({id})
+        const userInfo = await AdminService.getUser({id})
 
-        res.render('./adminpage/user-detail',{user})
+        res.render('./adminpage/user-detail',{userInfo})
     }
     catch(error){
         next(error)
@@ -164,16 +164,49 @@ exports.detailUser = async (req, res, next) => {
 exports.historyUser = async (req, res, next) => {
     try{
         const { id } = req.params
-        const user = await AdminService.getUser({id})
+        const userInfo = await AdminService.getUser({id})
         const reservations = await AdminService.historyUser({id})
 
         res.render('./adminpage/user-history',{
             reservations, 
-            user
+            userInfo
         })
     }
     catch(error){
-        console.log(error)
         next(error)
+    }
+}
+
+exports.penaltyUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const { changedPenaltyValue } = req.body
+        await AdminService.updateUserPenalty({id,penalty:changedPenaltyValue})
+
+        res.status(200).send({
+            result : true
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            result : false
+        })
+    }
+}
+
+exports.authUser = async (req, res, next) => {
+    try{
+        const { id } = req.params
+        const { changedAuthValue } = req.body
+        await AdminService.updateUserAuth({id,auth:changedAuthValue})
+
+        res.status(200).send({
+            result : true
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            result : false
+        })
     }
 }

@@ -189,7 +189,13 @@ exports.historyUser = async (params) => {
             results[`${reservation_number}`].equipments.push(equipmentInfo)
         }
     }
-    console.log(results['20210113-360299'])
     return results
 }
 
+exports.updateUserPenalty = async (params) => {
+    await UserDB.updatePenalty(params)
+}
+
+exports.updateUserAuth = async (params) => {
+    await UserDB.updateAuth(params)
+}

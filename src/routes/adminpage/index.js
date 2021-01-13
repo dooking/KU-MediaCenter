@@ -21,4 +21,7 @@ router.get("/manage/user", AdminController.manageUser);
 router.get("/manage/user/detail/:id", AdminController.detailUser);
 router.get("/manage/user/history/:id", AdminController.historyUser);
 
+router.post("/manage/user/penalty/:id", AdminController.penaltyUser);
+router.post("/manage/user/auth/:id", AdminController.authUser);
+
 module.exports = router;
