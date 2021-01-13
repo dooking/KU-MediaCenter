@@ -137,7 +137,7 @@ exports.manageUser = async (req, res, next) => {
         const totalUsers = await AdminService.getUserLength({ searchWord })
         const users = await AdminService.getUserLists({ offset, searchWord })
 
-        res.render('./adminpage/user-manage',{
+        res.render('./adminpage/user/user-manage',{
             users,
             pageNum,
             totalPage : parseInt(totalUsers/PER_PAGE)+1,
@@ -154,7 +154,7 @@ exports.detailUser = async (req, res, next) => {
         const { id } = req.params
         const userInfo = await AdminService.getUser({id})
 
-        res.render('./adminpage/user-detail',{userInfo})
+        res.render('./adminpage/user/user-detail',{userInfo})
     }
     catch(error){
         next(error)
@@ -167,7 +167,7 @@ exports.historyUser = async (req, res, next) => {
         const userInfo = await AdminService.getUser({id})
         const reservations = await AdminService.historyUser({id})
 
-        res.render('./adminpage/user-history',{
+        res.render('./adminpage/user/user-history',{
             reservations, 
             userInfo
         })

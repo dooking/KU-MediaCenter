@@ -51,7 +51,6 @@ app.use((req,res,next)=>{
   else{
     res.locals.user = {}
   }
-  console.log(res.locals.user)
   next()
 })
 
