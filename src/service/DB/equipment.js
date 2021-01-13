@@ -265,6 +265,10 @@ const EquipmentDB = class {
       where : {
         equipment_detail_id : id
       },
+      order: [
+        ['reservation_number','ASC'],
+        ['from_date','ASC'],
+      ],
     })
     .then((results) => {
       return results;
@@ -285,6 +289,10 @@ const EquipmentDB = class {
       where : {
         user_id : id
       },
+      order: [
+        ['reservation_number','ASC'],
+        ['from_date','ASC'],
+      ],
     })
     .then((results) => {
       return results;

@@ -21,7 +21,7 @@ exports.manageEquipment = async (req, res, next) => {
         const equipmentsCount = await AdminService.getEquipmentsLength({ searchWord })
         const equipments = await AdminService.getEquipmentLists({offset, searchWord})
 
-        res.render('./adminpage/equipment-manage',{
+        res.render('./adminpage/manage/equipment-manage',{
             equipments,
             pageNum,
             totalPage : parseInt(equipmentsCount/PER_PAGE)+1,
@@ -38,7 +38,7 @@ exports.detailEquipment = async (req, res, next) => {
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
 
-        res.render('./adminpage/equipment-detail',{equipment})
+        res.render('./adminpage/manage/equipment-detail',{equipment})
     }
     catch(error){
         next(error)
@@ -50,7 +50,7 @@ exports.modifyEquipment = async (req, res, next) => {
         const { id } = req.params
         const equipment = await AdminService.getEquipmentDetail({id})
 
-        res.render('./adminpage/equipment-update',{equipment})
+        res.render('./adminpage/manage/equipment-update',{equipment})
     }
     catch(error){
         next(error)
@@ -63,7 +63,7 @@ exports.historyEquipment = async (req, res, next) => {
         const equipment = await AdminService.getEquipmentDetail({id})
         const reservations = await AdminService.historyEquipment({id})
 
-        res.render('./adminpage/equipment-history',{
+        res.render('./adminpage/manage/equipment-history',{
             reservations, 
             equipment
         })
@@ -104,7 +104,7 @@ exports.deleteEquipment = async (req, res, next) => {
 
 exports.addEquipment = async (req, res, next) => {
     try{
-        res.render('./adminpage/equipment-add')
+        res.render('./adminpage/manage/equipment-add')
     }
     catch(error){
         next(error)
