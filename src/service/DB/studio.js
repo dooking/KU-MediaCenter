@@ -63,7 +63,7 @@ const StudioDB = class {
       return err;
     });
   }
-  static getStudiosCount(id){
+  static getStudioCount(id){
     return studio_detail
       .count({
         raw: true,
@@ -341,7 +341,7 @@ const StudioDB = class {
         raw: true,
         studio_id : id,
         state : 0,
-        remark : ''
+        remark : '',
       })
       .then((results) => {
         return results;
