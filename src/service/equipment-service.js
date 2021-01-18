@@ -1,9 +1,10 @@
 const EquipmentDB = require('./DB/equipment')
-const { fillArray, checkStock, makeReservationNumber } = require('../utils/util')
+const { fillArray, checkStock, makeReservationNumber, generateDefaultPromiseDict } = require('../utils/util')
 const { getDateWithTime } = require('../utils/momment')
 
 exports.getStockData = async (selectDate, nextSelectDate)=>{
     const equipmentLists = await EquipmentDB.getEquipmentTypeLists()
+    const defaultPromiseDict = generateDefaultPromiseDict(equipmentLists)
     const equipments = await equipmentLists.reduce (async (promise, equipment)=>{
         const { id } = equipment
         let accumulator = await promise.then();
@@ -30,13 +31,7 @@ exports.getStockData = async (selectDate, nextSelectDate)=>{
         )
         
         return Promise.resolve(accumulator);
-    },Promise.resolve({
-        "카메라" : [],
-        "카메라 보조 장치":[],
-        "녹음 장비":[],
-        "조명": [],
-        "기타 부속": []
-    }))
+    },Promise.resolve(defaultPromiseDict))
 
     return equipments
 }

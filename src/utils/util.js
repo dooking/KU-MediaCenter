@@ -24,4 +24,11 @@ const makeReservationNumber = () => {
     return date + '-' + randomString
 }
 
-module.exports = { fillArray, checkStock, makeReservationNumber };
+const generateDefaultPromiseDict = (categories) => {
+    let defaultPromiseDict = {}
+    for (let category of categories) {
+        defaultPromiseDict[category] = []
+    }
+}
+
+module.exports = { fillArray, checkStock, makeReservationNumber, generateDefaultPromiseDict };
